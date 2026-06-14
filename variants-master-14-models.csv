@@ -1,0 +1,94 @@
+Make,Model,Year Group,Variant,Abs,Wheel Type,Self Start,Adjustable Levers,LED Indicators,Meter Type,Front Brake Type,Rear Brake Type,Backrest,Windscreen,Headlight,Usb Charging Port,Ride Modes,Smart Key,Colour,Diagnostic Questions (in order)
+Royal Enfield,Hunter 350,2022 – 2025 (1st gen),Metro Dapper,Dual Channel,,,,,,,,,,,,,,Single Tone (Fade),Abs › Colour
+Royal Enfield,Hunter 350,2022 – 2025 (1st gen),Retro Factory,Single Channel,,,,,,,,,,,,,,Black,Abs › Colour
+Royal Enfield,Hunter 350,2022 – 2025 (1st gen),Metro Rebel,Dual Channel,,,,,,,,,,,,,,Dual Tone,Abs › Colour
+Royal Enfield,Hunter 350,2025 onwards (new gen),Standard,Single Channel,Spoke,,,,,,,,,,,,,Factory Black,Abs › Wheel Type › Colour
+Royal Enfield,Hunter 350,2025 onwards (new gen),Base Premium,Single Channel,Alloy,,,,,,,,,,,,,Tarmac Black,Abs › Wheel Type › Colour
+Royal Enfield,Hunter 350,2025 onwards (new gen),Mid,Dual Channel,Alloy,,,,,,,,,,,,,"Graphite Grey, Dapper Grey, Rio White",Abs › Wheel Type › Colour
+Royal Enfield,Hunter 350,2025 onwards (new gen),Top,Dual Channel,Alloy,,,,,,,,,,,,,"Mumbai Yellow, Moonshot White, Tokyo Black, London Red, Rebel Blue",Abs › Wheel Type › Colour
+Royal Enfield,Classic 350,"2015 – 2017 (UCE, pre-ABS)",KS (Kick Start),,,No,,,,,,,,,,,,"Black, White, Silver, Red",Self Start › Colour
+Royal Enfield,Classic 350,"2015 – 2017 (UCE, pre-ABS)",ES (Electric Start),,,Yes,,,,,,,,,,,,"Black, White, Silver, Red",Self Start › Colour
+Royal Enfield,Classic 350,"2015 – 2017 (UCE, pre-ABS)",Chrome,,,Yes,,,,,,,,,,,,Chrome Tank,Self Start › Colour
+Royal Enfield,Classic 350,"2018 – 2020 (UCE, ABS)",ABS,Single Channel,Spoke,,,,,,,,,,,,,Traditional,Abs › Wheel Type › Colour
+Royal Enfield,Classic 350,"2018 – 2020 (UCE, ABS)",Signals Edition,Dual Channel,Spoke,,,,,,,,,,,,,Military graphics,Abs › Wheel Type › Colour
+Royal Enfield,Classic 350,"2018 – 2020 (UCE, ABS)",Gunmetal Grey,Dual Channel,Alloy,,,,,,,,,,,,,Blacked-out (Gunmetal Grey),Abs › Wheel Type › Colour
+Royal Enfield,Classic 350,"2018 – 2020 (UCE, ABS)",Stealth Black,Dual Channel,Alloy,,,,,,,,,,,,,Blacked-out (Stealth Black),Abs › Wheel Type › Colour
+Royal Enfield,Classic 350,"2018 – 2020 (UCE, ABS)",Chrome,Dual Channel,Spoke,,,,,,,,,,,,,Chrome Tank,Abs › Wheel Type › Colour
+Royal Enfield,Classic 350,2021 – 2023 (J-platform),Redditch,Single Channel,Spoke,,,,,,,,,,,,,,Abs › Wheel Type › Colour
+Royal Enfield,Classic 350,2021 – 2023 (J-platform),Halcyon,Dual Channel,Spoke,,,,,,,,,,,,,Halcyon colours,Abs › Wheel Type › Colour
+Royal Enfield,Classic 350,2021 – 2023 (J-platform),Signals,Dual Channel,Spoke,,,,,,,,,,,,,Military theme (blacked-out engine & exhaust),Abs › Wheel Type › Colour
+Royal Enfield,Classic 350,2021 – 2023 (J-platform),Dark,Dual Channel,Alloy,,,,,,,,,,,,,Dark theme (blacked-out engine & exhaust),Abs › Wheel Type › Colour
+Royal Enfield,Classic 350,2021 – 2023 (J-platform),Chrome,Dual Channel,Spoke,,,,,,,,,,,,,Chrome Tank,Abs › Wheel Type › Colour
+Royal Enfield,Classic 350,2024 – 2026 (current),Heritage,Dual Channel,Spoke,,No,No,Semi-Digital,,,,,,,,,Heritage colours,Abs › Wheel Type › Adjustable Levers › LED Indicators › Meter Type › Colour
+Royal Enfield,Classic 350,2024 – 2026 (current),Heritage Premium,Dual Channel,Spoke,,No,No,Semi-Digital,,,,,,,,,Heritage Premium paint,Abs › Wheel Type › Adjustable Levers › LED Indicators › Meter Type › Colour
+Royal Enfield,Classic 350,2024 – 2026 (current),Signals,Dual Channel,Spoke,,No,No,Semi-Digital,,,,,,,,,Military theme (blacked-out engine & exhaust),Abs › Wheel Type › Adjustable Levers › LED Indicators › Meter Type › Colour
+Royal Enfield,Classic 350,2024 – 2026 (current),Dark,Dual Channel,Alloy,,Yes,Yes,Tripper Navigation,,,,,,,,,Dark theme (blacked-out engine & exhaust),Abs › Wheel Type › Adjustable Levers › LED Indicators › Meter Type › Colour
+Royal Enfield,Classic 350,2024 – 2026 (current),Chrome / Emerald,Dual Channel,Spoke,,Yes,Yes,Tripper Navigation,,,,,,,,,Chrome Tank,Abs › Wheel Type › Adjustable Levers › LED Indicators › Meter Type › Colour
+Royal Enfield,Bullet 350,2015 – 2018 (UCE),Bullet 350,,,No,,,,Drum,Drum,,,,,,,,Self Start › Front Brake Type › Rear Brake Type
+Royal Enfield,Bullet 350,2015 – 2018 (UCE),Bullet 350 ES (formerly Electra),,,Yes,,,,Disc,Drum,,,,,,,,Self Start › Front Brake Type › Rear Brake Type
+Royal Enfield,Bullet 350,"2019 – 2022 (UCE, ABS)",Bullet 350 ABS,,,No,,,,,,,,,,,,,Self Start
+Royal Enfield,Bullet 350,"2019 – 2022 (UCE, ABS)",Bullet 350 ES ABS,,,Yes,,,,,,,,,,,,,Self Start
+Royal Enfield,Bullet 350,2023 – 2026 (new platform / J-series),Military,Single Channel,,,,,,Disc,Drum,,,,,,,Basic 2-D paint logo (Military Black/Red/Silver),Front Brake Type › Rear Brake Type › Abs › Colour
+Royal Enfield,Bullet 350,2023 – 2026 (new platform / J-series),Battalion Black,Single Channel,,,,,,Disc,Drum,,,,,,,Gold pinstriped with 3-D RE badge (Battalion Black),Front Brake Type › Rear Brake Type › Abs › Colour
+Royal Enfield,Bullet 350,2023 – 2026 (new platform / J-series),Standard,Dual Channel,,,,,,Disc,Disc,,,,,,,Gold pinstriped 3-D RE badge (chrome engine),Front Brake Type › Rear Brake Type › Abs › Colour
+Royal Enfield,Bullet 350,2023 – 2026 (new platform / J-series),Black Gold,Dual Channel,,,,,,Disc,Disc,,,,,,,Gold pinstriped with 3-D RE badge & blacked-out engine/exhaust,Front Brake Type › Rear Brake Type › Abs › Colour
+Royal Enfield,Meteor 350,2020 – 2026 (all years),Fireball,Dual Channel,Alloy,,No,,,,,No,No,,,,,,Abs › Wheel Type › Adjustable Levers › Backrest › Windscreen
+Royal Enfield,Meteor 350,2020 – 2026 (all years),Stellar,Dual Channel,Alloy,,No,,,,,Yes,No,,,,,,Abs › Wheel Type › Adjustable Levers › Backrest › Windscreen
+Royal Enfield,Meteor 350,2020 – 2026 (all years),Aurora,Dual Channel,Spoke,,Yes,,,,,Yes,Small Visor,,,,,,Abs › Wheel Type › Adjustable Levers › Backrest › Windscreen
+Royal Enfield,Meteor 350,2020 – 2026 (all years),Supernova,Dual Channel,Alloy,,Yes,,,,,Yes,Large Windscreen,,,,,,Abs › Wheel Type › Adjustable Levers › Backrest › Windscreen
+TVS,Apache RTR 160,2015 – 2026 (all years),RM Drum (Single Disc),Single Channel,,,,,LCD Display,Disc,Drum,,,,,,,,Front Brake Type › Rear Brake Type › Meter Type › Abs
+TVS,Apache RTR 160,2015 – 2026 (all years),RM Disc (Twin Disc),Single Channel,,,,,LCD Display,Disc,Disc,,,,,,,,Front Brake Type › Rear Brake Type › Meter Type › Abs
+TVS,Apache RTR 160,2015 – 2026 (all years),RM Disc BT,Single Channel,,,,,SmartXonnect,Disc,Disc,,,,,,,,Front Brake Type › Rear Brake Type › Meter Type › Abs
+TVS,Apache RTR 160,2015 – 2026 (all years),Racing Edition,Single Channel,,,,,SmartXonnect,Disc,Disc,,,,,,,,Front Brake Type › Rear Brake Type › Meter Type › Abs
+TVS,Apache RTR 160,2015 – 2026 (all years),Dual ABS,Dual Channel,,,,,SmartXonnect,Disc,Disc,,,,,,,,Front Brake Type › Rear Brake Type › Meter Type › Abs
+Bajaj,Pulsar NS125,2021 – 2026 (all years),Standard,CBS,,,,,,,,,,Halogen Bulb,No,,,,Headlight › Usb Charging Port
+Bajaj,Pulsar NS125,2021 – 2026 (all years),Bluetooth,CBS,,,,,,,,,,LED,Yes,,,,Headlight › Usb Charging Port
+TVS,Ntorq 125,2018 – 2026 (all years),Drum,,,,,,Basic,Drum,,,,Halogen Bulb,,No,,"Harlequin Blue, Nardo Gray, Turquoise Blue",Meter Type › Front Brake Type › Ride Modes › Colour
+TVS,Ntorq 125,2018 – 2026 (all years),Disc,,,,,,Basic,Disc,,,,Halogen Bulb,,No,,"Harlequin Blue, Nardo Gray, Turquoise Blue",Meter Type › Front Brake Type › Ride Modes › Colour
+TVS,Ntorq 125,2018 – 2026 (all years),Race Edition,,,,,,SmartXonnect,Disc,,,,LED,,No,,"Race Edition Marine Blue, Race Edition Red",Meter Type › Front Brake Type › Ride Modes › Colour
+TVS,Ntorq 125,2018 – 2026 (all years),Super Squad,,,,,,SmartXonnect,Disc,,,,LED,,No,,Marvel Graphics,Meter Type › Front Brake Type › Ride Modes › Colour
+TVS,Ntorq 125,2018 – 2026 (all years),Race XP,,,,,,SmartXonnect,Disc,,,,LED,,Yes,,"Dark Black, Race Red Black",Meter Type › Front Brake Type › Ride Modes › Colour
+TVS,Ntorq 125,2018 – 2026 (all years),XT,,,,,,TFT SmartXonnect,Disc,,,,LED,,Yes,,Neon,Meter Type › Front Brake Type › Ride Modes › Colour
+TVS,Jupiter,2015 – 2020,Standard,,Steel,,,,Analogue,,,No,No,,,,,,Wheel Type › Meter Type › Backrest › Windscreen
+TVS,Jupiter,2015 – 2020,ZX,,Alloy,,,,Semi-Digital,,,No,No,,,,,,Wheel Type › Meter Type › Backrest › Windscreen
+TVS,Jupiter,2015 – 2020,Classic,,Alloy,,,,Semi-Digital,,,Yes,Yes,,,,,,Wheel Type › Meter Type › Backrest › Windscreen
+TVS,Jupiter,2021 – 2022,Standard,,Steel,,,,Analogue,Drum,,No,No,,,,,,Wheel Type › Meter Type › Front Brake Type › Backrest › Windscreen
+TVS,Jupiter,2021 – 2022,ZX,,Alloy,,,,Semi-Digital,Drum,,No,No,,,,,,Wheel Type › Meter Type › Front Brake Type › Backrest › Windscreen
+TVS,Jupiter,2021 – 2022,ZX Disc,,Alloy,,,,Semi-Digital,Disc,,No,No,,,,,,Wheel Type › Meter Type › Front Brake Type › Backrest › Windscreen
+TVS,Jupiter,2021 – 2022,Classic,,Alloy,,,,Semi-Digital,Disc,,Yes,Yes,,,,,,Wheel Type › Meter Type › Front Brake Type › Backrest › Windscreen
+TVS,Jupiter,2023 – 2026 (current),Drum,,Steel,,,,Semi-Digital,Drum,,,,,,,,,Wheel Type › Meter Type › Front Brake Type
+TVS,Jupiter,2023 – 2026 (current),Drum Alloy,,Alloy,,,,Semi-Digital,Drum,,,,,,,,,Wheel Type › Meter Type › Front Brake Type
+TVS,Jupiter,2023 – 2026 (current),Drum SmartXonnect,,Alloy,,,,SmartXonnect,Drum,,,,,,,,,Wheel Type › Meter Type › Front Brake Type
+TVS,Jupiter,2023 – 2026 (current),Disc SmartXonnect,,Alloy,,,,SmartXonnect,Disc,,,,,,,,,Wheel Type › Meter Type › Front Brake Type
+TVS,Jupiter 125,2021 – 2026 (all years),Drum - Steel Wheel,,Steel,,,,Semi-Digital,Drum,,No,,,,,,,Wheel Type › Meter Type › Front Brake Type › Backrest
+TVS,Jupiter 125,2021 – 2026 (all years),Drum - Alloy Wheel,,Alloy,,,,Semi-Digital,Drum,,No,,,,,,,Wheel Type › Meter Type › Front Brake Type › Backrest
+TVS,Jupiter 125,2021 – 2026 (all years),Disc - Alloy Wheel,,Alloy,,,,Semi-Digital,Disc,,No,,,,,,,Wheel Type › Meter Type › Front Brake Type › Backrest
+TVS,Jupiter 125,2021 – 2026 (all years),SmartXonnect,,Alloy,,,,SmartXonnect,Disc,,Yes,,,,,,,Wheel Type › Meter Type › Front Brake Type › Backrest
+Honda,Activa 6G,2020 – 2026 (all years),Standard,,Steel,,,,,,,,,,,,No,,Wheel Type › Smart Key
+Honda,Activa 6G,2020 – 2026 (all years),Deluxe,,Alloy,,,,,,,,,,,,No,,Wheel Type › Smart Key
+Honda,Activa 6G,2020 – 2026 (all years),H-Smart,,Alloy,,,,,,,,,,,,Yes,,Wheel Type › Smart Key
+Hero,Splendor Plus,2015 – 2026 (all years),Drum Spoke (Kick),,Spoke,No,,,Analogue,Drum,,,,,,,,,Meter Type › Front Brake Type › Wheel Type › Self Start
+Hero,Splendor Plus,2015 – 2026 (all years),Self Spoke,,Spoke,Yes,,,Analogue,Drum,,,,,,,,,Meter Type › Front Brake Type › Wheel Type › Self Start
+Hero,Splendor Plus,2015 – 2026 (all years),Self Alloy,,Alloy,Yes,,,Analogue,Drum,,,,,,,,,Meter Type › Front Brake Type › Wheel Type › Self Start
+Hero,Splendor Plus,2015 – 2026 (all years),Self Alloy i3S,,Alloy,Yes,,,Analogue,Drum,,,,,,,,,Meter Type › Front Brake Type › Wheel Type › Self Start
+Hero,Splendor Plus,2015 – 2026 (all years),Xtec / Xtec 2.0,,Alloy,Yes,,,Digital (segment LCD),Drum,,,,,,,,,Meter Type › Front Brake Type › Wheel Type › Self Start
+Hero,Splendor Plus,2015 – 2026 (all years),Disc (2025+),,Alloy,Yes,,,Analogue,Disc,,,,,,,,,Meter Type › Front Brake Type › Wheel Type › Self Start
+Hero,HF Deluxe,2015 – 2026 (all years),Kick Start,,,No,,,Analogue,,,,,Halogen Bulb,,,,Standard graphics,Headlight › Meter Type › Colour › Self Start
+Hero,HF Deluxe,2015 – 2026 (all years),Self Start,,,Yes,,,Analogue,,,,,Halogen Bulb,,,,Standard graphics,Headlight › Meter Type › Colour › Self Start
+Hero,HF Deluxe,2015 – 2026 (all years),Self Start i3S,,,Yes,,,Analogue,,,,,Halogen Bulb,,,,Standard graphics,Headlight › Meter Type › Colour › Self Start
+Hero,HF Deluxe,2015 – 2026 (all years),Canvas Black,,,Yes,,,Analogue,,,,,Halogen Bulb,,,,All-black theme + 3D HF emblem,Headlight › Meter Type › Colour › Self Start
+Hero,HF Deluxe,2015 – 2026 (all years),HF Deluxe Pro,,,Yes,,,Digital (LCD console),,,,,LED,,,,Premium graphics,Headlight › Meter Type › Colour › Self Start
+TVS,Radeon,2018 – 2021 (analogue console),Drum (Base),,,,,,Analogue,Drum,,,,,,,,,Meter Type › Front Brake Type
+TVS,Radeon,2018 – 2021 (analogue console),Disc (Special Edition),,,,,,Analogue,Disc,,,,,,,,,Meter Type › Front Brake Type
+TVS,Radeon,2022 – 2026 (digital console),"Drum (Base, analogue)",,,,,,Analogue,Drum,,,,,,,,,Meter Type › Front Brake Type
+TVS,Radeon,2022 – 2026 (digital console),Digi Drum,,,,,,Digital (negative LCD),Drum,,,,,,,,,Meter Type › Front Brake Type
+TVS,Radeon,2022 – 2026 (digital console),Digi Disc,,,,,,Digital (negative LCD),Disc,,,,,,,,,Meter Type › Front Brake Type
+Honda,Activa 125,2015 – 2022 (BS4 / BS6),Standard,,Steel,,,,,Drum,,,,,,,,,Wheel Type › Front Brake Type
+Honda,Activa 125,2015 – 2022 (BS4 / BS6),Alloy,,Alloy,,,,,Drum,,,,,,,,,Wheel Type › Front Brake Type
+Honda,Activa 125,2015 – 2022 (BS4 / BS6),Deluxe,,Alloy,,,,,Disc,,,,,,,,,Wheel Type › Front Brake Type
+Honda,Activa 125,2023 – 2024 (OBD2 update),Drum,,Steel,,,,,Drum,,,,,,,No,,Wheel Type › Front Brake Type › Smart Key
+Honda,Activa 125,2023 – 2024 (OBD2 update),Drum Alloy,,Alloy,,,,,Drum,,,,,,,No,,Wheel Type › Front Brake Type › Smart Key
+Honda,Activa 125,2023 – 2024 (OBD2 update),Disc,,Alloy,,,,,Disc,,,,,,,No,,Wheel Type › Front Brake Type › Smart Key
+Honda,Activa 125,2023 – 2024 (OBD2 update),H-Smart,,Alloy,,,,,Disc,,,,,,,Yes,,Wheel Type › Front Brake Type › Smart Key
+Honda,Activa 125,2025 onwards (TFT update),DLX,,Alloy,,,,Semi-Digital,Disc,,,,,,,No,,Wheel Type › Front Brake Type › Smart Key › Meter Type
+Honda,Activa 125,2025 onwards (TFT update),H-Smart,,Alloy,,,,TFT (Bluetooth),Disc,,,,,,,Yes,,Wheel Type › Front Brake Type › Smart Key › Meter Type
