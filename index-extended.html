@@ -340,13 +340,13 @@ const DATA = {
         ]
       },
       {
-        yearLabel: "2023 – 2026 (new platform)",
-        questions: ["Abs", "Rear Brake Type", "Colour"],
+        yearLabel: "2023 – 2026 (new platform / J-series)",
+        questions: ["Front Brake Type", "Rear Brake Type", "Abs", "Colour"],
         variants: [
-          { name: "Military",        specs: { "Abs": "Single Channel", "Rear Brake Type": "Drum", "Colour": "Basic 2-D paint logo" } },
-          { name: "Standard",        specs: { "Abs": "Dual Channel",   "Rear Brake Type": "Disc", "Colour": "Gold pinstriped with 3-D RE badge" } },
-          { name: "Black Gold",      specs: { "Abs": "Dual Channel",   "Rear Brake Type": "Disc", "Colour": "Gold pinstriped, 3-D RE badge & blacked-out engine/exhaust" } },
-          { name: "Battalion Black", specs: { "Abs": "Single Channel", "Rear Brake Type": "Drum", "Colour": "Gold pinstriped with 3-D RE badge (Battalion Black)" } }
+          { name: "Military",        specs: { "Front Brake Type": "Disc", "Rear Brake Type": "Drum", "Abs": "Single Channel", "Colour": "Basic 2-D paint logo (Military Black/Red/Silver)" } },
+          { name: "Battalion Black", specs: { "Front Brake Type": "Disc", "Rear Brake Type": "Drum", "Abs": "Single Channel", "Colour": "Gold pinstriped with 3-D RE badge (Battalion Black)" } },
+          { name: "Standard",        specs: { "Front Brake Type": "Disc", "Rear Brake Type": "Disc", "Abs": "Dual Channel",   "Colour": "Gold pinstriped 3-D RE badge (chrome engine)" } },
+          { name: "Black Gold",      specs: { "Front Brake Type": "Disc", "Rear Brake Type": "Disc", "Abs": "Dual Channel",   "Colour": "Gold pinstriped with 3-D RE badge & blacked-out engine/exhaust" } }
         ]
       }
     ]
@@ -373,13 +373,13 @@ const DATA = {
     generations: [
       {
         yearLabel: "All years",
-        questions: ["Abs", "Meter Type", "Front Brake Type", "Rear Brake Type"],
+        questions: ["Front Brake Type", "Rear Brake Type", "Meter Type", "Abs"],
         variants: [
-          { name: "RM Drum",        specs: { "Abs": "Single Channel", "Meter Type": "LCD Display",  "Front Brake Type": "Disc", "Rear Brake Type": "Drum" } },
-          { name: "RM Disc",        specs: { "Abs": "Single Channel", "Meter Type": "LCD Display",  "Front Brake Type": "Disc", "Rear Brake Type": "Disc" } },
-          { name: "RM Disc BT",     specs: { "Abs": "Single Channel", "Meter Type": "SmartXonnect", "Front Brake Type": "Disc", "Rear Brake Type": "Disc" } },
-          { name: "Racing Edition", specs: { "Abs": "Single Channel", "Meter Type": "SmartXonnect", "Front Brake Type": "Disc", "Rear Brake Type": "Disc" } },
-          { name: "Dual ABS",       specs: { "Abs": "Dual Channel",   "Meter Type": "SmartXonnect", "Front Brake Type": "Disc", "Rear Brake Type": "Disc" } }
+          { name: "RM Drum (Single Disc)", specs: { "Front Brake Type": "Disc", "Rear Brake Type": "Drum", "Meter Type": "LCD Display",  "Abs": "Single Channel" } },
+          { name: "RM Disc (Twin Disc)",   specs: { "Front Brake Type": "Disc", "Rear Brake Type": "Disc", "Meter Type": "LCD Display",  "Abs": "Single Channel" } },
+          { name: "RM Disc BT",            specs: { "Front Brake Type": "Disc", "Rear Brake Type": "Disc", "Meter Type": "SmartXonnect", "Abs": "Single Channel" } },
+          { name: "Racing Edition",        specs: { "Front Brake Type": "Disc", "Rear Brake Type": "Disc", "Meter Type": "SmartXonnect", "Abs": "Single Channel" } },
+          { name: "Dual ABS",              specs: { "Front Brake Type": "Disc", "Rear Brake Type": "Disc", "Meter Type": "SmartXonnect", "Abs": "Dual Channel" } }
         ]
       }
     ]
@@ -508,14 +508,16 @@ const DATA = {
     make: "Hero", model: "HF Deluxe",
     generations: [
       {
+        // Wheel type intentionally NOT used: cast/alloy wheels are standard/optional
+        // across kick & self trims, so they don't map cleanly to a variant.
         yearLabel: "All years (current BS6)",
-        questions: ["Wheel Type", "Self Start"],
+        questions: ["Headlight", "Meter Type", "Colour", "Self Start"],
         variants: [
-          { name: "Kick Spoke",     specs: { "Wheel Type": "Spoke", "Self Start": "No" } },
-          { name: "Kick Alloy",     specs: { "Wheel Type": "Alloy", "Self Start": "No" } },
-          { name: "Self Spoke",     specs: { "Wheel Type": "Spoke", "Self Start": "Yes" } },
-          { name: "Self Alloy",     specs: { "Wheel Type": "Alloy", "Self Start": "Yes" } },
-          { name: "Self Alloy i3S", specs: { "Wheel Type": "Alloy", "Self Start": "Yes" } }
+          { name: "Kick Start",     specs: { "Headlight": "Halogen Bulb", "Meter Type": "Analogue",              "Colour": "Standard graphics",             "Self Start": "No" } },
+          { name: "Self Start",     specs: { "Headlight": "Halogen Bulb", "Meter Type": "Analogue",              "Colour": "Standard graphics",             "Self Start": "Yes" } },
+          { name: "Self Start i3S", specs: { "Headlight": "Halogen Bulb", "Meter Type": "Analogue",              "Colour": "Standard graphics",             "Self Start": "Yes" } },
+          { name: "Canvas Black",   specs: { "Headlight": "Halogen Bulb", "Meter Type": "Analogue",              "Colour": "All-black theme + 3D HF emblem", "Self Start": "Yes" } },
+          { name: "HF Deluxe Pro",  specs: { "Headlight": "LED",          "Meter Type": "Digital (LCD console)", "Colour": "Premium graphics",              "Self Start": "Yes" } }
         ]
       }
     ]
@@ -525,12 +527,20 @@ const DATA = {
     make: "TVS", model: "Radeon",
     generations: [
       {
-        yearLabel: "All years",
+        yearLabel: "2018 – 2021 (analogue console)",
         questions: ["Meter Type", "Front Brake Type"],
         variants: [
-          { name: "Drum (Base)", specs: { "Meter Type": "Analogue",              "Front Brake Type": "Drum" } },
-          { name: "Digi Drum",   specs: { "Meter Type": "Digital (negative LCD)", "Front Brake Type": "Drum" } },
-          { name: "Digi Disc",   specs: { "Meter Type": "Digital (negative LCD)", "Front Brake Type": "Disc" } }
+          { name: "Drum (Base)",            specs: { "Meter Type": "Analogue", "Front Brake Type": "Drum" } },
+          { name: "Disc (Special Edition)", specs: { "Meter Type": "Analogue", "Front Brake Type": "Disc" } }
+        ]
+      },
+      {
+        yearLabel: "2022 – 2026 (digital console)",
+        questions: ["Meter Type", "Front Brake Type"],
+        variants: [
+          { name: "Drum (Base, analogue)", specs: { "Meter Type": "Analogue",              "Front Brake Type": "Drum" } },
+          { name: "Digi Drum",             specs: { "Meter Type": "Digital (negative LCD)", "Front Brake Type": "Drum" } },
+          { name: "Digi Disc",             specs: { "Meter Type": "Digital (negative LCD)", "Front Brake Type": "Disc" } }
         ]
       }
     ]
@@ -540,13 +550,30 @@ const DATA = {
     make: "Honda", model: "Activa 125",
     generations: [
       {
-        yearLabel: "All years",
+        yearLabel: "2022 & earlier (BS4 / BS6)",
+        questions: ["Wheel Type", "Front Brake Type"],
+        variants: [
+          { name: "Standard", specs: { "Wheel Type": "Steel", "Front Brake Type": "Drum" } },
+          { name: "Alloy",    specs: { "Wheel Type": "Alloy", "Front Brake Type": "Drum" } },
+          { name: "Deluxe",   specs: { "Wheel Type": "Alloy", "Front Brake Type": "Disc" } }
+        ]
+      },
+      {
+        yearLabel: "2023 – 2024 (OBD2 update)",
         questions: ["Wheel Type", "Front Brake Type", "Smart Key"],
         variants: [
-          { name: "Drum (STD)", specs: { "Wheel Type": "Steel", "Front Brake Type": "Drum", "Smart Key": "No" } },
+          { name: "Drum",       specs: { "Wheel Type": "Steel", "Front Brake Type": "Drum", "Smart Key": "No" } },
           { name: "Drum Alloy", specs: { "Wheel Type": "Alloy", "Front Brake Type": "Drum", "Smart Key": "No" } },
           { name: "Disc",       specs: { "Wheel Type": "Alloy", "Front Brake Type": "Disc", "Smart Key": "No" } },
           { name: "H-Smart",    specs: { "Wheel Type": "Alloy", "Front Brake Type": "Disc", "Smart Key": "Yes" } }
+        ]
+      },
+      {
+        yearLabel: "2025 onward (TFT update)",
+        questions: ["Wheel Type", "Front Brake Type", "Smart Key", "Meter Type"],
+        variants: [
+          { name: "DLX",     specs: { "Wheel Type": "Alloy", "Front Brake Type": "Disc", "Smart Key": "No",  "Meter Type": "Semi-Digital" } },
+          { name: "H-Smart", specs: { "Wheel Type": "Alloy", "Front Brake Type": "Disc", "Smart Key": "Yes", "Meter Type": "TFT (Bluetooth)" } }
         ]
       }
     ]

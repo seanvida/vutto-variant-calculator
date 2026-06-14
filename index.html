@@ -340,13 +340,13 @@ const DATA = {
         ]
       },
       {
-        yearLabel: "2023 – 2026 (new platform)",
-        questions: ["Abs", "Rear Brake Type", "Colour"],
+        yearLabel: "2023 – 2026 (new platform / J-series)",
+        questions: ["Front Brake Type", "Rear Brake Type", "Abs", "Colour"],
         variants: [
-          { name: "Military",        specs: { "Abs": "Single Channel", "Rear Brake Type": "Drum", "Colour": "Basic 2-D paint logo" } },
-          { name: "Standard",        specs: { "Abs": "Dual Channel",   "Rear Brake Type": "Disc", "Colour": "Gold pinstriped with 3-D RE badge" } },
-          { name: "Black Gold",      specs: { "Abs": "Dual Channel",   "Rear Brake Type": "Disc", "Colour": "Gold pinstriped, 3-D RE badge & blacked-out engine/exhaust" } },
-          { name: "Battalion Black", specs: { "Abs": "Single Channel", "Rear Brake Type": "Drum", "Colour": "Gold pinstriped with 3-D RE badge (Battalion Black)" } }
+          { name: "Military",        specs: { "Front Brake Type": "Disc", "Rear Brake Type": "Drum", "Abs": "Single Channel", "Colour": "Basic 2-D paint logo (Military Black/Red/Silver)" } },
+          { name: "Battalion Black", specs: { "Front Brake Type": "Disc", "Rear Brake Type": "Drum", "Abs": "Single Channel", "Colour": "Gold pinstriped with 3-D RE badge (Battalion Black)" } },
+          { name: "Standard",        specs: { "Front Brake Type": "Disc", "Rear Brake Type": "Disc", "Abs": "Dual Channel",   "Colour": "Gold pinstriped 3-D RE badge (chrome engine)" } },
+          { name: "Black Gold",      specs: { "Front Brake Type": "Disc", "Rear Brake Type": "Disc", "Abs": "Dual Channel",   "Colour": "Gold pinstriped with 3-D RE badge & blacked-out engine/exhaust" } }
         ]
       }
     ]
@@ -373,13 +373,13 @@ const DATA = {
     generations: [
       {
         yearLabel: "All years",
-        questions: ["Abs", "Meter Type", "Front Brake Type", "Rear Brake Type"],
+        questions: ["Front Brake Type", "Rear Brake Type", "Meter Type", "Abs"],
         variants: [
-          { name: "RM Drum",        specs: { "Abs": "Single Channel", "Meter Type": "LCD Display",  "Front Brake Type": "Disc", "Rear Brake Type": "Drum" } },
-          { name: "RM Disc",        specs: { "Abs": "Single Channel", "Meter Type": "LCD Display",  "Front Brake Type": "Disc", "Rear Brake Type": "Disc" } },
-          { name: "RM Disc BT",     specs: { "Abs": "Single Channel", "Meter Type": "SmartXonnect", "Front Brake Type": "Disc", "Rear Brake Type": "Disc" } },
-          { name: "Racing Edition", specs: { "Abs": "Single Channel", "Meter Type": "SmartXonnect", "Front Brake Type": "Disc", "Rear Brake Type": "Disc" } },
-          { name: "Dual ABS",       specs: { "Abs": "Dual Channel",   "Meter Type": "SmartXonnect", "Front Brake Type": "Disc", "Rear Brake Type": "Disc" } }
+          { name: "RM Drum (Single Disc)", specs: { "Front Brake Type": "Disc", "Rear Brake Type": "Drum", "Meter Type": "LCD Display",  "Abs": "Single Channel" } },
+          { name: "RM Disc (Twin Disc)",   specs: { "Front Brake Type": "Disc", "Rear Brake Type": "Disc", "Meter Type": "LCD Display",  "Abs": "Single Channel" } },
+          { name: "RM Disc BT",            specs: { "Front Brake Type": "Disc", "Rear Brake Type": "Disc", "Meter Type": "SmartXonnect", "Abs": "Single Channel" } },
+          { name: "Racing Edition",        specs: { "Front Brake Type": "Disc", "Rear Brake Type": "Disc", "Meter Type": "SmartXonnect", "Abs": "Single Channel" } },
+          { name: "Dual ABS",              specs: { "Front Brake Type": "Disc", "Rear Brake Type": "Disc", "Meter Type": "SmartXonnect", "Abs": "Dual Channel" } }
         ]
       }
     ]
