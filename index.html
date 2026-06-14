@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Bike Variant Finder</title>
+<style>
+  :root {
+    --bg: #0f1115;
+    --panel: #171a21;
+    --panel-2: #1e222b;
+    --line: #2a2f3a;
+    --line-2: #353b48;
+    --text: #eef1f6;
+    --text-2: #aab2c0;
+    --text-3: #7c8493;
+    --accent: #3ea6ff;
+    --accent-2: #1f7fd6;
+    --good: #2fd07a;
+    --good-bg: #143324;
+    --warn: #ffb33e;
+    --warn-bg: #33270e;
+    --r: 14px;
+    --r-sm: 10px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; }
+  body {
+    background: radial-gradient(1200px 600px at 50% -10%, #1b2230 0%, var(--bg) 55%);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    padding: 32px 18px 64px;
+  }
+  .wrap { max-width: 760px; margin: 0 auto; }
+
+  header.app { text-align: center; margin-bottom: 26px; }
+  header.app .logo {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-weight: 700; letter-spacing: -0.02em; font-size: 14px;
+    color: var(--text-2); text-transform: uppercase;
+  }
+  header.app .logo .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 14px var(--accent); }
+  header.app h1 { font-size: 28px; letter-spacing: -0.03em; margin: 10px 0 6px; }
+  header.app p { color: var(--text-3); font-size: 14.5px; }
+
+  .card {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: var(--r);
+    padding: 22px;
+    box-shadow: 0 12px 40px rgba(0,0,0,.35);
+  }
+
+  /* breadcrumb */
+  .crumbs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
+  .crumb {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--panel-2); border: 1px solid var(--line);
+    border-radius: 999px; padding: 6px 12px; font-size: 12.5px; color: var(--text-2);
+    cursor: pointer; transition: .15s;
+  }
+  .crumb:hover { border-color: var(--accent); color: var(--text); }
+  .crumb .k { color: var(--text-3); }
+  .crumb .v { color: var(--text); font-weight: 600; }
+  .crumb .x { color: var(--text-3); font-weight: 700; margin-left: 2px; }
+  .crumbs .hint { color: var(--text-3); font-size: 12px; align-self: center; }
+
+  .step-label { font-size: 12.5px; text-transform: uppercase; letter-spacing: .08em; color: var(--accent); font-weight: 700; margin-bottom: 4px; }
+  .step-q { font-size: 20px; letter-spacing: -0.02em; margin-bottom: 4px; }
+  .step-hint { color: var(--text-3); font-size: 13.5px; margin-bottom: 18px; }
+
+  .opts { display: grid; gap: 10px; }
+  .opts.cols-2 { grid-template-columns: 1fr 1fr; }
+  @media (max-width: 520px) { .opts.cols-2 { grid-template-columns: 1fr; } }
+
+  .opt {
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    background: var(--panel-2);
+    border: 1px solid var(--line-2);
+    border-radius: var(--r-sm);
+    padding: 14px 16px;
+    color: var(--text);
+    font-size: 15px; font-weight: 500;
+    cursor: pointer;
+    text-align: left;
+    transition: .14s;
+    width: 100%;
+  }
+  .opt:hover { border-color: var(--accent); background: #20262f; transform: translateY(-1px); }
+  .opt .arrow { color: var(--text-3); font-size: 18px; }
+  .opt:hover .arrow { color: var(--accent); }
+  .opt .sub { display: block; font-size: 12px; color: var(--text-3); font-weight: 400; margin-top: 2px; }
+
+  .brand-group { margin-bottom: 16px; }
+  .brand-group:last-child { margin-bottom: 0; }
+  .brand-group h3 { font-size: 12.5px; text-transform: uppercase; letter-spacing: .08em; color: var(--text-3); margin-bottom: 9px; }
+
+  /* result */
+  .result-badge { display: inline-flex; align-items: center; gap: 8px; font-size: 12.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; padding: 6px 12px; border-radius: 999px; margin-bottom: 14px; }
+  .result-badge.ok { background: var(--good-bg); color: var(--good); }
+  .result-badge.warn { background: var(--warn-bg); color: var(--warn); }
+  .result-name { font-size: 30px; letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 6px; }
+  .result-sub { color: var(--text-2); font-size: 15px; margin-bottom: 20px; }
+
+  .specs { border: 1px solid var(--line); border-radius: var(--r-sm); overflow: hidden; }
+  .specs .row { display: flex; justify-content: space-between; gap: 16px; padding: 11px 15px; font-size: 14px; border-bottom: 1px solid var(--line); }
+  .specs .row:last-child { border-bottom: none; }
+  .specs .row:nth-child(odd) { background: rgba(255,255,255,.015); }
+  .specs .row .k { color: var(--text-3); }
+  .specs .row .v { color: var(--text); font-weight: 600; text-align: right; }
+
+  .candidates { display: grid; gap: 10px; margin-top: 4px; }
+
+  .section-title { font-size: 13px; color: var(--text-2); font-weight: 600; margin: 22px 0 10px; }
+
+  .row-btns { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 22px; }
+  .btn { border: 1px solid var(--line-2); background: var(--panel-2); color: var(--text); border-radius: var(--r-sm); padding: 11px 18px; font-size: 14px; font-weight: 600; cursor: pointer; transition: .14s; }
+  .btn:hover { border-color: var(--accent); }
+  .btn.primary { background: var(--accent); border-color: var(--accent); color: #04121f; }
+  .btn.primary:hover { background: #57b3ff; }
+
+  details.override { margin-top: 18px; border-top: 1px solid var(--line); padding-top: 16px; }
+  details.override summary { cursor: pointer; color: var(--text-2); font-size: 13.5px; font-weight: 600; list-style: none; }
+  details.override summary::-webkit-details-marker { display: none; }
+  details.override summary:hover { color: var(--accent); }
+  details.override summary::before { content: "▸ "; color: var(--text-3); }
+  details.override[open] summary::before { content: "▾ "; }
+  details.override .candidates { margin-top: 14px; }
+
+  footer.app { text-align: center; color: var(--text-3); font-size: 12px; margin-top: 28px; }
+  footer.app code { background: var(--panel-2); padding: 2px 6px; border-radius: 5px; border: 1px solid var(--line); }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="app">
+      <span class="logo"><span class="dot"></span> Variant Finder</span>
+      <h1>Which variant is it?</h1>
+      <p>Pick a model, answer a few quick questions, and we'll pin down the exact variant.</p>
+    </header>
+
+    <div class="card" id="app"><!-- rendered by JS --></div>
+
+    <footer class="app">
+      Deterministic match from the variant spec sheet · no guessing.
+    </footer>
+  </div>
+
+<script>
+/* =========================================================================
+   DATA  — transcribed from the "Variants" matrix + "Journey" question-order
+   tab of the source spreadsheet. Each model has one or more generations
+   (year buckets). Each generation lists the ordered diagnostic questions and
+   the variants with their distinguishing spec values.
+   Comma-separated colour values map multiple colours to one variant.
+   A blank ("") spec value means "not a differentiator for that variant".
+   ========================================================================= */
+const DATA = {
+  "Royal Enfield|Hunter 350": {
+    make: "Royal Enfield", model: "Hunter 350",
+    generations: [
+      {
+        yearLabel: "Up to 2025 (1st generation)",
+        questions: ["Abs", "Colour"],
+        variants: [
+          { name: "Metro Dapper",  specs: { "Abs": "Dual Channel",   "Colour": "Single Tone (Fade)" } },
+          { name: "Retro Factory", specs: { "Abs": "Single Channel", "Colour": "Black" } },
+          { name: "Metro Rebel",   specs: { "Abs": "Dual Channel",   "Colour": "Dual Tone" } }
+        ]
+      },
+      {
+        yearLabel: "2025 onward (new generation)",
+        questions: ["Abs", "Wheel Type", "Colour"],
+        variants: [
+          { name: "Standard",     specs: { "Abs": "Single Channel", "Wheel Type": "Spoke", "Colour": "Factory Black" } },
+          { name: "Base Premium", specs: { "Abs": "Single Channel", "Wheel Type": "Alloy", "Colour": "Tarmac Black" } },
+          { name: "Mid",          specs: { "Abs": "Dual Channel",   "Wheel Type": "Alloy", "Colour": "Graphite Grey, Dapper Grey, Rio White" } },
+          { name: "Top",          specs: { "Abs": "Dual Channel",   "Wheel Type": "Alloy", "Colour": "Mumbai Yellow, Moonshot White, Tokyo Black, London Red, Rebel Blue" } }
+        ]
+      }
+    ]
+  },
+
+  "Royal Enfield|Classic 350": {
+    make: "Royal Enfield", model: "Classic 350",
+    generations: [
+      {
+        yearLabel: "2017 & earlier",
+        questions: ["Self Start", "Colour"],
+        variants: [
+          { name: "KS (Kick Start)",     specs: { "Self Start": "No",  "Colour": "Black, White, Silver, Red" } },
+          { name: "ES (Electric Start)", specs: { "Self Start": "Yes", "Colour": "Black, White, Silver, Red" } },
+          { name: "Chrome",              specs: { "Self Start": "Yes", "Colour": "Chrome Tank" } }
+        ]
+      },
+      {
+        yearLabel: "2018 – 2020",
+        questions: ["Abs", "Wheel Type", "Colour"],
+        variants: [
+          { name: "ABS",             specs: { "Abs": "Single Channel", "Wheel Type": "Spoke", "Colour": "Traditional" } },
+          { name: "Signals Edition", specs: { "Abs": "Dual Channel",   "Wheel Type": "Spoke", "Colour": "Military graphics" } },
+          { name: "Gunmetal Grey",   specs: { "Abs": "Dual Channel",   "Wheel Type": "Alloy", "Colour": "Blacked-out (Gunmetal Grey)" } },
+          { name: "Stealth Black",   specs: { "Abs": "Dual Channel",   "Wheel Type": "Alloy", "Colour": "Blacked-out (Stealth Black)" } },
+          { name: "Chrome",          specs: { "Abs": "Dual Channel",   "Wheel Type": "Spoke", "Colour": "Chrome Tank" } }
+        ]
+      },
+      {
+        yearLabel: "2021 – 2023 (J-platform)",
+        questions: ["Abs", "Wheel Type", "Colour"],
+        variants: [
+          { name: "Redditch", specs: { "Abs": "Single Channel", "Wheel Type": "Spoke", "Colour": "" } },
+          { name: "Halcyon",  specs: { "Abs": "Dual Channel",   "Wheel Type": "Spoke", "Colour": "Halcyon colours" } },
+          { name: "Signals",  specs: { "Abs": "Dual Channel",   "Wheel Type": "Spoke", "Colour": "Military theme (blacked-out engine & exhaust)" } },
+          { name: "Dark",     specs: { "Abs": "Dual Channel",   "Wheel Type": "Alloy", "Colour": "Dark theme (blacked-out engine & exhaust)" } },
+          { name: "Chrome",   specs: { "Abs": "Dual Channel",   "Wheel Type": "Spoke", "Colour": "Chrome Tank" } }
+        ]
+      },
+      {
+        yearLabel: "2024 – 2026 (current)",
+        questions: ["Abs", "Wheel Type", "Adjustable Levers", "LED Indicators", "Meter Type", "Colour"],
+        variants: [
+          { name: "Heritage",         specs: { "Abs": "Dual Channel", "Wheel Type": "Spoke", "Adjustable Levers": "No",  "LED Indicators": "No",  "Meter Type": "Semi-Digital",        "Colour": "Heritage colours" } },
+          { name: "Heritage Premium", specs: { "Abs": "Dual Channel", "Wheel Type": "Spoke", "Adjustable Levers": "No",  "LED Indicators": "No",  "Meter Type": "Semi-Digital",        "Colour": "Heritage Premium paint" } },
+          { name: "Signals",          specs: { "Abs": "Dual Channel", "Wheel Type": "Spoke", "Adjustable Levers": "No",  "LED Indicators": "No",  "Meter Type": "Semi-Digital",        "Colour": "Military theme (blacked-out engine & exhaust)" } },
+          { name: "Dark",             specs: { "Abs": "Dual Channel", "Wheel Type": "Alloy", "Adjustable Levers": "Yes", "LED Indicators": "Yes", "Meter Type": "Tripper Navigation",  "Colour": "Dark theme (blacked-out engine & exhaust)" } },
+          { name: "Chrome / Emerald", specs: { "Abs": "Dual Channel", "Wheel Type": "Spoke", "Adjustable Levers": "Yes", "LED Indicators": "Yes", "Meter Type": "Tripper Navigation",  "Colour": "Chrome Tank" } }
+        ]
+      }
+    ]
+  },
+
+  "Royal Enfield|Bullet 350": {
+    make: "Royal Enfield", model: "Bullet 350",
+    generations: [
+      {
+        yearLabel: "2018 & earlier",
+        questions: ["Self Start", "Front Brake Type", "Rear Brake Type"],
+        variants: [
+          { name: "Bullet 350",                       specs: { "Self Start": "No",  "Front Brake Type": "Drum", "Rear Brake Type": "Drum" } },
+          { name: "Bullet 350 ES (formerly Electra)", specs: { "Self Start": "Yes", "Front Brake Type": "Disc", "Rear Brake Type": "Drum" } }
+        ]
+      },
+      {
+        yearLabel: "2019 – 2022",
+        questions: ["Self Start"],
+        variants: [
+          { name: "Bullet 350 ABS",    specs: { "Self Start": "No" } },
+          { name: "Bullet 350 ES ABS", specs: { "Self Start": "Yes" } }
+        ]
+      },
+      {
+        yearLabel: "2023 – 2026 (new platform)",
+        questions: ["Abs", "Rear Brake Type", "Colour"],
+        variants: [
+          { name: "Military",        specs: { "Abs": "Single Channel", "Rear Brake Type": "Drum", "Colour": "Basic 2-D paint logo" } },
+          { name: "Standard",        specs: { "Abs": "Dual Channel",   "Rear Brake Type": "Disc", "Colour": "Gold pinstriped with 3-D RE badge" } },
+          { name: "Black Gold",      specs: { "Abs": "Dual Channel",   "Rear Brake Type": "Disc", "Colour": "Gold pinstriped, 3-D RE badge & blacked-out engine/exhaust" } },
+          { name: "Battalion Black", specs: { "Abs": "Single Channel", "Rear Brake Type": "Drum", "Colour": "Gold pinstriped with 3-D RE badge (Battalion Black)" } }
+        ]
+      }
+    ]
+  },
+
+  "Royal Enfield|Meteor 350": {
+    make: "Royal Enfield", model: "Meteor 350",
+    generations: [
+      {
+        yearLabel: "All years (2021 – 2026)",
+        questions: ["Abs", "Wheel Type", "Adjustable Levers", "Backrest", "Windscreen"],
+        variants: [
+          { name: "Fireball",  specs: { "Abs": "Dual Channel", "Wheel Type": "Alloy", "Adjustable Levers": "No",  "Backrest": "No",  "Windscreen": "No" } },
+          { name: "Stellar",   specs: { "Abs": "Dual Channel", "Wheel Type": "Alloy", "Adjustable Levers": "No",  "Backrest": "Yes", "Windscreen": "No" } },
+          { name: "Aurora",    specs: { "Abs": "Dual Channel", "Wheel Type": "Spoke", "Adjustable Levers": "Yes", "Backrest": "Yes", "Windscreen": "Small Visor" } },
+          { name: "Supernova", specs: { "Abs": "Dual Channel", "Wheel Type": "Alloy", "Adjustable Levers": "Yes", "Backrest": "Yes", "Windscreen": "Large Windscreen" } }
+        ]
+      }
+    ]
+  },
+
+  "TVS|Apache RTR 160": {
+    make: "TVS", model: "Apache RTR 160",
+    generations: [
+      {
+        yearLabel: "All years",
+        questions: ["Abs", "Meter Type", "Front Brake Type", "Rear Brake Type"],
+        variants: [
+          { name: "RM Drum",        specs: { "Abs": "Single Channel", "Meter Type": "LCD Display",  "Front Brake Type": "Disc", "Rear Brake Type": "Drum" } },
+          { name: "RM Disc",        specs: { "Abs": "Single Channel", "Meter Type": "LCD Display",  "Front Brake Type": "Disc", "Rear Brake Type": "Disc" } },
+          { name: "RM Disc BT",     specs: { "Abs": "Single Channel", "Meter Type": "SmartXonnect", "Front Brake Type": "Disc", "Rear Brake Type": "Disc" } },
+          { name: "Racing Edition", specs: { "Abs": "Single Channel", "Meter Type": "SmartXonnect", "Front Brake Type": "Disc", "Rear Brake Type": "Disc" } },
+          { name: "Dual ABS",       specs: { "Abs": "Dual Channel",   "Meter Type": "SmartXonnect", "Front Brake Type": "Disc", "Rear Brake Type": "Disc" } }
+        ]
+      }
+    ]
+  },
+
+  "Bajaj|Pulsar NS125": {
+    make: "Bajaj", model: "Pulsar NS125",
+    generations: [
+      {
+        yearLabel: "All years",
+        questions: ["Headlight", "Usb Charging Port"],
+        variants: [
+          { name: "Standard",  specs: { "Abs": "CBS", "Headlight": "Halogen Bulb", "Usb Charging Port": "No" } },
+          { name: "Bluetooth", specs: { "Abs": "CBS", "Headlight": "LED",          "Usb Charging Port": "Yes" } }
+        ]
+      }
+    ]
+  },
+
+  "TVS|Ntorq 125": {
+    make: "TVS", model: "Ntorq 125",
+    generations: [
+      {
+        yearLabel: "All years",
+        questions: ["Meter Type", "Front Brake Type", "Ride Modes", "Colour"],
+        variants: [
+          { name: "Drum",         specs: { "Meter Type": "Basic",            "Front Brake Type": "Drum", "Headlight": "Halogen Bulb", "Ride Modes": "No",  "Colour": "Harlequin Blue, Nardo Gray, Turquoise Blue" } },
+          { name: "Disc",         specs: { "Meter Type": "Basic",            "Front Brake Type": "Disc", "Headlight": "Halogen Bulb", "Ride Modes": "No",  "Colour": "Harlequin Blue, Nardo Gray, Turquoise Blue" } },
+          { name: "Race Edition", specs: { "Meter Type": "SmartXonnect",     "Front Brake Type": "Disc", "Headlight": "LED",          "Ride Modes": "No",  "Colour": "Race Edition Marine Blue, Race Edition Red" } },
+          { name: "Super Squad",  specs: { "Meter Type": "SmartXonnect",     "Front Brake Type": "Disc", "Headlight": "LED",          "Ride Modes": "No",  "Colour": "Marvel Graphics" } },
+          { name: "Race XP",      specs: { "Meter Type": "SmartXonnect",     "Front Brake Type": "Disc", "Headlight": "LED",          "Ride Modes": "Yes", "Colour": "Dark Black, Race Red Black" } },
+          { name: "XT",           specs: { "Meter Type": "TFT SmartXonnect", "Front Brake Type": "Disc", "Headlight": "LED",          "Ride Modes": "Yes", "Colour": "Neon" } }
+        ]
+      }
+    ]
+  },
+
+  "TVS|Jupiter": {
+    make: "TVS", model: "Jupiter",
+    generations: [
+      {
+        yearLabel: "2020 & earlier",
+        questions: ["Wheel Type", "Meter Type", "Backrest", "Windscreen"],
+        variants: [
+          { name: "Standard", specs: { "Wheel Type": "Steel", "Meter Type": "Analogue",     "Backrest": "No",  "Windscreen": "No" } },
+          { name: "ZX",       specs: { "Wheel Type": "Alloy", "Meter Type": "Semi-Digital", "Backrest": "No",  "Windscreen": "No" } },
+          { name: "Classic",  specs: { "Wheel Type": "Alloy", "Meter Type": "Semi-Digital", "Backrest": "Yes", "Windscreen": "Yes" } }
+        ]
+      },
+      {
+        yearLabel: "2021 – 2022",
+        questions: ["Wheel Type", "Meter Type", "Front Brake Type", "Backrest", "Windscreen"],
+        variants: [
+          { name: "Standard", specs: { "Wheel Type": "Steel", "Meter Type": "Analogue",     "Front Brake Type": "Drum", "Backrest": "No",  "Windscreen": "No" } },
+          { name: "ZX",       specs: { "Wheel Type": "Alloy", "Meter Type": "Semi-Digital", "Front Brake Type": "Drum", "Backrest": "No",  "Windscreen": "No" } },
+          { name: "ZX Disc",  specs: { "Wheel Type": "Alloy", "Meter Type": "Semi-Digital", "Front Brake Type": "Disc", "Backrest": "No",  "Windscreen": "No" } },
+          { name: "Classic",  specs: { "Wheel Type": "Alloy", "Meter Type": "Semi-Digital", "Front Brake Type": "Disc", "Backrest": "Yes", "Windscreen": "Yes" } }
+        ]
+      },
+      {
+        yearLabel: "2023 – 2026 (current)",
+        questions: ["Wheel Type", "Meter Type", "Front Brake Type"],
+        variants: [
+          { name: "Drum",              specs: { "Wheel Type": "Steel", "Meter Type": "Semi-Digital", "Front Brake Type": "Drum" } },
+          { name: "Drum Alloy",        specs: { "Wheel Type": "Alloy", "Meter Type": "Semi-Digital", "Front Brake Type": "Drum" } },
+          { name: "Drum SmartXonnect", specs: { "Wheel Type": "Alloy", "Meter Type": "SmartXonnect", "Front Brake Type": "Drum" } },
+          { name: "Disc SmartXonnect", specs: { "Wheel Type": "Alloy", "Meter Type": "SmartXonnect", "Front Brake Type": "Disc" } }
+        ]
+      }
+    ]
+  },
+
+  "TVS|Jupiter 125": {
+    make: "TVS", model: "Jupiter 125",
+    generations: [
+      {
+        yearLabel: "All years",
+        questions: ["Wheel Type", "Meter Type", "Front Brake Type", "Backrest"],
+        variants: [
+          { name: "Drum - Steel Wheel", specs: { "Wheel Type": "Steel", "Meter Type": "Semi-Digital", "Front Brake Type": "Drum", "Backrest": "No" } },
+          { name: "Drum - Alloy Wheel", specs: { "Wheel Type": "Alloy", "Meter Type": "Semi-Digital", "Front Brake Type": "Drum", "Backrest": "No" } },
+          { name: "Disc - Alloy Wheel", specs: { "Wheel Type": "Alloy", "Meter Type": "Semi-Digital", "Front Brake Type": "Disc", "Backrest": "No" } },
+          { name: "SmartXonnect",       specs: { "Wheel Type": "Alloy", "Meter Type": "SmartXonnect", "Front Brake Type": "Disc", "Backrest": "Yes" } }
+        ]
+      }
+    ]
+  },
+
+  "Honda|Activa 6G": {
+    make: "Honda", model: "Activa 6G",
+    generations: [
+      {
+        yearLabel: "All years",
+        questions: ["Wheel Type", "Smart Key"],
+        variants: [
+          { name: "Standard", specs: { "Wheel Type": "Steel", "Smart Key": "No" } },
+          { name: "Deluxe",   specs: { "Wheel Type": "Alloy", "Smart Key": "No" } },
+          { name: "H-Smart",  specs: { "Wheel Type": "Alloy", "Smart Key": "Yes" } }
+        ]
+      }
+    ]
+  }
+};
+
+/* Friendly question copy + ordering of brands in the picker */
+const QMETA = {
+  "Abs":               { label: "Braking system (ABS)",            hint: "How many wheels does the ABS act on?" },
+  "Wheel Type":        { label: "Wheel type",                      hint: "Look at the wheels." },
+  "Self Start":        { label: "Self start (electric start)?",    hint: "Is there an electric starter button?" },
+  "Adjustable Levers": { label: "Adjustable brake / clutch levers?", hint: "Do the levers have an adjuster dial?" },
+  "LED Indicators":    { label: "LED turn indicators?",            hint: "Are the blinkers LED?" },
+  "Meter Type":        { label: "Instrument cluster",              hint: "What does the speedometer console look like?" },
+  "Front Brake Type":  { label: "Front brake",                     hint: "Disc or drum at the front wheel?" },
+  "Rear Brake Type":   { label: "Rear brake",                      hint: "Disc or drum at the rear wheel?" },
+  "Backrest":          { label: "Pillion backrest?",               hint: "Is a rear backrest fitted?" },
+  "Windscreen":        { label: "Windscreen / visor",              hint: "Is there a front visor or windscreen?" },
+  "Headlight":         { label: "Headlight",                       hint: "Halogen bulb or LED?" },
+  "Usb Charging Port": { label: "USB charging port?",              hint: "Is there a USB charger?" },
+  "Ride Modes":        { label: "Ride modes?",                     hint: "Are selectable ride modes available?" },
+  "Smart Key":         { label: "Smart key?",                      hint: "Keyless smart key system?" },
+  "Colour":            { label: "Colour / paint scheme",           hint: "Pick the closest colour or theme." }
+};
+const BRAND_ORDER = ["Royal Enfield", "TVS", "Bajaj", "Honda"];
+
+/* ============================= ENGINE / STATE ============================ */
+const state = { modelKey: null, genIndex: null, answers: [], override: null };
+const app = document.getElementById("app");
+
+function splitVals(raw) {
+  if (!raw) return [];
+  return raw.split(",").map(s => s.trim()).filter(Boolean);
+}
+// A variant matches a chosen value if its spec value (split on commas) contains it.
+// Blank spec value = wildcard (does not eliminate the variant).
+function variantMatches(variant, key, value) {
+  const raw = variant.specs[key];
+  if (raw === undefined || raw === "") return true;
+  return splitVals(raw).includes(value);
+}
+function currentGen() {
+  const m = DATA[state.modelKey];
+  if (!m) return null;
+  return m.generations[state.genIndex];
+}
+function candidatesFor(gen, answers) {
+  return gen.variants.filter(v => answers.every(a => variantMatches(v, a.key, a.value)));
+}
+// distinct, non-blank option values for a question across the given variants
+function optionsFor(key, variants) {
+  const seen = [];
+  variants.forEach(v => splitVals(v.specs[key]).forEach(val => { if (!seen.includes(val)) seen.push(val); }));
+  return seen;
+}
+// next question with real discriminating power (>=2 distinct values among candidates)
+function nextQuestion(gen, answers, candidates) {
+  const asked = new Set(answers.map(a => a.key));
+  for (const key of gen.questions) {
+    if (asked.has(key)) continue;
+    if (optionsFor(key, candidates).length >= 2) return key;
+  }
+  return null;
+}
+
+/* ================================ RENDER ================================ */
+function el(html) { const t = document.createElement("template"); t.innerHTML = html.trim(); return t.content.firstElementChild; }
+function esc(s) { return String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c])); }
+
+function render() {
+  app.innerHTML = "";
+  if (!state.modelKey) return renderModelPicker();
+  const m = DATA[state.modelKey];
+  if (state.genIndex === null) {
+    if (m.generations.length === 1) { state.genIndex = 0; } // auto-skip year step
+    else return renderYearPicker();
+  }
+  return renderQuestionOrResult();
+}
+
+function renderCrumbs() {
+  const wrap = el('<div class="crumbs"></div>');
+  if (state.modelKey) {
+    const m = DATA[state.modelKey];
+    wrap.appendChild(makeCrumb("Model", m.make + " " + m.model, () => { state.modelKey = null; state.genIndex = null; state.answers = []; state.override = null; render(); }));
+    if (state.genIndex !== null && m.generations.length > 1) {
+      wrap.appendChild(makeCrumb("Year", m.generations[state.genIndex].yearLabel, () => { state.genIndex = null; state.answers = []; state.override = null; render(); }));
+    }
+    state.answers.forEach((a, i) => {
+      wrap.appendChild(makeCrumb(QMETA[a.key].label, a.value, () => { state.answers = state.answers.slice(0, i); state.override = null; render(); }));
+    });
+  }
+  if (wrap.children.length === 0) wrap.appendChild(el('<span class="hint">Start by choosing a model below.</span>'));
+  return wrap;
+}
+function makeCrumb(k, v, onClick) {
+  const c = el(`<button class="crumb"><span class="k">${esc(k)}:</span> <span class="v">${esc(v)}</span> <span class="x">✕</span></button>`);
+  c.addEventListener("click", onClick);
+  return c;
+}
+
+function renderModelPicker() {
+  app.appendChild(renderCrumbs());
+  app.appendChild(el('<div class="step-label">Step 1</div>'));
+  app.appendChild(el('<div class="step-q">Select the bike model</div>'));
+  app.appendChild(el('<div class="step-hint">Choose the make &amp; model you want to identify.</div>'));
+
+  BRAND_ORDER.forEach(brand => {
+    const models = Object.entries(DATA).filter(([, m]) => m.make === brand);
+    if (!models.length) return;
+    const group = el(`<div class="brand-group"><h3>${esc(brand)}</h3></div>`);
+    const opts = el('<div class="opts cols-2"></div>');
+    models.forEach(([key, m]) => {
+      const b = el(`<button class="opt">${esc(m.model)}<span class="arrow">›</span></button>`);
+      b.addEventListener("click", () => { state.modelKey = key; state.genIndex = null; state.answers = []; state.override = null; render(); });
+      opts.appendChild(b);
+    });
+    group.appendChild(opts);
+    app.appendChild(group);
+  });
+}
+
+function renderYearPicker() {
+  app.appendChild(renderCrumbs());
+  const m = DATA[state.modelKey];
+  app.appendChild(el('<div class="step-label">Step 2</div>'));
+  app.appendChild(el('<div class="step-q">Which model year / generation?</div>'));
+  app.appendChild(el('<div class="step-hint">The right questions depend on when the bike was made.</div>'));
+  const opts = el('<div class="opts"></div>');
+  m.generations.forEach((g, i) => {
+    const b = el(`<button class="opt">${esc(g.yearLabel)}<span class="arrow">›</span></button>`);
+    b.addEventListener("click", () => { state.genIndex = i; state.answers = []; state.override = null; render(); });
+    opts.appendChild(b);
+  });
+  app.appendChild(opts);
+}
+
+function renderQuestionOrResult() {
+  app.appendChild(renderCrumbs());
+  const gen = currentGen();
+  const candidates = candidatesFor(gen, state.answers);
+
+  // Resolved (or user override) -> result
+  if (state.override || candidates.length <= 1) return renderResult(gen, candidates);
+
+  const key = nextQuestion(gen, state.answers, candidates);
+  if (!key) return renderResult(gen, candidates); // no more discriminating questions
+
+  const stepNo = (DATA[state.modelKey].generations.length > 1 ? 3 : 2) + state.answers.length;
+  app.appendChild(el(`<div class="step-label">Step ${stepNo}</div>`));
+  app.appendChild(el(`<div class="step-q">${esc(QMETA[key].label)}</div>`));
+  app.appendChild(el(`<div class="step-hint">${esc(QMETA[key].hint)}</div>`));
+
+  const values = optionsFor(key, candidates);
+  const opts = el(`<div class="opts ${values.length > 3 ? "" : "cols-2"}"></div>`);
+  values.forEach(val => {
+    const remain = candidates.filter(v => variantMatches(v, key, val)).length;
+    const sub = remain === 1 ? '<span class="sub">→ identifies the variant</span>' : `<span class="sub">${remain} variants match</span>`;
+    const b = el(`<button class="opt"><span>${esc(val)}${sub}</span><span class="arrow">›</span></button>`);
+    b.addEventListener("click", () => { state.answers.push({ key, value: val }); render(); });
+    opts.appendChild(b);
+  });
+  app.appendChild(opts);
+}
+
+function renderResult(gen, candidates) {
+  const m = DATA[state.modelKey];
+  let chosen = state.override || (candidates.length === 1 ? candidates[0] : null);
+
+  if (chosen) {
+    app.appendChild(el(`<div class="result-badge ok">✓ ${state.override ? "Manually selected" : "Variant identified"}</div>`));
+    app.appendChild(el(`<div class="result-name">${esc(chosen.name)}</div>`));
+    app.appendChild(el(`<div class="result-sub">${esc(m.make)} ${esc(m.model)} · ${esc(gen.yearLabel)}</div>`));
+    app.appendChild(renderSpecs(gen, chosen));
+  } else {
+    // ambiguous — present the remaining candidates to finalise
+    app.appendChild(el('<div class="result-badge warn">! Almost there</div>'));
+    app.appendChild(el(`<div class="result-name">${candidates.length} possible variants</div>`));
+    app.appendChild(el(`<div class="result-sub">These share the same recorded specs. Pick the exact one:</div>`));
+    const opts = el('<div class="candidates"></div>');
+    candidates.forEach(v => {
+      const b = el(`<button class="opt"><span>${esc(v.name)}${v.specs["Colour"] ? `<span class="sub">${esc(v.specs["Colour"])}</span>` : ""}</span><span class="arrow">›</span></button>`);
+      b.addEventListener("click", () => { state.override = v; render(); });
+      opts.appendChild(b);
+    });
+    app.appendChild(opts);
+  }
+
+  // Override / manual choose-from-all
+  const others = gen.variants.filter(v => !chosen || v.name !== chosen.name);
+  if (others.length) {
+    const det = el('<details class="override"><summary>Not right? Choose a different variant</summary></details>');
+    const opts = el('<div class="candidates"></div>');
+    gen.variants.forEach(v => {
+      const b = el(`<button class="opt"><span>${esc(v.name)}</span><span class="arrow">›</span></button>`);
+      b.addEventListener("click", () => { state.override = v; render(); });
+      opts.appendChild(b);
+    });
+    det.appendChild(opts);
+    app.appendChild(det);
+  }
+
+  const btns = el('<div class="row-btns"></div>');
+  const restart = el('<button class="btn primary">Identify another bike</button>');
+  restart.addEventListener("click", () => { state.modelKey = null; state.genIndex = null; state.answers = []; state.override = null; render(); });
+  btns.appendChild(restart);
+  if (state.override) {
+    const back = el('<button class="btn">Back to questions</button>');
+    back.addEventListener("click", () => { state.override = null; render(); });
+    btns.appendChild(back);
+  }
+  app.appendChild(btns);
+}
+
+function renderSpecs(gen, variant) {
+  const box = el('<div><div class="section-title">Distinguishing features</div></div>');
+  const specs = el('<div class="specs"></div>');
+  gen.questions.forEach(key => {
+    let val = variant.specs[key];
+    if (val === undefined || val === "") val = "—";
+    specs.appendChild(el(`<div class="row"><span class="k">${esc(QMETA[key].label)}</span><span class="v">${esc(val)}</span></div>`));
+  });
+  box.appendChild(specs);
+  return box;
+}
+
+render();
+</script>
+</body>
+</html>
