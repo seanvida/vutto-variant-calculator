@@ -4,13 +4,16 @@ This file provides guidance to Claude Code (claude.ai/code) when working in this
 
 ## Project
 
-**Bike Variant Finder** — a single-file web tool that identifies the exact variant of a
+**Vutto Variant Calculator** — a single-file web tool that identifies the exact variant of a
 two-wheeler by walking the user through a short, model-specific question flow. Built for
 differentiating variants of the same model (e.g. Royal Enfield Classic 350 → "Heritage" vs
 "Dark" vs "Signals") based on the features that actually differ between them.
 
 There is no build step, no framework, and no runtime dependencies. Everything lives in
-`index.html`.
+`index.html` (the only external resource is Google Fonts — Plus Jakarta Sans).
+
+Hosted on GitHub Pages: https://seanvida.github.io/vutto-variant-calculator/
+(repo `seanvida/vutto-variant-calculator`). Pushing to `main` auto-redeploys.
 
 ## Development
 
@@ -49,9 +52,24 @@ If the sheet changes, update the `DATA` object in `index.html` to match. Each mo
 }
 ```
 
+## Design system (Vutto brand)
+
+The UI follows the official Vutto brand identity — do not substitute these:
+- **Font:** Plus Jakarta Sans (headings 800 / tight tracking; body 400–600).
+- **Colors (CSS vars in `:root`):** rose `#D23757` (primary/accent/CTA), ink `#111111`
+  (headings), white background, `#FCE8EF` pink pills/badges, green `#22C55E` for positive
+  ticks, greys for body/muted text.
+- **Motion:** atmospheric pink radial background + faint grid; staggered `rise`/`stageIn`
+  reveals on each step; animated SVG check + confetti burst on result; progress rail fills
+  as the flow advances. All motion respects `prefers-reduced-motion`.
+- **Interactivity:** number keys `1–9` pick the corresponding option; `Backspace`/`Esc` go
+  back one step; breadcrumb chips jump back to and edit any earlier answer.
+
+When changing visuals, keep it on-brand and dependency-free (single file).
+
 ## Architecture (`index.html`)
 
-- **CSS** — in `<head>`; dark theme driven by CSS custom properties in `:root`.
+- **CSS** — in `<head>`; light Vutto theme driven by CSS custom properties in `:root`.
 - **DATA** — the transcribed sheet data (Variants + Journey), keyed `"Make|Model"`.
 - **QMETA** — friendly question label + hint for each spec column.
 - **Engine / state** — a small state machine (`{ modelKey, genIndex, answers, override }`)
