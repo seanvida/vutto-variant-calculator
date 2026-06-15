@@ -26,3 +26,6 @@ Thumbs.db
 
 # Claude
 .claude/
+
+# Playwright MCP smoke-test artifacts
+.playwright-mcp/

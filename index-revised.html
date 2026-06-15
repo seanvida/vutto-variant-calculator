@@ -156,6 +156,15 @@
   .brand-group h3 { display: flex; align-items: center; gap: 9px; font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: .09em; color: var(--muted-2); margin-bottom: 10px; }
   .brand-group h3::after { content: ""; flex: 1; height: 1px; background: var(--line); }
 
+  /* ---------- model search ---------- */
+  .msearch-wrap { position: relative; margin-bottom: 18px; }
+  .msearch-wrap svg { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); width: 18px; height: 18px; pointer-events: none; opacity: .5; }
+  .msearch { width: 100%; box-sizing: border-box; padding: 13px 14px 13px 42px; font: inherit; font-size: 15px; font-weight: 600; color: var(--ink); background: #fff; border: 1.5px solid var(--line); border-radius: var(--r); outline: none; transition: border-color .15s, box-shadow .15s; }
+  .msearch::placeholder { color: var(--muted-2); font-weight: 500; }
+  .msearch:focus { border-color: var(--rose); box-shadow: 0 0 0 3px rgba(210,55,87,.12); }
+  .msearch-hint { font-size: 12.5px; color: var(--muted); margin: -8px 0 14px; }
+  .msearch-hint b { color: var(--ink); font-weight: 700; }
+
   /* ---------- result ---------- */
   .result-head { display: flex; align-items: center; gap: 14px; margin-bottom: 18px; }
   .check { flex: none; width: 46px; height: 46px; border-radius: 50%; display: grid; place-items: center;
@@ -224,7 +233,7 @@
         <span class="tool">Variant Calculator</span>
       </div>
       <h1>Which variant is it, <span class="accent">exactly?</span></h1>
-      <p class="lede">Pick the model, the year it was made, then the features you can see. We'll pin down the precise variant. <strong style="color:var(--rose)">14 models · every variant from 2015.</strong></p>
+      <p class="lede">Pick the model, the year it was made, then the features you can see. We'll pin down the precise variant. <strong style="color:var(--rose)">34 models · every variant from 2015.</strong></p>
     </header>
 
     <div class="progress"><div class="track"><div class="fill" id="pbar"></div></div><div class="pmeta" id="pmeta">Step 1</div></div>
@@ -719,6 +728,297 @@ const DATA = {
         ]
       }
     ]
+  },
+
+  /* ================= Expansion batch (16 models) — Gemini + Search grounding.
+     Non-visible splits (i3S, Bluetooth, IBS-vs-ABS, ride modes) collapse to the
+     pick-list rather than inventing a fake visual cue. ================= */
+
+  "TVS|Sport": {
+    make: "TVS", model: "Sport",
+    generations: [
+      {
+        yearLabel: "2015 – 2026 (all years)",
+        questions: ["Self Start", "Wheel Type"],
+        variants: [
+          { name: "Kick (Spoke)",   specs: { "Self Start": "No",  "Wheel Type": "Spoke", "Front Brake Type": "Drum", "Meter Type": "Analogue", "Headlight": "Halogen Bulb" } },
+          { name: "Kick (Alloy)",   specs: { "Self Start": "No",  "Wheel Type": "Alloy", "Front Brake Type": "Drum", "Meter Type": "Analogue", "Headlight": "Halogen Bulb" } },
+          { name: "Electric Start", specs: { "Self Start": "Yes", "Wheel Type": "Alloy", "Front Brake Type": "Drum", "Meter Type": "Analogue", "Headlight": "Halogen Bulb" } }
+        ]
+      }
+    ]
+  },
+
+  "Bajaj|Pulsar 125": {
+    make: "Bajaj", model: "Pulsar 125",
+    generations: [
+      {
+        yearLabel: "2019 – 2023 (halogen)",
+        questions: ["Front Brake Type"],
+        variants: [
+          { name: "Drum", specs: { "Front Brake Type": "Drum", "Wheel Type": "Alloy", "Headlight": "Halogen Bulb", "Meter Type": "Semi-Digital" } },
+          { name: "Disc", specs: { "Front Brake Type": "Disc", "Wheel Type": "Alloy", "Headlight": "Halogen Bulb", "Meter Type": "Semi-Digital" } }
+        ]
+      },
+      {
+        yearLabel: "2024 – 2026 (LED update)",
+        questions: ["Headlight", "Front Brake Type"],
+        variants: [
+          { name: "Drum (Halogen)", specs: { "Headlight": "Halogen Bulb", "Front Brake Type": "Drum", "Wheel Type": "Alloy", "Meter Type": "Semi-Digital" } },
+          { name: "Disc (LED)",     specs: { "Headlight": "LED",          "Front Brake Type": "Disc", "Wheel Type": "Alloy", "Meter Type": "Digital (LCD)" } }
+        ]
+      }
+    ]
+  },
+
+  "Hero|Xtreme 125R": {
+    make: "Hero", model: "Xtreme 125R",
+    generations: [
+      {
+        // IBS vs single-channel ABS look identical (rear drum + digital LCD) -> pick-list.
+        yearLabel: "2024 – 2026 (all years)",
+        questions: ["Rear Brake Type", "Meter Type"],
+        variants: [
+          { name: "IBS",                  specs: { "Rear Brake Type": "Drum", "Meter Type": "Digital (LCD)",        "Front Brake Type": "Disc", "Headlight": "LED", "Wheel Type": "Alloy" } },
+          { name: "ABS (Single Channel)", specs: { "Rear Brake Type": "Drum", "Meter Type": "Digital (LCD)",        "Front Brake Type": "Disc", "Headlight": "LED", "Wheel Type": "Alloy" } },
+          { name: "Dual-Channel ABS",     specs: { "Rear Brake Type": "Disc", "Meter Type": "Colour Digital (LCD)", "Front Brake Type": "Disc", "Headlight": "LED", "Wheel Type": "Alloy" } }
+        ]
+      }
+    ]
+  },
+
+  "Honda|Activa 5G": {
+    make: "Honda", model: "Activa 5G",
+    generations: [
+      {
+        // Both trims have LED headlamp; the cluster (analogue vs semi-digital) is the marker.
+        yearLabel: "2018 – 2020 (all years)",
+        questions: ["Meter Type"],
+        variants: [
+          { name: "Standard", specs: { "Meter Type": "Analogue",     "Headlight": "LED", "Wheel Type": "Steel", "Front Brake Type": "Drum" } },
+          { name: "Deluxe",   specs: { "Meter Type": "Semi-Digital", "Headlight": "LED", "Wheel Type": "Steel", "Front Brake Type": "Drum" } }
+        ]
+      }
+    ]
+  },
+
+  "Hero|Splendor Plus Xtec": {
+    make: "Hero", model: "Splendor Plus Xtec",
+    generations: [
+      {
+        yearLabel: "2022 – 2024 (Xtec)",
+        questions: ["Headlight"],
+        variants: [
+          { name: "Xtec (i3S Drum Self Alloy)", specs: { "Headlight": "Halogen with LED DRL", "Meter Type": "Digital (LCD)", "Front Brake Type": "Drum", "Wheel Type": "Alloy", "Self Start": "Yes" } }
+        ]
+      },
+      {
+        yearLabel: "2024 – 2026 (Xtec 2.0)",
+        questions: ["Headlight"],
+        variants: [
+          { name: "Xtec 2.0", specs: { "Headlight": "LED", "Meter Type": "Digital (LCD)", "Front Brake Type": "Drum", "Wheel Type": "Alloy", "Self Start": "Yes" } }
+        ]
+      }
+    ]
+  },
+
+  "Bajaj|Pulsar 150": {
+    make: "Bajaj", model: "Pulsar 150",
+    generations: [
+      {
+        yearLabel: "2015 – 2018 (pre-ABS, halogen)",
+        questions: ["Rear Brake Type"],
+        variants: [
+          { name: "Single Disc", specs: { "Front Brake Type": "Disc", "Rear Brake Type": "Drum", "Headlight": "Halogen Bulb", "Meter Type": "Semi-Digital", "Wheel Type": "Alloy" } },
+          { name: "Twin Disc",   specs: { "Front Brake Type": "Disc", "Rear Brake Type": "Disc", "Headlight": "Halogen Bulb", "Meter Type": "Semi-Digital", "Wheel Type": "Alloy" } }
+        ]
+      },
+      {
+        yearLabel: "2019 – 2023 (ABS, halogen)",
+        questions: ["Rear Brake Type"],
+        variants: [
+          { name: "Single Disc ABS", specs: { "Front Brake Type": "Disc", "Rear Brake Type": "Drum", "Abs": "Single Channel", "Headlight": "Halogen Bulb", "Meter Type": "Semi-Digital", "Wheel Type": "Alloy" } },
+          { name: "Twin Disc ABS",   specs: { "Front Brake Type": "Disc", "Rear Brake Type": "Disc", "Abs": "Single Channel", "Headlight": "Halogen Bulb", "Meter Type": "Semi-Digital", "Wheel Type": "Alloy" } }
+        ]
+      },
+      {
+        yearLabel: "2024 – 2026 (LED)",
+        questions: ["Rear Brake Type"],
+        variants: [
+          { name: "Single Disc", specs: { "Front Brake Type": "Disc", "Rear Brake Type": "Drum", "Abs": "Single Channel", "Headlight": "LED", "Meter Type": "Digital (LCD)", "Wheel Type": "Alloy" } },
+          { name: "Twin Disc",   specs: { "Front Brake Type": "Disc", "Rear Brake Type": "Disc", "Abs": "Single Channel", "Headlight": "LED", "Meter Type": "Digital (LCD)", "Wheel Type": "Alloy" } }
+        ]
+      }
+    ]
+  },
+
+  "Honda|Activa 3G / 4G": {
+    make: "Honda", model: "Activa 3G / 4G",
+    generations: [
+      {
+        yearLabel: "2015 – 2016 (Activa 3G)",
+        questions: [],
+        variants: [
+          { name: "Activa 3G", specs: { "Headlight": "Halogen Bulb", "Meter Type": "Analogue", "Wheel Type": "Steel", "Front Brake Type": "Drum", "Self Start": "Yes" } }
+        ]
+      },
+      {
+        yearLabel: "2017 – 2018 (Activa 4G)",
+        questions: [],
+        variants: [
+          { name: "Activa 4G", specs: { "Headlight": "Halogen Bulb", "Meter Type": "Analogue", "Wheel Type": "Steel", "Front Brake Type": "Drum", "Self Start": "Yes" } }
+        ]
+      }
+    ]
+  },
+
+  "Honda|Shine 100": {
+    make: "Honda", model: "Shine 100",
+    generations: [
+      {
+        yearLabel: "2023 – 2026 (all years)",
+        questions: ["Meter Type"],
+        variants: [
+          { name: "Standard", specs: { "Meter Type": "Analogue",      "Front Brake Type": "Drum", "Wheel Type": "Alloy", "Headlight": "Halogen Bulb", "Self Start": "Yes" } },
+          { name: "DX",       specs: { "Meter Type": "Digital (LCD)", "Front Brake Type": "Drum", "Wheel Type": "Alloy", "Headlight": "Halogen Bulb", "Self Start": "Yes" } }
+        ]
+      }
+    ]
+  },
+
+  "TVS|Apache RTR 200 4V": {
+    make: "TVS", model: "Apache RTR 200 4V",
+    generations: [
+      {
+        yearLabel: "2016 – 2019 (halogen)",
+        questions: ["Abs"],
+        variants: [
+          { name: "Non-ABS",  specs: { "Abs": "No ABS",       "Headlight": "Halogen Bulb", "Meter Type": "Digital LCD", "Front Brake Type": "Disc", "Rear Brake Type": "Disc" } },
+          { name: "Dual ABS", specs: { "Abs": "Dual Channel", "Headlight": "Halogen Bulb", "Meter Type": "Digital LCD", "Front Brake Type": "Disc", "Rear Brake Type": "Disc" } }
+        ]
+      },
+      {
+        yearLabel: "2020 – 2024 (BS6, LED + SmartXonnect)",
+        questions: ["Meter Type"],
+        variants: [
+          { name: "LCD",          specs: { "Meter Type": "Digital LCD",  "Headlight": "LED", "Abs": "Dual Channel", "Front Suspension": "Telescopic", "Front Brake Type": "Disc", "Rear Brake Type": "Disc" } },
+          { name: "SmartXonnect", specs: { "Meter Type": "SmartXonnect", "Headlight": "LED", "Abs": "Dual Channel", "Front Suspension": "Telescopic", "Front Brake Type": "Disc", "Rear Brake Type": "Disc" } }
+        ]
+      },
+      {
+        yearLabel: "2025 – 2026 (TFT / USD forks)",
+        questions: ["Meter Type"],
+        variants: [
+          { name: "SmartXonnect", specs: { "Meter Type": "SmartXonnect", "Front Suspension": "Telescopic",   "Headlight": "LED",           "Abs": "Dual Channel", "Front Brake Type": "Disc", "Rear Brake Type": "Disc" } },
+          { name: "TFT (USD)",    specs: { "Meter Type": "TFT (colour)",  "Front Suspension": "USD (golden)", "Headlight": "LED Projector", "Abs": "Dual Channel", "Front Brake Type": "Disc", "Rear Brake Type": "Disc" } }
+        ]
+      }
+    ]
+  },
+
+  "Bajaj|Platina 110": {
+    make: "Bajaj", model: "Platina 110",
+    generations: [
+      {
+        yearLabel: "2018 – 2026 (all years)",
+        questions: ["Front Brake Type"],
+        variants: [
+          { name: "Drum (CBS)", specs: { "Front Brake Type": "Drum", "Abs": "CBS", "Wheel Type": "Alloy", "Headlight": "Halogen with LED DRL", "Meter Type": "Semi-Digital" } },
+          { name: "Disc (CBS)", specs: { "Front Brake Type": "Disc", "Abs": "CBS", "Wheel Type": "Alloy", "Headlight": "Halogen with LED DRL", "Meter Type": "Semi-Digital" } }
+        ]
+      }
+    ]
+  },
+
+  "Bajaj|Platina 100": {
+    make: "Bajaj", model: "Platina 100",
+    generations: [
+      {
+        yearLabel: "2015 – 2026 (all years)",
+        questions: ["Self Start"],
+        variants: [
+          { name: "Kick Start (KS)",     specs: { "Self Start": "No",  "Front Brake Type": "Drum", "Wheel Type": "Alloy", "Headlight": "Halogen with LED DRL", "Meter Type": "Analogue" } },
+          { name: "Electric Start (ES)", specs: { "Self Start": "Yes", "Front Brake Type": "Drum", "Wheel Type": "Alloy", "Headlight": "Halogen with LED DRL", "Meter Type": "Analogue" } }
+        ]
+      }
+    ]
+  },
+
+  "Honda|Shine 125": {
+    make: "Honda", model: "Shine 125",
+    generations: [
+      {
+        yearLabel: "2015 – 2019 (carburettor)",
+        questions: ["Front Brake Type"],
+        variants: [
+          { name: "Drum", specs: { "Front Brake Type": "Drum", "Wheel Type": "Alloy", "Headlight": "Halogen Bulb", "Meter Type": "Analogue", "Self Start": "Yes" } },
+          { name: "Disc", specs: { "Front Brake Type": "Disc", "Wheel Type": "Alloy", "Headlight": "Halogen Bulb", "Meter Type": "Analogue", "Self Start": "Yes" } }
+        ]
+      },
+      {
+        yearLabel: "2020 – 2026 (BS6, fuel-injected)",
+        questions: ["Front Brake Type"],
+        variants: [
+          { name: "Drum", specs: { "Front Brake Type": "Drum", "Wheel Type": "Alloy", "Headlight": "Halogen Bulb", "Meter Type": "Analogue", "Self Start": "Yes" } },
+          { name: "Disc", specs: { "Front Brake Type": "Disc", "Wheel Type": "Alloy", "Headlight": "Halogen Bulb", "Meter Type": "Analogue", "Self Start": "Yes" } }
+        ]
+      }
+    ]
+  },
+
+  "Hero|Glamour Xtec": {
+    make: "Hero", model: "Glamour Xtec",
+    generations: [
+      {
+        yearLabel: "2021 – 2026 (all years)",
+        questions: ["Front Brake Type"],
+        variants: [
+          { name: "Drum (Alloy)", specs: { "Front Brake Type": "Drum", "Wheel Type": "Alloy", "Headlight": "LED", "Meter Type": "Digital (LCD)", "Self Start": "Yes" } },
+          { name: "Disc (Alloy)", specs: { "Front Brake Type": "Disc", "Wheel Type": "Alloy", "Headlight": "LED", "Meter Type": "Digital (LCD)", "Self Start": "Yes" } }
+        ]
+      }
+    ]
+  },
+
+  "Yamaha|FZ-X": {
+    make: "Yamaha", model: "FZ-X",
+    generations: [
+      {
+        yearLabel: "2021 – 2026 (all years)",
+        questions: [],
+        variants: [
+          { name: "FZ-X", specs: { "Front Brake Type": "Disc", "Rear Brake Type": "Disc", "Abs": "Single Channel", "Headlight": "LED", "Meter Type": "Digital (LCD)", "Wheel Type": "Alloy" } }
+        ]
+      }
+    ]
+  },
+
+  "Hero|Destini Prime": {
+    make: "Hero", model: "Destini Prime",
+    generations: [
+      {
+        yearLabel: "2023 – 2026 (all years)",
+        questions: [],
+        variants: [
+          { name: "Destini Prime", specs: { "Front Brake Type": "Drum", "Rear Brake Type": "Drum", "Wheel Type": "Steel", "Headlight": "LED", "Meter Type": "Semi-Digital", "Self Start": "Yes" } }
+        ]
+      }
+    ]
+  },
+
+  "Yamaha|R15 V4": {
+    make: "Yamaha", model: "R15 V4",
+    generations: [
+      {
+        // R15 V4 (LCD) vs R15M (colour TFT) — the cluster is the clean visual marker.
+        yearLabel: "2021 – 2026 (all years)",
+        questions: ["Meter Type"],
+        variants: [
+          { name: "R15 V4", specs: { "Meter Type": "Digital (LCD)", "Headlight": "LED Projector", "Front Suspension": "USD (golden)", "Abs": "Dual Channel", "Front Brake Type": "Disc", "Rear Brake Type": "Disc", "Wheel Type": "Alloy" } },
+          { name: "R15M",   specs: { "Meter Type": "TFT (colour)",  "Headlight": "LED Projector", "Front Suspension": "USD (golden)", "Abs": "Dual Channel", "Front Brake Type": "Disc", "Rear Brake Type": "Disc", "Wheel Type": "Alloy" } }
+        ]
+      }
+    ]
   }
 };
 
@@ -741,10 +1041,10 @@ const QMETA = {
   "Front Suspension":  { label: "Front suspension",                hint: "Conventional telescopic forks, or golden upside-down (USD) forks?" },
   "Colour":            { label: "Colour / paint scheme",           hint: "Pick the closest colour or theme." }
 };
-const BRAND_ORDER = ["Royal Enfield", "TVS", "Bajaj", "Honda", "Hero", "Suzuki"];
+const BRAND_ORDER = ["Royal Enfield", "TVS", "Bajaj", "Honda", "Hero", "Suzuki", "Yamaha"];
 
 /* ============================= ENGINE / STATE ============================ */
-const state = { modelKey: null, genIndex: null, answers: [], override: null };
+const state = { modelKey: null, genIndex: null, answers: [], override: null, modelQuery: "" };
 const app = document.getElementById("app");
 
 function splitVals(raw) {
@@ -857,25 +1157,88 @@ function optButton(label, sub, pillHtml, onClick) {
   return b;
 }
 
-function renderModelPicker(stage) {
-  renderCrumbs(stage);
-  stage.appendChild(el('<div class="step-label"><span class="num">Step 1</span> Bike model</div>'));
-  stage.appendChild(el('<div class="step-q">Which model are you identifying?</div>'));
-  stage.appendChild(el('<div class="step-hint">Choose the make &amp; model — we\'ll only ask what actually matters for it.</div>'));
+// fuzzy match a query against a label; higher = better, -1 = no match
+function fuzzyScore(query, text) {
+  const q = query.toLowerCase().replace(/[^a-z0-9]/g, "");
+  const t = text.toLowerCase().replace(/[^a-z0-9]/g, "");
+  if (!q) return 0;
+  const idx = t.indexOf(q);
+  if (idx !== -1) return 1000 - idx * 2 - (t.length - q.length);   // contiguous substring
+  let qi = 0, gaps = 0, last = -1;                                  // subsequence
+  for (let i = 0; i < t.length && qi < q.length; i++) {
+    if (t[i] === q[qi]) { if (last !== -1) gaps += i - last - 1; last = i; qi++; }
+  }
+  if (qi === q.length) return 400 - gaps;
+  return qi >= Math.ceil(q.length * 0.6) ? 100 + qi : -1;           // fuzzy partial
+}
 
+function renderBrandGroups(stage, all, selectModel) {
   BRAND_ORDER.forEach(brand => {
-    const models = Object.entries(DATA).filter(([, m]) => m.make === brand);
+    const models = all.filter(([, m]) => m.make === brand);
     if (!models.length) return;
     const group = el(`<div class="brand-group"><h3>${esc(brand)}</h3></div>`);
     const opts = el('<div class="opts cols-2"></div>');
     models.forEach(([key, m]) => {
       const n = m.generations.length;
       const sub = n > 1 ? n + " generations" : null;
-      opts.appendChild(optButton(m.model, sub, "", () => { reset(); state.modelKey = key; render(); }));
+      opts.appendChild(optButton(m.model, sub, "", () => selectModel(key)));
     });
     group.appendChild(opts);
     stage.appendChild(group);
   });
+}
+
+function renderModelPicker(stage) {
+  renderCrumbs(stage);
+  stage.appendChild(el('<div class="step-label"><span class="num">Step 1</span> Bike model</div>'));
+  stage.appendChild(el('<div class="step-q">Which model are you identifying?</div>'));
+  stage.appendChild(el('<div class="step-hint">Search a model, or pick the make &amp; model below.</div>'));
+
+  const all = Object.entries(DATA);
+  const selectModel = (key) => { reset(); state.modelKey = key; state.modelQuery = ""; render(); };
+
+  // ----- search box (the <input> element is kept stable so typing never loses focus) -----
+  const wrap = el('<div class="msearch-wrap"><svg viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="M21 21l-4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>');
+  const input = el('<input class="msearch" type="text" placeholder="Search a model — e.g. Activa, R15, Pulsar 150…" autocomplete="off" spellcheck="false">');
+  input.value = state.modelQuery || "";
+  wrap.appendChild(input);
+  stage.appendChild(wrap);
+
+  const host = el('<div></div>');           // only this region repaints as you type
+  stage.appendChild(host);
+
+  let topMatchKey = null;
+  function paint(query) {
+    host.innerHTML = "";
+    topMatchKey = null;
+    const q = (query || "").trim();
+    if (!q) { renderBrandGroups(host, all, selectModel); return; }
+    const matches = all.map(([key, m]) => ({ key, m, s: Math.max(fuzzyScore(q, m.model), fuzzyScore(q, m.make + " " + m.model)) }))
+                       .filter(x => x.s > -1)
+                       .sort((a, b) => b.s - a.s);
+    if (!matches.length) {
+      host.appendChild(el('<div class="msearch-hint">No match — try a shorter term, or pick from the list below.</div>'));
+      renderBrandGroups(host, all, selectModel);
+      return;
+    }
+    topMatchKey = matches[0].key;
+    host.appendChild(el(`<div class="msearch-hint">${matches.length} match${matches.length > 1 ? "es" : ""} · press <b>Enter</b> for the closest</div>`));
+    const opts = el('<div class="opts"></div>');
+    matches.forEach(({ key, m }) => {
+      const n = m.generations.length;
+      opts.appendChild(optButton(m.model, m.make + (n > 1 ? " · " + n + " generations" : ""), "", () => selectModel(key)));
+    });
+    host.appendChild(opts);
+  }
+
+  input.addEventListener("input", () => { state.modelQuery = input.value; paint(input.value); });
+  input.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") { if (topMatchKey) { e.preventDefault(); selectModel(topMatchKey); } }
+    else if (e.key === "Escape") { e.preventDefault(); input.value = ""; state.modelQuery = ""; paint(""); }
+  });
+
+  paint(input.value);
+  requestAnimationFrame(() => { input.focus(); const v = input.value; input.value = ""; input.value = v; });
 }
 
 function renderYearPicker(stage) {
@@ -1005,6 +1368,9 @@ function fireConfetti() {
 /* keyboard interactivity */
 document.addEventListener("keydown", (e) => {
   if (e.metaKey || e.ctrlKey || e.altKey) return;
+  // ignore shortcuts while typing in the search box (let it handle its own keys)
+  const ae = document.activeElement;
+  if (ae && (ae.tagName === "INPUT" || ae.tagName === "TEXTAREA")) return;
   if (/^[1-9]$/.test(e.key)) {
     const i = parseInt(e.key, 10) - 1;
     if (keyMap[i]) { e.preventDefault(); keyMap[i](); }

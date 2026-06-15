@@ -19,10 +19,10 @@ Hosted on GitHub Pages: https://seanvida.github.io/vutto-variant-calculator/
 
 | File | Role |
 |------|------|
-| **`index-revised.html`** | **CANONICAL / current build.** 18 models, enforced 3-step flow (Model → Year → cues), year groups from 2015. Edit this one. |
+| **`index-revised.html`** | **CANONICAL / current build.** 34 models, enforced 3-step flow (Model → Year → cues), year groups from 2015, plus a fuzzy model **search box** at Step 1. Edit this one. |
 | `index-extended.html` | Prior 14-model build (year step auto-skipped for single-gen). Kept for history. |
-| `index.html` | **LIVE homepage (`/`).** A copy of `index-revised.html` (18 models + feedback fixes). Edit `index-revised.html`, validate, then copy it over this. Rollback = git history (the original 10-model build). |
-| `final18_models.csv` | **Master variant repository** — all 18 models / 128 variants with their visual-cue specs + diagnostic question order (mirrors `DATA` in `index-revised.html`). |
+| `index.html` | **LIVE homepage (`/`).** Currently the 18-model build. When ready, promote `index-revised.html` over it (confirm first). Rollback = git history. |
+| `final34_models.csv` | **Master variant repository** — all 34 models / 172 variants with their visual-cue specs + diagnostic question order. Regenerated directly from `DATA` (see `/tmp/gencsv.mjs` pattern) so it always mirrors `index-revised.html`. |
 | `variants-new-4-models.csv` | Visual-cue spec reference for the first 4 web-sourced models (Splendor Plus, HF Deluxe, Radeon, Activa 125). |
 | `variant-cues.csv` | Master taxonomy of all differentiating cues + how to spot each + visual-verifiability. |
 | `.env` | `GEMINI_API_KEY` (working). Gitignored — never commit. |
@@ -80,8 +80,18 @@ Step numbering is fixed: 1 = model, 2 = year, 3+ = questions.
 - **Genuine visual twins → pick-list.** If two variants share identical *visual* specs (e.g.
   i3S vs non-i3S, which differ only by a badge), leave them indistinguishable; the tool shows
   an "almost there" pick-list. That IS the honest "can't tell visually" call-out.
+- **Single-variant generations are fine.** A generation may have one variant and
+  `questions: []`; the engine resolves it the moment the year is chosen (`candidates.length <= 1`
+  → result). Used for thin models (Activa 3G/4G, FZ-X, Destini Prime, Splendor Plus Xtec eras).
 - **Override + editable breadcrumbs** are always available.
-- Keyboard: `1–9` select options, `Backspace`/`Esc` go back one step.
+- **Model search box (Step 1):** `renderModelPicker` shows a fuzzy search input above the brand
+  groups. `fuzzyScore()` ranks by contiguous-substring → subsequence → partial; `Enter` picks the
+  top match. The `<input>` element is kept stable and only the results region (`host`) repaints on
+  each keystroke — do NOT call full `render()` on input, or focus/characters are lost. The global
+  `keydown` shortcut handler bails when an `INPUT`/`TEXTAREA` is focused so typing digits (125/150)
+  doesn't trigger the `1–9` option shortcuts.
+- Keyboard: `1–9` select options, `Backspace`/`Esc` go back one step (disabled while the search box
+  is focused).
 
 ---
 
@@ -202,11 +212,16 @@ Original 10 models came from the source Google Sheet
 (`docs.google.com/spreadsheets/d/1rHQSKc_lLPY3HqugLSC8QgySSonMSbNjDIlHT6mnjGQ`, Variants +
 Journey tabs). The other 8 models — Splendor Plus, HF Deluxe, Radeon, Activa 125 (set 1) and
 Honda SP125, Suzuki Access 125, TVS Raider 125, TVS Apache RTR 160 4V (set 2) — were
-researched via Gemini + Google Search grounding (see Playbook Step 1). Flag any web-sourced
-spec for human confirmation before relying on it. (Note: `Apache RTR 160 4V` is a separate
-model object from the existing `Apache RTR 160`, which covers the 2V line. `Suzuki` is the
-only brand added by set 2 — it's in `BRAND_ORDER`. Set 2 also added the `Front Suspension`
-cue, telescopic vs golden USD forks, used by the Apache RTR 160 4V.)
+researched via Gemini + Google Search grounding (see Playbook Step 1), as were the **set-3**
+16 models (TVS Sport, Pulsar 125, Xtreme 125R, Activa 5G, Splendor Plus Xtec, Pulsar 150,
+Activa 3G/4G, Shine 100, Apache RTR 200 4V, Platina 110, Platina 100, Shine 125, Glamour Xtec,
+FZ-X, Destini Prime, R15 V4). Flag any web-sourced spec for human confirmation before relying
+on it — set-3 in particular leans on recent web data (some 2025/26 trims). Notes:
+- `Apache RTR 160 4V` / `Apache RTR 200 4V` are separate model objects from the 2V `Apache RTR 160`.
+- `Honda|Activa 3G / 4G` is one model object with two year groups (matching how it was requested);
+  `Splendor Plus Xtec` is its own cluster, separate from the `Xtec` *variant* inside `Splendor Plus`.
+- Brands added over time and present in `BRAND_ORDER`: `Suzuki` (set 2), `Yamaha` (set 3).
+- `Front Suspension` cue (telescopic vs golden USD forks) is shared by the Apache 4V/200 4V and R15 V4.
 
 ## Secrets
 
