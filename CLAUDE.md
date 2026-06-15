@@ -19,10 +19,11 @@ Hosted on GitHub Pages: https://seanvida.github.io/vutto-variant-calculator/
 
 | File | Role |
 |------|------|
-| **`index-revised.html`** | **CANONICAL / current build.** 14 models, enforced 3-step flow (Model → Year → cues), year groups from 2015. Edit this one. |
+| **`index-revised.html`** | **CANONICAL / current build.** 18 models, enforced 3-step flow (Model → Year → cues), year groups from 2015. Edit this one. |
 | `index-extended.html` | Prior 14-model build (year step auto-skipped for single-gen). Kept for history. |
-| `index.html` | Original 10-model build. Clean rollback point. Still what `/` serves. |
-| `variants-new-4-models.csv` | Visual-cue spec reference for the 4 newest models (Splendor Plus, HF Deluxe, Radeon, Activa 125). |
+| `index.html` | **LIVE homepage (`/`).** A copy of `index-revised.html` (18 models + feedback fixes). Edit `index-revised.html`, validate, then copy it over this. Rollback = git history (the original 10-model build). |
+| `final18_models.csv` | **Master variant repository** — all 18 models / 128 variants with their visual-cue specs + diagnostic question order (mirrors `DATA` in `index-revised.html`). |
+| `variants-new-4-models.csv` | Visual-cue spec reference for the first 4 web-sourced models (Splendor Plus, HF Deluxe, Radeon, Activa 125). |
 | `variant-cues.csv` | Master taxonomy of all differentiating cues + how to spot each + visual-verifiability. |
 | `.env` | `GEMINI_API_KEY` (working). Gitignored — never commit. |
 
@@ -126,6 +127,20 @@ Decision tree for ordering `questions` (most-discriminating, most-visible first)
 - Map each cue to the canonical `QMETA` key. Reuse existing keys; only add a new `QMETA`
   entry for a genuinely new cue.
 
+#### ⚠️ Cue-selection guardrails (learned from real inspector feedback)
+A cue can uniquely resolve a variant in the Node sim and still be the *wrong* cue for a
+human in a yard. Pick the cue an inspector can actually verify at a glance:
+- **Distrust steel-vs-alloy wheels on scooters & commuters.** Steel wheels wear full covers
+  that mimic alloys, so `Wheel Type` is an unreliable lead marker. Prefer the **instrument
+  cluster** (`Meter Type`: analogue vs semi-digital vs SmartXonnect) or the **headlamp**
+  (`Headlight`: halogen vs LED), which are unmistakable. *(This is exactly why Jupiter now
+  leads with `Meter Type` and Activa 6G with `Headlight`.)* Only fall back to `Wheel Type`
+  as a final tie-break when it is genuinely the sole difference (e.g. Jupiter Drum vs Drum
+  Alloy).
+- **Lead with the cue that defines the trim, not the cue that happens to differ.** Trims are
+  usually defined by console / lighting / brakes; wheels often just track the trim and are
+  hard to read.
+
 ### Step 4 — Handle non-visual distinctions honestly
 If two variants differ only by something you can't see (i3S badge, Bluetooth pairing, engine
 internals), give them **identical visual specs** so they fall to the pick-list. Do NOT invent
@@ -134,6 +149,13 @@ a fake visual difference. (Record the real difference in the CSV's "Visually Ver
 ### Step 5 — Validate (must be 0 mismatches)
 Run the Node simulation (below) — it replays the real engine over every variant. Expect
 `mismatch 0`. "Ambiguous" rows are fine **only** when they're intended visual twins.
+
+> ⚠️ The sim only proves the chosen cue path **resolves** each *listed* variant. It does NOT
+> prove the cue is the right real-world one, nor that the variant list is **complete** (it
+> can't catch a missing variant like the Pulsar NS125 ABS, or a phantom one like the Classic
+> 350 KS). So Step 5 must be paired with: (a) the cue guardrails in Step 3, and (b) an
+> explicit lineup-completeness check in Step 1 — ask Gemini to list *every* variant including
+> ABS/CBS and mid-cycle additions, and to confirm which trims were **never sold**.
 
 ### Step 6 — Browser smoke-test
 Serve, open the file, walk one new model end to end (Model → Year → cues → result). Check the
@@ -178,8 +200,13 @@ Keep every build on-brand, dependency-free, and single-file.
 
 Original 10 models came from the source Google Sheet
 (`docs.google.com/spreadsheets/d/1rHQSKc_lLPY3HqugLSC8QgySSonMSbNjDIlHT6mnjGQ`, Variants +
-Journey tabs). The 4 newest models were researched via Gemini + Google Search grounding (see
-Playbook Step 1) — flag any web-sourced spec for human confirmation before relying on it.
+Journey tabs). The other 8 models — Splendor Plus, HF Deluxe, Radeon, Activa 125 (set 1) and
+Honda SP125, Suzuki Access 125, TVS Raider 125, TVS Apache RTR 160 4V (set 2) — were
+researched via Gemini + Google Search grounding (see Playbook Step 1). Flag any web-sourced
+spec for human confirmation before relying on it. (Note: `Apache RTR 160 4V` is a separate
+model object from the existing `Apache RTR 160`, which covers the 2V line. `Suzuki` is the
+only brand added by set 2 — it's in `BRAND_ORDER`. Set 2 also added the `Front Suspension`
+cue, telescopic vs golden USD forks, used by the Apache RTR 160 4V.)
 
 ## Secrets
 

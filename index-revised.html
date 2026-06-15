@@ -277,9 +277,8 @@ const DATA = {
     generations: [
       {
         yearLabel: "2015 – 2017 (UCE, pre-ABS)",
-        questions: ["Self Start", "Colour"],
+        questions: ["Colour"],
         variants: [
-          { name: "KS (Kick Start)",     specs: { "Self Start": "No",  "Colour": "Black, White, Silver, Red" } },
           { name: "ES (Electric Start)", specs: { "Self Start": "Yes", "Colour": "Black, White, Silver, Red" } },
           { name: "Chrome",              specs: { "Self Start": "Yes", "Colour": "Chrome Tank" } }
         ]
@@ -390,10 +389,11 @@ const DATA = {
     generations: [
       {
         yearLabel: "2021 – 2026 (all years)",
-        questions: ["Headlight", "Usb Charging Port"],
+        questions: ["Headlight", "Abs", "Usb Charging Port"],
         variants: [
-          { name: "Standard",  specs: { "Abs": "CBS", "Headlight": "Halogen Bulb", "Usb Charging Port": "No" } },
-          { name: "Bluetooth", specs: { "Abs": "CBS", "Headlight": "LED",          "Usb Charging Port": "Yes" } }
+          { name: "Standard (CBS)", specs: { "Abs": "CBS",            "Headlight": "Halogen Bulb", "Meter Type": "Semi-Digital",  "Usb Charging Port": "No" } },
+          { name: "LED BT (CBS)",   specs: { "Abs": "CBS",            "Headlight": "LED",          "Meter Type": "Digital (LCD)", "Usb Charging Port": "Yes" } },
+          { name: "LED BT ABS",     specs: { "Abs": "Single Channel", "Headlight": "LED",          "Meter Type": "Digital (LCD)", "Usb Charging Port": "Yes" } }
         ]
       }
     ]
@@ -421,32 +421,37 @@ const DATA = {
     make: "TVS", model: "Jupiter",
     generations: [
       {
+        // Marker = instrument cluster (analogue vs semi-digital), NOT wheel type:
+        // steel wheels wear covers that look like alloys, so wheel type is an
+        // unreliable visual cue on this scooter.
         yearLabel: "2015 – 2020",
-        questions: ["Wheel Type", "Meter Type", "Backrest", "Windscreen"],
+        questions: ["Meter Type", "Backrest", "Windscreen"],
         variants: [
-          { name: "Standard", specs: { "Wheel Type": "Steel", "Meter Type": "Analogue",     "Backrest": "No",  "Windscreen": "No" } },
-          { name: "ZX",       specs: { "Wheel Type": "Alloy", "Meter Type": "Semi-Digital", "Backrest": "No",  "Windscreen": "No" } },
-          { name: "Classic",  specs: { "Wheel Type": "Alloy", "Meter Type": "Semi-Digital", "Backrest": "Yes", "Windscreen": "Yes" } }
+          { name: "Standard", specs: { "Meter Type": "Analogue",     "Backrest": "No",  "Windscreen": "No" } },
+          { name: "ZX",       specs: { "Meter Type": "Semi-Digital", "Backrest": "No",  "Windscreen": "No" } },
+          { name: "Classic",  specs: { "Meter Type": "Semi-Digital", "Backrest": "Yes", "Windscreen": "Yes" } }
         ]
       },
       {
         yearLabel: "2021 – 2022",
-        questions: ["Wheel Type", "Meter Type", "Front Brake Type", "Backrest", "Windscreen"],
+        questions: ["Meter Type", "Front Brake Type", "Backrest", "Windscreen"],
         variants: [
-          { name: "Standard", specs: { "Wheel Type": "Steel", "Meter Type": "Analogue",     "Front Brake Type": "Drum", "Backrest": "No",  "Windscreen": "No" } },
-          { name: "ZX",       specs: { "Wheel Type": "Alloy", "Meter Type": "Semi-Digital", "Front Brake Type": "Drum", "Backrest": "No",  "Windscreen": "No" } },
-          { name: "ZX Disc",  specs: { "Wheel Type": "Alloy", "Meter Type": "Semi-Digital", "Front Brake Type": "Disc", "Backrest": "No",  "Windscreen": "No" } },
-          { name: "Classic",  specs: { "Wheel Type": "Alloy", "Meter Type": "Semi-Digital", "Front Brake Type": "Disc", "Backrest": "Yes", "Windscreen": "Yes" } }
+          { name: "Standard", specs: { "Meter Type": "Analogue",     "Front Brake Type": "Drum", "Backrest": "No",  "Windscreen": "No" } },
+          { name: "ZX",       specs: { "Meter Type": "Semi-Digital", "Front Brake Type": "Drum", "Backrest": "No",  "Windscreen": "No" } },
+          { name: "ZX Disc",  specs: { "Meter Type": "Semi-Digital", "Front Brake Type": "Disc", "Backrest": "No",  "Windscreen": "No" } },
+          { name: "Classic",  specs: { "Meter Type": "Semi-Digital", "Front Brake Type": "Disc", "Backrest": "Yes", "Windscreen": "Yes" } }
         ]
       },
       {
+        // Cluster-first again. Wheel type is retained only as the final tie-break
+        // for Drum vs Drum Alloy, where it is the sole real difference.
         yearLabel: "2023 – 2026 (current)",
-        questions: ["Wheel Type", "Meter Type", "Front Brake Type"],
+        questions: ["Meter Type", "Front Brake Type", "Wheel Type"],
         variants: [
-          { name: "Drum",              specs: { "Wheel Type": "Steel", "Meter Type": "Semi-Digital", "Front Brake Type": "Drum" } },
-          { name: "Drum Alloy",        specs: { "Wheel Type": "Alloy", "Meter Type": "Semi-Digital", "Front Brake Type": "Drum" } },
-          { name: "Drum SmartXonnect", specs: { "Wheel Type": "Alloy", "Meter Type": "SmartXonnect", "Front Brake Type": "Drum" } },
-          { name: "Disc SmartXonnect", specs: { "Wheel Type": "Alloy", "Meter Type": "SmartXonnect", "Front Brake Type": "Disc" } }
+          { name: "Drum",              specs: { "Meter Type": "Semi-Digital", "Front Brake Type": "Drum", "Wheel Type": "Steel" } },
+          { name: "Drum Alloy",        specs: { "Meter Type": "Semi-Digital", "Front Brake Type": "Drum", "Wheel Type": "Alloy" } },
+          { name: "Drum SmartXonnect", specs: { "Meter Type": "SmartXonnect", "Front Brake Type": "Drum" } },
+          { name: "Disc SmartXonnect", specs: { "Meter Type": "SmartXonnect", "Front Brake Type": "Disc" } }
         ]
       }
     ]
@@ -472,12 +477,14 @@ const DATA = {
     make: "Honda", model: "Activa 6G",
     generations: [
       {
+        // Marker = headlamp (halogen vs LED), NOT wheel type. Activa steel wheels
+        // wear full covers that mimic alloys, so wheel type is unreliable here.
         yearLabel: "2020 – 2026 (all years)",
-        questions: ["Wheel Type", "Smart Key"],
+        questions: ["Headlight", "Smart Key"],
         variants: [
-          { name: "Standard", specs: { "Wheel Type": "Steel", "Smart Key": "No" } },
-          { name: "Deluxe",   specs: { "Wheel Type": "Alloy", "Smart Key": "No" } },
-          { name: "H-Smart",  specs: { "Wheel Type": "Alloy", "Smart Key": "Yes" } }
+          { name: "Standard", specs: { "Headlight": "Halogen Bulb", "Smart Key": "No" } },
+          { name: "Deluxe",   specs: { "Headlight": "LED",          "Smart Key": "No" } },
+          { name: "H-Smart",  specs: { "Headlight": "LED",          "Smart Key": "Yes" } }
         ]
       }
     ]
@@ -577,6 +584,141 @@ const DATA = {
         ]
       }
     ]
+  },
+
+  /* ---- 18-model expansion (researched via Gemini + Google Search grounding;
+         see final18_models.csv). Visual-only cues; non-visible distinctions
+         (Bluetooth pairing, ride modes, CBS, engine internals) fall to the
+         "almost there" pick-list rather than inventing a fake cue. ---- */
+  "Honda|SP125": {
+    make: "Honda", model: "SP125",
+    generations: [
+      {
+        yearLabel: "2019 – 2024 (BS6 / OBD2)",
+        questions: ["Front Brake Type", "Self Start"],
+        variants: [
+          { name: "Drum", specs: { "Front Brake Type": "Drum", "Wheel Type": "Alloy", "Headlight": "LED", "Meter Type": "Digital (segment LCD)", "Self Start": "Yes" } },
+          { name: "Disc", specs: { "Front Brake Type": "Disc", "Wheel Type": "Alloy", "Headlight": "LED", "Meter Type": "Digital (segment LCD)", "Self Start": "Yes" } }
+        ]
+      },
+      {
+        yearLabel: "2025 onwards (OBD2B / TFT)",
+        questions: ["Meter Type", "Front Brake Type"],
+        variants: [
+          { name: "Drum",      specs: { "Meter Type": "Digital (segment LCD)", "Front Brake Type": "Drum", "Wheel Type": "Alloy", "Headlight": "LED" } },
+          { name: "DLX (TFT)", specs: { "Meter Type": "TFT (colour)",          "Front Brake Type": "Disc", "Wheel Type": "Alloy", "Headlight": "LED" } }
+        ]
+      }
+    ]
+  },
+
+  "Suzuki|Access 125": {
+    make: "Suzuki", model: "Access 125",
+    generations: [
+      {
+        yearLabel: "2015 – 2019 (BS4, halogen)",
+        questions: ["Front Brake Type", "Wheel Type"],
+        variants: [
+          { name: "Standard",        specs: { "Front Brake Type": "Drum", "Wheel Type": "Steel", "Headlight": "Halogen Bulb", "Meter Type": "Semi-Digital" } },
+          { name: "Special Edition", specs: { "Front Brake Type": "Disc", "Wheel Type": "Alloy", "Headlight": "Halogen Bulb", "Meter Type": "Semi-Digital" } }
+        ]
+      },
+      {
+        yearLabel: "2020 – 2022 (BS6, LED headlamp)",
+        questions: ["Front Brake Type", "Wheel Type"],
+        variants: [
+          { name: "Drum (Steel)", specs: { "Front Brake Type": "Drum", "Wheel Type": "Steel", "Headlight": "LED", "Meter Type": "Semi-Digital" } },
+          { name: "Drum (Alloy)", specs: { "Front Brake Type": "Drum", "Wheel Type": "Alloy", "Headlight": "LED", "Meter Type": "Semi-Digital" } },
+          { name: "Disc (Alloy)", specs: { "Front Brake Type": "Disc", "Wheel Type": "Alloy", "Headlight": "LED", "Meter Type": "Semi-Digital" } }
+        ]
+      },
+      {
+        yearLabel: "2023 – 2026 (OBD2 / Ride Connect)",
+        questions: ["Meter Type", "Front Brake Type", "Wheel Type"],
+        variants: [
+          { name: "Standard",         specs: { "Meter Type": "Semi-Digital",            "Front Brake Type": "Drum", "Wheel Type": "Steel", "Headlight": "LED" } },
+          { name: "Special Edition",  specs: { "Meter Type": "Semi-Digital",            "Front Brake Type": "Disc", "Wheel Type": "Alloy", "Headlight": "LED" } },
+          { name: "Ride Connect",     specs: { "Meter Type": "Digital (Bluetooth LCD)", "Front Brake Type": "Disc", "Wheel Type": "Alloy", "Headlight": "LED" } },
+          { name: "Ride Connect TFT", specs: { "Meter Type": "TFT (Bluetooth)",         "Front Brake Type": "Disc", "Wheel Type": "Alloy", "Headlight": "LED" } }
+        ]
+      }
+    ]
+  },
+
+  "TVS|Raider 125": {
+    make: "TVS", model: "Raider 125",
+    generations: [
+      {
+        yearLabel: "2021 – 2022 (launch)",
+        questions: ["Meter Type", "Front Brake Type"],
+        variants: [
+          { name: "Drum",             specs: { "Meter Type": "Reverse LCD",     "Front Brake Type": "Drum", "Wheel Type": "Alloy", "Headlight": "LED" } },
+          { name: "Disc",             specs: { "Meter Type": "Reverse LCD",     "Front Brake Type": "Disc", "Wheel Type": "Alloy", "Headlight": "LED" } },
+          { name: "SmartXonnect TFT", specs: { "Meter Type": "TFT SmartXonnect", "Front Brake Type": "Disc", "Wheel Type": "Alloy", "Headlight": "LED" } }
+        ]
+      },
+      {
+        yearLabel: "2023 – 2024 (Super Squad / iGO)",
+        questions: ["Meter Type", "Front Brake Type", "Colour"],
+        variants: [
+          { name: "Drum",             specs: { "Meter Type": "Reverse LCD",      "Front Brake Type": "Drum", "Colour": "Striking Red, Wicked Black" } },
+          { name: "Disc",             specs: { "Meter Type": "Reverse LCD",      "Front Brake Type": "Disc", "Colour": "Blazing Blue, Fiery Yellow" } },
+          { name: "iGO",              specs: { "Meter Type": "Reverse LCD",      "Front Brake Type": "Disc", "Colour": "Nardo Grey with red wheels" } },
+          { name: "Super Squad",      specs: { "Meter Type": "Reverse LCD",      "Front Brake Type": "Disc", "Colour": "Black Panther, Iron Man" } },
+          { name: "SmartXonnect TFT", specs: { "Meter Type": "TFT SmartXonnect", "Front Brake Type": "Disc" } }
+        ]
+      },
+      {
+        yearLabel: "2025 – 2026 (Dual Disc / TFT)",
+        questions: ["Meter Type", "Rear Brake Type", "Front Brake Type"],
+        variants: [
+          { name: "Drum",             specs: { "Meter Type": "Reverse LCD",      "Front Brake Type": "Drum", "Rear Brake Type": "Drum" } },
+          { name: "Disc",             specs: { "Meter Type": "Reverse LCD",      "Front Brake Type": "Disc", "Rear Brake Type": "Drum" } },
+          { name: "SmartXonnect TFT", specs: { "Meter Type": "TFT SmartXonnect", "Front Brake Type": "Disc", "Rear Brake Type": "Drum" } },
+          { name: "TFT Dual Disc",    specs: { "Meter Type": "TFT SmartXonnect", "Front Brake Type": "Disc", "Rear Brake Type": "Disc" } }
+        ]
+      }
+    ]
+  },
+
+  "TVS|Apache RTR 160 4V": {
+    make: "TVS", model: "Apache RTR 160 4V",
+    generations: [
+      {
+        yearLabel: "2018 – 2019 (BS4, halogen)",
+        questions: ["Rear Brake Type"],
+        variants: [
+          { name: "Drum (Rear Drum)", specs: { "Rear Brake Type": "Drum", "Front Brake Type": "Disc", "Headlight": "Halogen Bulb", "Meter Type": "Digital LCD" } },
+          { name: "Disc (Rear Disc)", specs: { "Rear Brake Type": "Disc", "Front Brake Type": "Disc", "Headlight": "Halogen Bulb", "Meter Type": "Digital LCD" } }
+        ]
+      },
+      {
+        yearLabel: "2020 – 2022 (BS6, LED + SmartXonnect)",
+        questions: ["Meter Type", "Rear Brake Type"],
+        variants: [
+          { name: "Drum",              specs: { "Meter Type": "Digital LCD",  "Rear Brake Type": "Drum", "Front Brake Type": "Disc", "Headlight": "LED", "Abs": "Single Channel" } },
+          { name: "Disc",              specs: { "Meter Type": "Digital LCD",  "Rear Brake Type": "Disc", "Front Brake Type": "Disc", "Headlight": "LED", "Abs": "Single Channel" } },
+          { name: "Disc SmartXonnect", specs: { "Meter Type": "SmartXonnect", "Rear Brake Type": "Disc", "Front Brake Type": "Disc", "Headlight": "LED", "Abs": "Single Channel" } }
+        ]
+      },
+      {
+        yearLabel: "2023 – 2024 (USD forks / Dual Channel ABS)",
+        questions: ["Front Suspension", "Abs", "Rear Brake Type"],
+        variants: [
+          { name: "Disc (Single ABS)",    specs: { "Front Suspension": "Telescopic",   "Abs": "Single Channel", "Rear Brake Type": "Disc", "Front Brake Type": "Disc", "Meter Type": "SmartXonnect", "Headlight": "LED" } },
+          { name: "Drum (Single ABS)",    specs: { "Front Suspension": "Telescopic",   "Abs": "Single Channel", "Rear Brake Type": "Drum", "Front Brake Type": "Disc", "Meter Type": "SmartXonnect", "Headlight": "LED" } },
+          { name: "USD Dual Channel ABS", specs: { "Front Suspension": "USD (golden)", "Abs": "Dual Channel",   "Rear Brake Type": "Disc", "Front Brake Type": "Disc", "Meter Type": "SmartXonnect", "Headlight": "LED" } }
+        ]
+      },
+      {
+        yearLabel: "2025 – 2026 (TFT projector top variant)",
+        questions: ["Meter Type", "Headlight"],
+        variants: [
+          { name: "SmartXonnect (USD, Dual ABS)", specs: { "Meter Type": "SmartXonnect", "Headlight": "LED",           "Front Suspension": "USD (golden)", "Abs": "Dual Channel", "Front Brake Type": "Disc", "Rear Brake Type": "Disc" } },
+          { name: "TFT (projector)",              specs: { "Meter Type": "TFT (colour)",  "Headlight": "LED Projector", "Front Suspension": "USD (golden)", "Abs": "Dual Channel", "Front Brake Type": "Disc", "Rear Brake Type": "Disc" } }
+        ]
+      }
+    ]
   }
 };
 
@@ -596,9 +738,10 @@ const QMETA = {
   "Usb Charging Port": { label: "USB charging port?",              hint: "Is there a USB charger?" },
   "Ride Modes":        { label: "Ride modes?",                     hint: "Are selectable ride modes available?" },
   "Smart Key":         { label: "Smart key?",                      hint: "Keyless smart key system?" },
+  "Front Suspension":  { label: "Front suspension",                hint: "Conventional telescopic forks, or golden upside-down (USD) forks?" },
   "Colour":            { label: "Colour / paint scheme",           hint: "Pick the closest colour or theme." }
 };
-const BRAND_ORDER = ["Royal Enfield", "TVS", "Bajaj", "Honda", "Hero"];
+const BRAND_ORDER = ["Royal Enfield", "TVS", "Bajaj", "Honda", "Hero", "Suzuki"];
 
 /* ============================= ENGINE / STATE ============================ */
 const state = { modelKey: null, genIndex: null, answers: [], override: null };
