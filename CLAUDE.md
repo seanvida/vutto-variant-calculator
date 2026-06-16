@@ -189,9 +189,17 @@ Run the Node simulation (below) — it replays the real engine over every varian
 > explicit lineup-completeness check in Step 1 — ask Gemini to list *every* variant including
 > ABS/CBS and mid-cycle additions, and to confirm which trims were **never sold**.
 
-### Step 6 — Browser smoke-test
-Serve, open the file, walk one new model end to end (Model → Year → cues → result). Check the
-year crumb, early-termination pills, and that no colour value split into phantom options.
+### Step 5b — Completeness audit (MANDATORY GATE — do not skip)
+The sim cannot see a *missing* variant. So for **every model you add or edit**, run:
+```
+node tools/audit-coverage.mjs "<Model>"      # e.g. "Pulsar 125"
+```
+It diffs our lineup against a grounded source and prints `⚠ REVIEW` with the variants we lack.
+**Resolve every flag before shipping** — either add the missing variant, or consciously decide
+it's out of scope per the variant definition (plain colour, not a named edition). This is the
+guard that catches the "Pulsar 125 Neon was missing" class of bug — that slipped precisely
+because this step had never been run (Gemini quota was exhausted; see quota note above).
+Mind the 20/day quota: audit the models you touched, not all 34, unless on a paid key.
 
 ### Step 7 — Sync + ship
 Update the relevant CSV, then commit & push. Confirm `.env` is NOT staged
