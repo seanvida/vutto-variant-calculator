@@ -67,12 +67,13 @@ TVS,Jupiter 125,2021 – 2026 (all years),SmartXonnect,,Alloy,,,,SmartXonnect,Di
 Honda,Activa 6G,2020 – 2026 (all years),Standard,,,,,,,,,,,Halogen Bulb,,,No,,,Headlight › Smart Key
 Honda,Activa 6G,2020 – 2026 (all years),Deluxe,,,,,,,,,,,LED,,,No,,,Headlight › Smart Key
 Honda,Activa 6G,2020 – 2026 (all years),H-Smart,,,,,,,,,,,LED,,,Yes,,,Headlight › Smart Key
-Hero,Splendor Plus,2015 – 2026 (all years),Drum Spoke (Kick),,Spoke,No,,,Analogue,Drum,,,,,,,,,,Meter Type › Front Brake Type › Wheel Type › Self Start
-Hero,Splendor Plus,2015 – 2026 (all years),Self Spoke,,Spoke,Yes,,,Analogue,Drum,,,,,,,,,,Meter Type › Front Brake Type › Wheel Type › Self Start
-Hero,Splendor Plus,2015 – 2026 (all years),Self Alloy,,Alloy,Yes,,,Analogue,Drum,,,,,,,,,,Meter Type › Front Brake Type › Wheel Type › Self Start
-Hero,Splendor Plus,2015 – 2026 (all years),Self Alloy i3S,,Alloy,Yes,,,Analogue,Drum,,,,,,,,,,Meter Type › Front Brake Type › Wheel Type › Self Start
-Hero,Splendor Plus,2015 – 2026 (all years),Xtec / Xtec 2.0,,Alloy,Yes,,,Digital (segment LCD),Drum,,,,,,,,,,Meter Type › Front Brake Type › Wheel Type › Self Start
-Hero,Splendor Plus,2015 – 2026 (all years),Disc (2025+),,Alloy,Yes,,,Analogue,Disc,,,,,,,,,,Meter Type › Front Brake Type › Wheel Type › Self Start
+Hero,Splendor Plus,2015 – 2026 (all years),Drum Spoke (Kick),,Spoke,No,,,Analogue,Drum,,,,Halogen Bulb,,,,,,Wheel Type › Front Brake Type › Self Start › Colour
+Hero,Splendor Plus,2015 – 2026 (all years),Self Spoke,,Spoke,Yes,,,Analogue,Drum,,,,Halogen Bulb,,,,,,Wheel Type › Front Brake Type › Self Start › Colour
+Hero,Splendor Plus,2015 – 2026 (all years),Self Alloy,,Alloy,Yes,,,Analogue,Drum,,,,Halogen Bulb,,,,,Standard,Wheel Type › Front Brake Type › Self Start › Colour
+Hero,Splendor Plus,2015 – 2026 (all years),Self Alloy i3S,,Alloy,Yes,,,Analogue,Drum,,,,Halogen Bulb,,,,,Standard,Wheel Type › Front Brake Type › Self Start › Colour
+Hero,Splendor Plus,2015 – 2026 (all years),100 Million Edition,,Alloy,Yes,,,Analogue,Drum,,,,Halogen Bulb,,,,,Red & White dual-tone,Wheel Type › Front Brake Type › Self Start › Colour
+Hero,Splendor Plus,2015 – 2026 (all years),125 Million Edition,,Alloy,Yes,,,Analogue,Drum,,,,Halogen Bulb,,,,,Glossy Grey with gold badges,Wheel Type › Front Brake Type › Self Start › Colour
+Hero,Splendor Plus,2015 – 2026 (all years),Disc (2025+),,Alloy,Yes,,,Analogue,Disc,,,,Halogen Bulb,,,,,,Wheel Type › Front Brake Type › Self Start › Colour
 Hero,HF Deluxe,2015 – 2026 (all years),Kick Start,,,No,,,Analogue,,,,,Halogen Bulb,,,,,Standard graphics,Headlight › Meter Type › Colour › Self Start
 Hero,HF Deluxe,2015 – 2026 (all years),Self Start,,,Yes,,,Analogue,,,,,Halogen Bulb,,,,,Standard graphics,Headlight › Meter Type › Colour › Self Start
 Hero,HF Deluxe,2015 – 2026 (all years),Self Start i3S,,,Yes,,,Analogue,,,,,Halogen Bulb,,,,,Standard graphics,Headlight › Meter Type › Colour › Self Start
@@ -130,17 +131,21 @@ TVS,Apache RTR 160 4V,2025 – 2026 (TFT projector top variant),TFT (projector),
 TVS,Sport,2015 – 2026 (all years),Kick (Spoke),,Spoke,No,,,Analogue,Drum,,,,Halogen Bulb,,,,,,Self Start › Wheel Type
 TVS,Sport,2015 – 2026 (all years),Kick (Alloy),,Alloy,No,,,Analogue,Drum,,,,Halogen Bulb,,,,,,Self Start › Wheel Type
 TVS,Sport,2015 – 2026 (all years),Electric Start,,Alloy,Yes,,,Analogue,Drum,,,,Halogen Bulb,,,,,,Self Start › Wheel Type
-Bajaj,Pulsar 125,2019 – 2023 (halogen),Drum,,Alloy,,,,Semi-Digital,Drum,,,,Halogen Bulb,,,,,,Front Brake Type
-Bajaj,Pulsar 125,2019 – 2023 (halogen),Disc,,Alloy,,,,Semi-Digital,Disc,,,,Halogen Bulb,,,,,,Front Brake Type
+Bajaj,Pulsar 125,2019 – 2023 (halogen),Drum,,Alloy,,,,Semi-Digital,Drum,,,,Halogen Bulb,,,,,,Front Brake Type › Colour
+Bajaj,Pulsar 125,2019 – 2023 (halogen),Disc,,Alloy,,,,Semi-Digital,Disc,,,,Halogen Bulb,,,,,Standard,Front Brake Type › Colour
+Bajaj,Pulsar 125,2019 – 2023 (halogen),Carbon Fibre Edition,,Alloy,,,,Semi-Digital,Disc,,,,Halogen Bulb,,,,,Carbon-fibre graphics,Front Brake Type › Colour
 Bajaj,Pulsar 125,2024 – 2026 (LED update),Drum (Halogen),,Alloy,,,,Semi-Digital,Drum,,,,Halogen Bulb,,,,,,Headlight › Front Brake Type
 Bajaj,Pulsar 125,2024 – 2026 (LED update),Disc (LED),,Alloy,,,,Digital (LCD),Disc,,,,LED,,,,,,Headlight › Front Brake Type
-Hero,Xtreme 125R,2024 – 2026 (all years),IBS,,Alloy,,,,Digital (LCD),Disc,Drum,,,LED,,,,,,Rear Brake Type › Meter Type
-Hero,Xtreme 125R,2024 – 2026 (all years),ABS (Single Channel),,Alloy,,,,Digital (LCD),Disc,Drum,,,LED,,,,,,Rear Brake Type › Meter Type
-Hero,Xtreme 125R,2024 – 2026 (all years),Dual-Channel ABS,,Alloy,,,,Colour Digital (LCD),Disc,Disc,,,LED,,,,,,Rear Brake Type › Meter Type
+Hero,Xtreme 125R,2024 – 2026 (all years),IBS,IBS (CBS),Alloy,,,,Digital (LCD),Disc,Drum,,,LED,,,,,,Abs › Seat Type › Rear Brake Type
+Hero,Xtreme 125R,2024 – 2026 (all years),ABS,Single Channel,Alloy,,,,Digital (LCD),Disc,Drum,,,LED,,,,,,Abs › Seat Type › Rear Brake Type
+Hero,Xtreme 125R,2024 – 2026 (all years),ABS Single Seat,Single Channel,Alloy,,,,Digital (LCD),Disc,Drum,,,LED,,,,,,Abs › Seat Type › Rear Brake Type
+Hero,Xtreme 125R,2024 – 2026 (all years),Dual-Channel ABS,Dual Channel,Alloy,,,,Colour Digital (LCD),Disc,Disc,,,LED,,,,,,Abs › Seat Type › Rear Brake Type
 Honda,Activa 5G,2018 – 2020 (all years),Standard,,Steel,,,,Analogue,Drum,,,,LED,,,,,,Meter Type
 Honda,Activa 5G,2018 – 2020 (all years),Deluxe,,Steel,,,,Semi-Digital,Drum,,,,LED,,,,,,Meter Type
-Hero,Splendor Plus Xtec,2022 – 2024 (Xtec),Xtec (i3S Drum Self Alloy),,Alloy,Yes,,,Digital (LCD),Drum,,,,Halogen with LED DRL,,,,,,Headlight
-Hero,Splendor Plus Xtec,2024 – 2026 (Xtec 2.0),Xtec 2.0,,Alloy,Yes,,,Digital (LCD),Drum,,,,LED,,,,,,Headlight
+Hero,Splendor Plus Xtec,2022 – 2024 (Xtec),Xtec Drum,,Alloy,Yes,,,Digital (LCD),Drum,,,,Halogen with LED DRL,,,,,,Front Brake Type
+Hero,Splendor Plus Xtec,2022 – 2024 (Xtec),Xtec Disc,,Alloy,Yes,,,Digital (LCD),Disc,,,,Halogen with LED DRL,,,,,,Front Brake Type
+Hero,Splendor Plus Xtec,2024 – 2026 (Xtec 2.0),Xtec 2.0,,Alloy,Yes,,,Digital (LCD),Drum,,,,LED,,,,,Standard,Colour
+Hero,Splendor Plus Xtec,2024 – 2026 (Xtec 2.0),Xtec 2.0 125 Million Edition,,Alloy,Yes,,,Digital (LCD),Drum,,,,LED,,,,,Grey with gold accents,Colour
 Bajaj,Pulsar 150,"2015 – 2018 (pre-ABS, halogen)",Single Disc,,Alloy,,,,Semi-Digital,Disc,Drum,,,Halogen Bulb,,,,,,Rear Brake Type
 Bajaj,Pulsar 150,"2015 – 2018 (pre-ABS, halogen)",Twin Disc,,Alloy,,,,Semi-Digital,Disc,Disc,,,Halogen Bulb,,,,,,Rear Brake Type
 Bajaj,Pulsar 150,"2019 – 2023 (ABS, halogen)",Single Disc ABS,Single Channel,Alloy,,,,Semi-Digital,Disc,Drum,,,Halogen Bulb,,,,,,Rear Brake Type
@@ -159,15 +164,20 @@ TVS,Apache RTR 200 4V,2025 – 2026 (TFT / USD forks),SmartXonnect,Dual Channel,
 TVS,Apache RTR 200 4V,2025 – 2026 (TFT / USD forks),TFT (USD),Dual Channel,,,,,TFT (colour),Disc,Disc,,,LED Projector,,,,USD (golden),,Meter Type
 Bajaj,Platina 110,2018 – 2026 (all years),Drum (CBS),CBS,Alloy,,,,Semi-Digital,Drum,,,,Halogen with LED DRL,,,,,,Front Brake Type
 Bajaj,Platina 110,2018 – 2026 (all years),Disc (CBS),CBS,Alloy,,,,Semi-Digital,Disc,,,,Halogen with LED DRL,,,,,,Front Brake Type
-Bajaj,Platina 100,2015 – 2026 (all years),Kick Start (KS),,Alloy,No,,,Analogue,Drum,,,,Halogen with LED DRL,,,,,,Self Start
-Bajaj,Platina 100,2015 – 2026 (all years),Electric Start (ES),,Alloy,Yes,,,Analogue,Drum,,,,Halogen with LED DRL,,,,,,Self Start
+Bajaj,Platina 100,2015 – 2026 (all years),Kick Start (KS),,Alloy,No,,,Analogue,Drum,,,,Halogen with LED DRL,,,,,,Self Start › Front Brake Type
+Bajaj,Platina 100,2015 – 2026 (all years),Electric Start (ES),,Alloy,Yes,,,Analogue,Drum,,,,Halogen with LED DRL,,,,,,Self Start › Front Brake Type
+Bajaj,Platina 100,2015 – 2026 (all years),ES Disc,,Alloy,Yes,,,Analogue,Disc,,,,Halogen with LED DRL,,,,,,Self Start › Front Brake Type
 Honda,Shine 125,2015 – 2019 (carburettor),Drum,,Alloy,Yes,,,Analogue,Drum,,,,Halogen Bulb,,,,,,Front Brake Type
 Honda,Shine 125,2015 – 2019 (carburettor),Disc,,Alloy,Yes,,,Analogue,Disc,,,,Halogen Bulb,,,,,,Front Brake Type
 Honda,Shine 125,"2020 – 2026 (BS6, fuel-injected)",Drum,,Alloy,Yes,,,Analogue,Drum,,,,Halogen Bulb,,,,,,Front Brake Type
 Honda,Shine 125,"2020 – 2026 (BS6, fuel-injected)",Disc,,Alloy,Yes,,,Analogue,Disc,,,,Halogen Bulb,,,,,,Front Brake Type
 Hero,Glamour Xtec,2021 – 2026 (all years),Drum (Alloy),,Alloy,Yes,,,Digital (LCD),Drum,,,,LED,,,,,,Front Brake Type
 Hero,Glamour Xtec,2021 – 2026 (all years),Disc (Alloy),,Alloy,Yes,,,Digital (LCD),Disc,,,,LED,,,,,,Front Brake Type
-Yamaha,FZ-X,2021 – 2026 (all years),FZ-X,Single Channel,Alloy,,,,Digital (LCD),Disc,Disc,,,LED,,,,,,
+Yamaha,FZ-X,2021 – 2026 (all years),Standard,Single Channel,Alloy,,,,Digital (LCD),Disc,Disc,,,LED,No,,,,,Meter Type › Usb Charging Port
+Yamaha,FZ-X,2021 – 2026 (all years),Bluetooth,Single Channel,Alloy,,,,Digital (LCD),Disc,Disc,,,LED,Yes,,,,,Meter Type › Usb Charging Port
+Yamaha,FZ-X,2021 – 2026 (all years),Hybrid (2025+),Single Channel,Alloy,,,,TFT (colour),Disc,Disc,,,LED,Yes,,,,,Meter Type › Usb Charging Port
 Hero,Destini Prime,2023 – 2026 (all years),Destini Prime,,Steel,Yes,,,Semi-Digital,Drum,Drum,,,LED,,,,,,
-Yamaha,R15 V4,2021 – 2026 (all years),R15 V4,Dual Channel,Alloy,,,,Digital (LCD),Disc,Disc,,,LED Projector,,,,USD (golden),,Meter Type
-Yamaha,R15 V4,2021 – 2026 (all years),R15M,Dual Channel,Alloy,,,,TFT (colour),Disc,Disc,,,LED Projector,,,,USD (golden),,Meter Type
+Yamaha,R15 V4,2021 – 2026 (all years),R15 V4,Dual Channel,Alloy,,,,Digital (LCD),Disc,Disc,,,LED Projector,,,,USD (golden),,Meter Type › Colour
+Yamaha,R15 V4,2021 – 2026 (all years),R15M,Dual Channel,Alloy,,,,TFT (colour),Disc,Disc,,,LED Projector,,,,USD (golden),Metallic Grey (standard M),Meter Type › Colour
+Yamaha,R15 V4,2021 – 2026 (all years),R15M MotoGP Edition,Dual Channel,Alloy,,,,TFT (colour),Disc,Disc,,,LED Projector,,,,USD (golden),Monster Energy MotoGP livery,Meter Type › Colour
+Yamaha,R15 V4,2021 – 2026 (all years),R15M Carbon,Dual Channel,Alloy,,,,TFT (colour),Disc,Disc,,,LED Projector,,,,USD (golden),Carbon-fibre pattern + blue wheels,Meter Type › Colour

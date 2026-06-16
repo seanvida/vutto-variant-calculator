@@ -103,6 +103,28 @@ Follow this order every time. Budget ~1 research call + a few data edits per mod
 Edit `index-revised.html` (canonical). Add each model object to `DATA`; add the brand to
 `BRAND_ORDER` if new; add any new cue key to `QMETA`.
 
+### Variant definition (settled with the user)
+A "variant" = every **hardware/trim** variant **plus every NAMED edition** (Super Squad,
+MotoGP, Carbon, 100/125 Million, Knight…). **Plain colours are NOT separate variants** — add a
+colour/edition only when it has an official edition name. Encode named editions as extra
+variants discriminated by the `Colour` cue (or as a pick-list twin when truly badge-only).
+Consequence: our counts are intentionally LOWER than a raw Gemini/dealer list that enumerates
+every paint — the audit (below) excludes plain colours so the comparison is fair.
+
+### ⚠️ Gemini free-tier quota (operational reality)
+The free key allows only **20 grounded `generateContent` requests per DAY per model**
+(`GenerateRequestsPerDayPerProjectPerModel-FreeTier = 20`). Grounded research + the coverage
+audit both draw from this. So: **budget calls** (1 deep call per model, don't batch-burn),
+expect 429 `RESOURCE_EXHAUSTED` once spent (its "retry in ~45s" is misleading — it's a daily
+cap), and for a full 24-model re-research + audit in one day you need a **paid key**. Cap resets
+~midnight Pacific.
+
+### Coverage audit (completeness guardrail) — `tools/audit-coverage.mjs`
+`node tools/audit-coverage.mjs [name…]` diffs our DATA lineup against a grounded source per
+model and flags only the divergent ones. This is the guard the Node sim can't be: the sim
+proves listed variants *resolve*; the audit proves the *list is complete*. Run it after any
+batch (costs ~1 grounded call/model — mind the 20/day cap). Review only flagged models.
+
 ### Step 1 — Research with Gemini (grounded)
 The key is in `.env`. Use `gemini-2.5-flash` with Google Search grounding:
 ```bash

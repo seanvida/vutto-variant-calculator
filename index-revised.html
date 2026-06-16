@@ -506,15 +506,17 @@ const DATA = {
     make: "Hero", model: "Splendor Plus",
     generations: [
       {
+        // Xtec variants now live in their own "Splendor Plus Xtec" cluster.
         yearLabel: "2015 – 2026 (all years)",
-        questions: ["Meter Type", "Front Brake Type", "Wheel Type", "Self Start"],
+        questions: ["Wheel Type", "Front Brake Type", "Self Start", "Colour"],
         variants: [
-          { name: "Drum Spoke (Kick)", specs: { "Meter Type": "Analogue",              "Front Brake Type": "Drum", "Wheel Type": "Spoke", "Self Start": "No" } },
-          { name: "Self Spoke",        specs: { "Meter Type": "Analogue",              "Front Brake Type": "Drum", "Wheel Type": "Spoke", "Self Start": "Yes" } },
-          { name: "Self Alloy",        specs: { "Meter Type": "Analogue",              "Front Brake Type": "Drum", "Wheel Type": "Alloy", "Self Start": "Yes" } },
-          { name: "Self Alloy i3S",    specs: { "Meter Type": "Analogue",              "Front Brake Type": "Drum", "Wheel Type": "Alloy", "Self Start": "Yes" } },
-          { name: "Xtec / Xtec 2.0",   specs: { "Meter Type": "Digital (segment LCD)", "Front Brake Type": "Drum", "Wheel Type": "Alloy", "Self Start": "Yes" } },
-          { name: "Disc (2025+)",      specs: { "Meter Type": "Analogue",              "Front Brake Type": "Disc", "Wheel Type": "Alloy", "Self Start": "Yes" } }
+          { name: "Drum Spoke (Kick)",   specs: { "Wheel Type": "Spoke", "Front Brake Type": "Drum", "Self Start": "No",  "Meter Type": "Analogue", "Headlight": "Halogen Bulb" } },
+          { name: "Self Spoke",          specs: { "Wheel Type": "Spoke", "Front Brake Type": "Drum", "Self Start": "Yes", "Meter Type": "Analogue", "Headlight": "Halogen Bulb" } },
+          { name: "Self Alloy",          specs: { "Wheel Type": "Alloy", "Front Brake Type": "Drum", "Self Start": "Yes", "Meter Type": "Analogue", "Headlight": "Halogen Bulb", "Colour": "Standard" } },
+          { name: "Self Alloy i3S",      specs: { "Wheel Type": "Alloy", "Front Brake Type": "Drum", "Self Start": "Yes", "Meter Type": "Analogue", "Headlight": "Halogen Bulb", "Colour": "Standard" } },
+          { name: "100 Million Edition", specs: { "Wheel Type": "Alloy", "Front Brake Type": "Drum", "Self Start": "Yes", "Meter Type": "Analogue", "Headlight": "Halogen Bulb", "Colour": "Red & White dual-tone" } },
+          { name: "125 Million Edition", specs: { "Wheel Type": "Alloy", "Front Brake Type": "Drum", "Self Start": "Yes", "Meter Type": "Analogue", "Headlight": "Halogen Bulb", "Colour": "Glossy Grey with gold badges" } },
+          { name: "Disc (2025+)",        specs: { "Wheel Type": "Alloy", "Front Brake Type": "Disc", "Self Start": "Yes", "Meter Type": "Analogue", "Headlight": "Halogen Bulb" } }
         ]
       }
     ]
@@ -754,10 +756,11 @@ const DATA = {
     generations: [
       {
         yearLabel: "2019 – 2023 (halogen)",
-        questions: ["Front Brake Type"],
+        questions: ["Front Brake Type", "Colour"],
         variants: [
-          { name: "Drum", specs: { "Front Brake Type": "Drum", "Wheel Type": "Alloy", "Headlight": "Halogen Bulb", "Meter Type": "Semi-Digital" } },
-          { name: "Disc", specs: { "Front Brake Type": "Disc", "Wheel Type": "Alloy", "Headlight": "Halogen Bulb", "Meter Type": "Semi-Digital" } }
+          { name: "Drum",                  specs: { "Front Brake Type": "Drum", "Wheel Type": "Alloy", "Headlight": "Halogen Bulb", "Meter Type": "Semi-Digital" } },
+          { name: "Disc",                  specs: { "Front Brake Type": "Disc", "Wheel Type": "Alloy", "Headlight": "Halogen Bulb", "Meter Type": "Semi-Digital", "Colour": "Standard" } },
+          { name: "Carbon Fibre Edition",  specs: { "Front Brake Type": "Disc", "Wheel Type": "Alloy", "Headlight": "Halogen Bulb", "Meter Type": "Semi-Digital", "Colour": "Carbon-fibre graphics" } }
         ]
       },
       {
@@ -775,13 +778,15 @@ const DATA = {
     make: "Hero", model: "Xtreme 125R",
     generations: [
       {
-        // IBS vs single-channel ABS look identical (rear drum + digital LCD) -> pick-list.
+        // IBS (no ABS ring) vs single-channel ABS (front ring) ARE visually distinct;
+        // single- vs split-seat separates the two single-channel trims.
         yearLabel: "2024 – 2026 (all years)",
-        questions: ["Rear Brake Type", "Meter Type"],
+        questions: ["Abs", "Seat Type", "Rear Brake Type"],
         variants: [
-          { name: "IBS",                  specs: { "Rear Brake Type": "Drum", "Meter Type": "Digital (LCD)",        "Front Brake Type": "Disc", "Headlight": "LED", "Wheel Type": "Alloy" } },
-          { name: "ABS (Single Channel)", specs: { "Rear Brake Type": "Drum", "Meter Type": "Digital (LCD)",        "Front Brake Type": "Disc", "Headlight": "LED", "Wheel Type": "Alloy" } },
-          { name: "Dual-Channel ABS",     specs: { "Rear Brake Type": "Disc", "Meter Type": "Colour Digital (LCD)", "Front Brake Type": "Disc", "Headlight": "LED", "Wheel Type": "Alloy" } }
+          { name: "IBS",              specs: { "Abs": "IBS (CBS)",      "Rear Brake Type": "Drum", "Meter Type": "Digital (LCD)",        "Front Brake Type": "Disc", "Headlight": "LED", "Wheel Type": "Alloy", "Seat Type": "Split" } },
+          { name: "ABS",              specs: { "Abs": "Single Channel", "Rear Brake Type": "Drum", "Meter Type": "Digital (LCD)",        "Front Brake Type": "Disc", "Headlight": "LED", "Wheel Type": "Alloy", "Seat Type": "Split" } },
+          { name: "ABS Single Seat",  specs: { "Abs": "Single Channel", "Rear Brake Type": "Drum", "Meter Type": "Digital (LCD)",        "Front Brake Type": "Disc", "Headlight": "LED", "Wheel Type": "Alloy", "Seat Type": "Single" } },
+          { name: "Dual-Channel ABS", specs: { "Abs": "Dual Channel",   "Rear Brake Type": "Disc", "Meter Type": "Colour Digital (LCD)", "Front Brake Type": "Disc", "Headlight": "LED", "Wheel Type": "Alloy", "Seat Type": "Split" } }
         ]
       }
     ]
@@ -807,16 +812,18 @@ const DATA = {
     generations: [
       {
         yearLabel: "2022 – 2024 (Xtec)",
-        questions: ["Headlight"],
+        questions: ["Front Brake Type"],
         variants: [
-          { name: "Xtec (i3S Drum Self Alloy)", specs: { "Headlight": "Halogen with LED DRL", "Meter Type": "Digital (LCD)", "Front Brake Type": "Drum", "Wheel Type": "Alloy", "Self Start": "Yes" } }
+          { name: "Xtec Drum", specs: { "Front Brake Type": "Drum", "Headlight": "Halogen with LED DRL", "Meter Type": "Digital (LCD)", "Wheel Type": "Alloy", "Self Start": "Yes" } },
+          { name: "Xtec Disc", specs: { "Front Brake Type": "Disc", "Headlight": "Halogen with LED DRL", "Meter Type": "Digital (LCD)", "Wheel Type": "Alloy", "Self Start": "Yes" } }
         ]
       },
       {
         yearLabel: "2024 – 2026 (Xtec 2.0)",
-        questions: ["Headlight"],
+        questions: ["Colour"],
         variants: [
-          { name: "Xtec 2.0", specs: { "Headlight": "LED", "Meter Type": "Digital (LCD)", "Front Brake Type": "Drum", "Wheel Type": "Alloy", "Self Start": "Yes" } }
+          { name: "Xtec 2.0",                     specs: { "Colour": "Standard",               "Headlight": "LED", "Meter Type": "Digital (LCD)", "Front Brake Type": "Drum", "Wheel Type": "Alloy", "Self Start": "Yes" } },
+          { name: "Xtec 2.0 125 Million Edition", specs: { "Colour": "Grey with gold accents", "Headlight": "LED", "Meter Type": "Digital (LCD)", "Front Brake Type": "Drum", "Wheel Type": "Alloy", "Self Start": "Yes" } }
         ]
       }
     ]
@@ -935,10 +942,11 @@ const DATA = {
     generations: [
       {
         yearLabel: "2015 – 2026 (all years)",
-        questions: ["Self Start"],
+        questions: ["Self Start", "Front Brake Type"],
         variants: [
           { name: "Kick Start (KS)",     specs: { "Self Start": "No",  "Front Brake Type": "Drum", "Wheel Type": "Alloy", "Headlight": "Halogen with LED DRL", "Meter Type": "Analogue" } },
-          { name: "Electric Start (ES)", specs: { "Self Start": "Yes", "Front Brake Type": "Drum", "Wheel Type": "Alloy", "Headlight": "Halogen with LED DRL", "Meter Type": "Analogue" } }
+          { name: "Electric Start (ES)", specs: { "Self Start": "Yes", "Front Brake Type": "Drum", "Wheel Type": "Alloy", "Headlight": "Halogen with LED DRL", "Meter Type": "Analogue" } },
+          { name: "ES Disc",             specs: { "Self Start": "Yes", "Front Brake Type": "Disc", "Wheel Type": "Alloy", "Headlight": "Halogen with LED DRL", "Meter Type": "Analogue" } }
         ]
       }
     ]
@@ -984,10 +992,13 @@ const DATA = {
     make: "Yamaha", model: "FZ-X",
     generations: [
       {
+        // Standard vs Bluetooth: same LCD, but BT trim adds a visible USB port below it.
         yearLabel: "2021 – 2026 (all years)",
-        questions: [],
+        questions: ["Meter Type", "Usb Charging Port"],
         variants: [
-          { name: "FZ-X", specs: { "Front Brake Type": "Disc", "Rear Brake Type": "Disc", "Abs": "Single Channel", "Headlight": "LED", "Meter Type": "Digital (LCD)", "Wheel Type": "Alloy" } }
+          { name: "Standard",        specs: { "Meter Type": "Digital (LCD)", "Usb Charging Port": "No",  "Front Brake Type": "Disc", "Rear Brake Type": "Disc", "Abs": "Single Channel", "Headlight": "LED", "Wheel Type": "Alloy" } },
+          { name: "Bluetooth",       specs: { "Meter Type": "Digital (LCD)", "Usb Charging Port": "Yes", "Front Brake Type": "Disc", "Rear Brake Type": "Disc", "Abs": "Single Channel", "Headlight": "LED", "Wheel Type": "Alloy" } },
+          { name: "Hybrid (2025+)",  specs: { "Meter Type": "TFT (colour)",  "Usb Charging Port": "Yes", "Front Brake Type": "Disc", "Rear Brake Type": "Disc", "Abs": "Single Channel", "Headlight": "LED", "Wheel Type": "Alloy" } }
         ]
       }
     ]
@@ -1010,12 +1021,15 @@ const DATA = {
     make: "Yamaha", model: "R15 V4",
     generations: [
       {
-        // R15 V4 (LCD) vs R15M (colour TFT) — the cluster is the clean visual marker.
+        // R15 V4 (LCD) vs R15M (colour TFT) is the cluster marker; the named M
+        // editions (MotoGP / Carbon) then split by livery.
         yearLabel: "2021 – 2026 (all years)",
-        questions: ["Meter Type"],
+        questions: ["Meter Type", "Colour"],
         variants: [
-          { name: "R15 V4", specs: { "Meter Type": "Digital (LCD)", "Headlight": "LED Projector", "Front Suspension": "USD (golden)", "Abs": "Dual Channel", "Front Brake Type": "Disc", "Rear Brake Type": "Disc", "Wheel Type": "Alloy" } },
-          { name: "R15M",   specs: { "Meter Type": "TFT (colour)",  "Headlight": "LED Projector", "Front Suspension": "USD (golden)", "Abs": "Dual Channel", "Front Brake Type": "Disc", "Rear Brake Type": "Disc", "Wheel Type": "Alloy" } }
+          { name: "R15 V4",              specs: { "Meter Type": "Digital (LCD)", "Headlight": "LED Projector", "Front Suspension": "USD (golden)", "Abs": "Dual Channel", "Front Brake Type": "Disc", "Rear Brake Type": "Disc", "Wheel Type": "Alloy" } },
+          { name: "R15M",                specs: { "Meter Type": "TFT (colour)",  "Colour": "Metallic Grey (standard M)",         "Headlight": "LED Projector", "Front Suspension": "USD (golden)", "Abs": "Dual Channel", "Front Brake Type": "Disc", "Rear Brake Type": "Disc", "Wheel Type": "Alloy" } },
+          { name: "R15M MotoGP Edition", specs: { "Meter Type": "TFT (colour)",  "Colour": "Monster Energy MotoGP livery",       "Headlight": "LED Projector", "Front Suspension": "USD (golden)", "Abs": "Dual Channel", "Front Brake Type": "Disc", "Rear Brake Type": "Disc", "Wheel Type": "Alloy" } },
+          { name: "R15M Carbon",         specs: { "Meter Type": "TFT (colour)",  "Colour": "Carbon-fibre pattern + blue wheels", "Headlight": "LED Projector", "Front Suspension": "USD (golden)", "Abs": "Dual Channel", "Front Brake Type": "Disc", "Rear Brake Type": "Disc", "Wheel Type": "Alloy" } }
         ]
       }
     ]
@@ -1039,7 +1053,8 @@ const QMETA = {
   "Ride Modes":        { label: "Ride modes?",                     hint: "Are selectable ride modes available?" },
   "Smart Key":         { label: "Smart key?",                      hint: "Keyless smart key system?" },
   "Front Suspension":  { label: "Front suspension",                hint: "Conventional telescopic forks, or golden upside-down (USD) forks?" },
-  "Colour":            { label: "Colour / paint scheme",           hint: "Pick the closest colour or theme." }
+  "Seat Type":         { label: "Seat",                            hint: "One-piece (single) seat, or a split rider + pillion seat?" },
+  "Colour":            { label: "Colour / edition",                hint: "Pick the closest colour scheme or named edition." }
 };
 const BRAND_ORDER = ["Royal Enfield", "TVS", "Bajaj", "Honda", "Hero", "Suzuki", "Yamaha"];
 
