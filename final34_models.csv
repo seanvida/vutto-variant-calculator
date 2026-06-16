@@ -81,9 +81,11 @@ Hero,HF Deluxe,2015 – 2026 (all years),Canvas Black,,,Yes,,,Analogue,,,,,Halog
 Hero,HF Deluxe,2015 – 2026 (all years),HF Deluxe Pro,,,Yes,,,Digital (LCD console),,,,,LED,,,,,Premium graphics,Headlight › Meter Type › Colour › Self Start
 TVS,Radeon,2018 – 2021 (analogue console),Drum (Base),,,,,,Analogue,Drum,,,,,,,,,,Meter Type › Front Brake Type
 TVS,Radeon,2018 – 2021 (analogue console),Disc (Special Edition),,,,,,Analogue,Disc,,,,,,,,,,Meter Type › Front Brake Type
-TVS,Radeon,2022 – 2026 (digital console),"Drum (Base, analogue)",,,,,,Analogue,Drum,,,,,,,,,,Meter Type › Front Brake Type
-TVS,Radeon,2022 – 2026 (digital console),Digi Drum,,,,,,Digital (negative LCD),Drum,,,,,,,,,,Meter Type › Front Brake Type
-TVS,Radeon,2022 – 2026 (digital console),Digi Disc,,,,,,Digital (negative LCD),Disc,,,,,,,,,,Meter Type › Front Brake Type
+TVS,Radeon,2022 – 2026 (digital console),"Drum (Base, analogue)",,,,,,Analogue,Drum,,,,,,,,,,Meter Type › Front Brake Type › Colour
+TVS,Radeon,2022 – 2026 (digital console),Digi Drum,,,,,,Digital (negative LCD),Drum,,,,,,,,,Standard,Meter Type › Front Brake Type › Colour
+TVS,Radeon,2022 – 2026 (digital console),Dual Tone Edition,,,,,,Digital (negative LCD),Drum,,,,,,,,,Dual-tone graphics,Meter Type › Front Brake Type › Colour
+TVS,Radeon,2022 – 2026 (digital console),All Black Edition,,,,,,Digital (negative LCD),Drum,,,,,,,,,All-black,Meter Type › Front Brake Type › Colour
+TVS,Radeon,2022 – 2026 (digital console),Digi Disc,,,,,,Digital (negative LCD),Disc,,,,,,,,,,Meter Type › Front Brake Type › Colour
 Honda,Activa 125,2015 – 2022 (BS4 / BS6),Standard,,Steel,,,,,Drum,,,,,,,,,,Wheel Type › Front Brake Type
 Honda,Activa 125,2015 – 2022 (BS4 / BS6),Alloy,,Alloy,,,,,Drum,,,,,,,,,,Wheel Type › Front Brake Type
 Honda,Activa 125,2015 – 2022 (BS4 / BS6),Deluxe,,Alloy,,,,,Disc,,,,,,,,,,Wheel Type › Front Brake Type
@@ -95,8 +97,9 @@ Honda,Activa 125,2025 onwards (TFT update),DLX,,Alloy,,,,Semi-Digital,Disc,,,,,,
 Honda,Activa 125,2025 onwards (TFT update),H-Smart,,Alloy,,,,TFT (Bluetooth),Disc,,,,,,,Yes,,,Wheel Type › Front Brake Type › Smart Key › Meter Type
 Honda,SP125,2019 – 2024 (BS6 / OBD2),Drum,,Alloy,Yes,,,Digital (segment LCD),Drum,,,,LED,,,,,,Front Brake Type › Self Start
 Honda,SP125,2019 – 2024 (BS6 / OBD2),Disc,,Alloy,Yes,,,Digital (segment LCD),Disc,,,,LED,,,,,,Front Brake Type › Self Start
-Honda,SP125,2025 onwards (OBD2B / TFT),Drum,,Alloy,,,,Digital (segment LCD),Drum,,,,LED,,,,,,Meter Type › Front Brake Type
-Honda,SP125,2025 onwards (OBD2B / TFT),DLX (TFT),,Alloy,,,,TFT (colour),Disc,,,,LED,,,,,,Meter Type › Front Brake Type
+Honda,SP125,2025 onwards (OBD2B / TFT),Drum,,Alloy,,,,Digital (segment LCD),Drum,,,,LED,,,,,,Meter Type › Colour
+Honda,SP125,2025 onwards (OBD2B / TFT),DLX (TFT),,Alloy,,,,TFT (colour),Disc,,,,LED,,,,,Standard,Meter Type › Colour
+Honda,SP125,2025 onwards (OBD2B / TFT),Anniversary Edition,,Alloy,,,,TFT (colour),Disc,,,,LED,,,,,Matte Blue Steel + gold wheels,Meter Type › Colour
 Suzuki,Access 125,"2015 – 2019 (BS4, halogen)",Standard,,Steel,,,,Semi-Digital,Drum,,,,Halogen Bulb,,,,,,Front Brake Type › Wheel Type
 Suzuki,Access 125,"2015 – 2019 (BS4, halogen)",Special Edition,,Alloy,,,,Semi-Digital,Disc,,,,Halogen Bulb,,,,,,Front Brake Type › Wheel Type
 Suzuki,Access 125,"2020 – 2022 (BS6, LED headlamp)",Drum (Steel),,Steel,,,,Semi-Digital,Drum,,,,LED,,,,,,Front Brake Type › Wheel Type
@@ -148,8 +151,9 @@ Hero,Splendor Plus Xtec,2024 – 2026 (Xtec 2.0),Xtec 2.0,,Alloy,Yes,,,Digital (
 Hero,Splendor Plus Xtec,2024 – 2026 (Xtec 2.0),Xtec 2.0 125 Million Edition,,Alloy,Yes,,,Digital (LCD),Drum,,,,LED,,,,,Grey with gold accents,Colour
 Bajaj,Pulsar 150,"2015 – 2018 (pre-ABS, halogen)",Single Disc,,Alloy,,,,Semi-Digital,Disc,Drum,,,Halogen Bulb,,,,,,Rear Brake Type
 Bajaj,Pulsar 150,"2015 – 2018 (pre-ABS, halogen)",Twin Disc,,Alloy,,,,Semi-Digital,Disc,Disc,,,Halogen Bulb,,,,,,Rear Brake Type
-Bajaj,Pulsar 150,"2019 – 2023 (ABS, halogen)",Single Disc ABS,Single Channel,Alloy,,,,Semi-Digital,Disc,Drum,,,Halogen Bulb,,,,,,Rear Brake Type
-Bajaj,Pulsar 150,"2019 – 2023 (ABS, halogen)",Twin Disc ABS,Single Channel,Alloy,,,,Semi-Digital,Disc,Disc,,,Halogen Bulb,,,,,,Rear Brake Type
+Bajaj,Pulsar 150,"2019 – 2023 (ABS, halogen)",Neon,Single Channel,Alloy,,,,Semi-Digital,Disc,Drum,,,Halogen Bulb,,,,,Neon highlights,Rear Brake Type › Colour
+Bajaj,Pulsar 150,"2019 – 2023 (ABS, halogen)",Single Disc ABS,Single Channel,Alloy,,,,Semi-Digital,Disc,Drum,,,Halogen Bulb,,,,,Standard,Rear Brake Type › Colour
+Bajaj,Pulsar 150,"2019 – 2023 (ABS, halogen)",Twin Disc ABS,Single Channel,Alloy,,,,Semi-Digital,Disc,Disc,,,Halogen Bulb,,,,,,Rear Brake Type › Colour
 Bajaj,Pulsar 150,2024 – 2026 (LED),Single Disc,Single Channel,Alloy,,,,Digital (LCD),Disc,Drum,,,LED,,,,,,Rear Brake Type
 Bajaj,Pulsar 150,2024 – 2026 (LED),Twin Disc,Single Channel,Alloy,,,,Digital (LCD),Disc,Disc,,,LED,,,,,,Rear Brake Type
 Honda,Activa 3G / 4G,2015 – 2016 (Activa 3G),Activa 3G,,Steel,Yes,,,Analogue,Drum,,,,Halogen Bulb,,,,,,

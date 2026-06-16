@@ -554,10 +554,12 @@ const DATA = {
       },
       {
         yearLabel: "2022 – 2026 (digital console)",
-        questions: ["Meter Type", "Front Brake Type"],
+        questions: ["Meter Type", "Front Brake Type", "Colour"],
         variants: [
           { name: "Drum (Base, analogue)", specs: { "Meter Type": "Analogue",              "Front Brake Type": "Drum" } },
-          { name: "Digi Drum",             specs: { "Meter Type": "Digital (negative LCD)", "Front Brake Type": "Drum" } },
+          { name: "Digi Drum",             specs: { "Meter Type": "Digital (negative LCD)", "Front Brake Type": "Drum", "Colour": "Standard" } },
+          { name: "Dual Tone Edition",     specs: { "Meter Type": "Digital (negative LCD)", "Front Brake Type": "Drum", "Colour": "Dual-tone graphics" } },
+          { name: "All Black Edition",     specs: { "Meter Type": "Digital (negative LCD)", "Front Brake Type": "Drum", "Colour": "All-black" } },
           { name: "Digi Disc",             specs: { "Meter Type": "Digital (negative LCD)", "Front Brake Type": "Disc" } }
         ]
       }
@@ -614,10 +616,11 @@ const DATA = {
       },
       {
         yearLabel: "2025 onwards (OBD2B / TFT)",
-        questions: ["Meter Type", "Front Brake Type"],
+        questions: ["Meter Type", "Colour"],
         variants: [
-          { name: "Drum",      specs: { "Meter Type": "Digital (segment LCD)", "Front Brake Type": "Drum", "Wheel Type": "Alloy", "Headlight": "LED" } },
-          { name: "DLX (TFT)", specs: { "Meter Type": "TFT (colour)",          "Front Brake Type": "Disc", "Wheel Type": "Alloy", "Headlight": "LED" } }
+          { name: "Drum",                specs: { "Meter Type": "Digital (segment LCD)", "Front Brake Type": "Drum", "Wheel Type": "Alloy", "Headlight": "LED" } },
+          { name: "DLX (TFT)",           specs: { "Meter Type": "TFT (colour)",          "Front Brake Type": "Disc", "Wheel Type": "Alloy", "Headlight": "LED", "Colour": "Standard" } },
+          { name: "Anniversary Edition", specs: { "Meter Type": "TFT (colour)",          "Front Brake Type": "Disc", "Wheel Type": "Alloy", "Headlight": "LED", "Colour": "Matte Blue Steel + gold wheels" } }
         ]
       }
     ]
@@ -842,9 +845,10 @@ const DATA = {
       },
       {
         yearLabel: "2019 – 2023 (ABS, halogen)",
-        questions: ["Rear Brake Type"],
+        questions: ["Rear Brake Type", "Colour"],
         variants: [
-          { name: "Single Disc ABS", specs: { "Front Brake Type": "Disc", "Rear Brake Type": "Drum", "Abs": "Single Channel", "Headlight": "Halogen Bulb", "Meter Type": "Semi-Digital", "Wheel Type": "Alloy" } },
+          { name: "Neon",            specs: { "Front Brake Type": "Disc", "Rear Brake Type": "Drum", "Abs": "Single Channel", "Headlight": "Halogen Bulb", "Meter Type": "Semi-Digital", "Wheel Type": "Alloy", "Colour": "Neon highlights" } },
+          { name: "Single Disc ABS", specs: { "Front Brake Type": "Disc", "Rear Brake Type": "Drum", "Abs": "Single Channel", "Headlight": "Halogen Bulb", "Meter Type": "Semi-Digital", "Wheel Type": "Alloy", "Colour": "Standard" } },
           { name: "Twin Disc ABS",   specs: { "Front Brake Type": "Disc", "Rear Brake Type": "Disc", "Abs": "Single Channel", "Headlight": "Halogen Bulb", "Meter Type": "Semi-Digital", "Wheel Type": "Alloy" } }
         ]
       },
