@@ -156,6 +156,15 @@
   .brand-group h3 { display: flex; align-items: center; gap: 9px; font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: .09em; color: var(--muted-2); margin-bottom: 10px; }
   .brand-group h3::after { content: ""; flex: 1; height: 1px; background: var(--line); }
 
+  /* ---------- model search ---------- */
+  .msearch-wrap { position: relative; margin-bottom: 18px; }
+  .msearch-wrap svg { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); width: 18px; height: 18px; pointer-events: none; opacity: .5; }
+  .msearch { width: 100%; box-sizing: border-box; padding: 13px 14px 13px 42px; font: inherit; font-size: 15px; font-weight: 600; color: var(--ink); background: #fff; border: 1.5px solid var(--line); border-radius: var(--r); outline: none; transition: border-color .15s, box-shadow .15s; }
+  .msearch::placeholder { color: var(--muted-2); font-weight: 500; }
+  .msearch:focus { border-color: var(--rose); box-shadow: 0 0 0 3px rgba(210,55,87,.12); }
+  .msearch-hint { font-size: 12.5px; color: var(--muted); margin: -8px 0 14px; }
+  .msearch-hint b { color: var(--ink); font-weight: 700; }
+
   /* ---------- result ---------- */
   .result-head { display: flex; align-items: center; gap: 14px; margin-bottom: 18px; }
   .check { flex: none; width: 46px; height: 46px; border-radius: 50%; display: grid; place-items: center;
@@ -169,6 +178,15 @@
   .result-kicker.warn { color: var(--rose); }
   .result-name { font-weight: 800; font-size: clamp(28px, 6vw, 38px); letter-spacing: -0.035em; color: var(--ink); line-height: 1.08; position: relative; display: inline; background-image: linear-gradient(transparent 64%, var(--rose-50) 64%); }
   .result-sub { color: var(--muted); font-size: 14.5px; margin: 6px 0 22px; }
+
+  /* Vutto Calculator mapping callout */
+  .vutto-map { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; background: var(--rose-50, #FCE8EF); border: 1px solid #F4C6D6; border-radius: var(--r); padding: 13px 15px; margin: 0 0 22px; }
+  .vutto-map .vm-label { font-size: 11px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--rose); }
+  .vutto-map .vm-line { font-size: 15px; color: var(--ink); }
+  .vutto-map .vm-line b { font-weight: 800; }
+  .vutto-map .vm-copy { margin-left: auto; border: 1px solid #F4C6D6; background: #fff; color: var(--rose); font-weight: 700; font-size: 12.5px; padding: 6px 12px; border-radius: 999px; cursor: pointer; }
+  .vutto-map .vm-copy:hover { background: var(--rose); color: #fff; }
+  .opt .sub.vm { color: var(--rose); font-weight: 700; }
 
   .specs-title { font-size: 12px; font-weight: 800; letter-spacing: .07em; text-transform: uppercase; color: var(--muted-2); margin-bottom: 11px; }
   .specs { border: 1px solid var(--line); border-radius: var(--r-md); overflow: hidden; }
@@ -224,7 +242,7 @@
         <span class="tool">Variant Calculator</span>
       </div>
       <h1>Which variant is it, <span class="accent">exactly?</span></h1>
-      <p class="lede">Pick the model, the year it was made, then the features you can see. We'll pin down the precise variant. <strong style="color:var(--rose)">14 models · every variant from 2015.</strong></p>
+      <p class="lede">Pick the model, the year it was made, then the features you can see. We'll pin down the precise variant. <strong style="color:var(--rose)">34 models · every variant from 2015.</strong></p>
     </header>
 
     <div class="progress"><div class="track"><div class="fill" id="pbar"></div></div><div class="pmeta" id="pmeta">Step 1</div></div>
@@ -326,8 +344,9 @@ const DATA = {
         yearLabel: "2015 – 2018 (UCE)",
         questions: ["Self Start", "Front Brake Type", "Rear Brake Type"],
         variants: [
-          { name: "Bullet 350",                       specs: { "Self Start": "No",  "Front Brake Type": "Drum", "Rear Brake Type": "Drum" } },
-          { name: "Bullet 350 ES (formerly Electra)", specs: { "Self Start": "Yes", "Front Brake Type": "Disc", "Rear Brake Type": "Drum" } }
+          { name: "Bullet 350",                           specs: { "Self Start": "No",  "Front Brake Type": "Drum", "Rear Brake Type": "Drum" } },
+          { name: "Bullet 350 ES (formerly Electra)",     specs: { "Self Start": "Yes", "Front Brake Type": "Disc", "Rear Brake Type": "Drum" } },
+          { name: "Electra Twinspark (Double Disc)",      specs: { "Self Start": "Yes", "Front Brake Type": "Disc", "Rear Brake Type": "Disc" } }
         ]
       },
       {
@@ -497,15 +516,14 @@ const DATA = {
     make: "Hero", model: "Splendor Plus",
     generations: [
       {
+        // Xtec variants now live in their own "Splendor Plus Xtec" cluster.
         yearLabel: "2015 – 2026 (all years)",
-        questions: ["Meter Type", "Front Brake Type", "Wheel Type", "Self Start"],
+        questions: ["Colour"],
         variants: [
-          { name: "Drum Spoke (Kick)", specs: { "Meter Type": "Analogue",              "Front Brake Type": "Drum", "Wheel Type": "Spoke", "Self Start": "No" } },
-          { name: "Self Spoke",        specs: { "Meter Type": "Analogue",              "Front Brake Type": "Drum", "Wheel Type": "Spoke", "Self Start": "Yes" } },
-          { name: "Self Alloy",        specs: { "Meter Type": "Analogue",              "Front Brake Type": "Drum", "Wheel Type": "Alloy", "Self Start": "Yes" } },
-          { name: "Self Alloy i3S",    specs: { "Meter Type": "Analogue",              "Front Brake Type": "Drum", "Wheel Type": "Alloy", "Self Start": "Yes" } },
-          { name: "Xtec / Xtec 2.0",   specs: { "Meter Type": "Digital (segment LCD)", "Front Brake Type": "Drum", "Wheel Type": "Alloy", "Self Start": "Yes" } },
-          { name: "Disc (2025+)",      specs: { "Meter Type": "Analogue",              "Front Brake Type": "Disc", "Wheel Type": "Alloy", "Self Start": "Yes" } }
+          { name: "Self Alloy",          specs: { "Wheel Type": "Alloy", "Front Brake Type": "Drum", "Self Start": "Yes", "Meter Type": "Analogue", "Headlight": "Halogen Bulb", "Colour": "Standard" } },
+          { name: "Self Alloy i3S",      specs: { "Wheel Type": "Alloy", "Front Brake Type": "Drum", "Self Start": "Yes", "Meter Type": "Analogue", "Headlight": "Halogen Bulb", "Colour": "Standard" } },
+          { name: "100 Million Edition", specs: { "Wheel Type": "Alloy", "Front Brake Type": "Drum", "Self Start": "Yes", "Meter Type": "Analogue", "Headlight": "Halogen Bulb", "Colour": "Red & White dual-tone" } },
+          { name: "125 Million Edition", specs: { "Wheel Type": "Alloy", "Front Brake Type": "Drum", "Self Start": "Yes", "Meter Type": "Analogue", "Headlight": "Halogen Bulb", "Colour": "Glossy Grey with gold badges" } }
         ]
       }
     ]
@@ -543,10 +561,12 @@ const DATA = {
       },
       {
         yearLabel: "2022 – 2026 (digital console)",
-        questions: ["Meter Type", "Front Brake Type"],
+        questions: ["Meter Type", "Front Brake Type", "Colour"],
         variants: [
           { name: "Drum (Base, analogue)", specs: { "Meter Type": "Analogue",              "Front Brake Type": "Drum" } },
-          { name: "Digi Drum",             specs: { "Meter Type": "Digital (negative LCD)", "Front Brake Type": "Drum" } },
+          { name: "Digi Drum",             specs: { "Meter Type": "Digital (negative LCD)", "Front Brake Type": "Drum", "Colour": "Standard" } },
+          { name: "Dual Tone Edition",     specs: { "Meter Type": "Digital (negative LCD)", "Front Brake Type": "Drum", "Colour": "Dual-tone graphics" } },
+          { name: "All Black Edition",     specs: { "Meter Type": "Digital (negative LCD)", "Front Brake Type": "Drum", "Colour": "All-black" } },
           { name: "Digi Disc",             specs: { "Meter Type": "Digital (negative LCD)", "Front Brake Type": "Disc" } }
         ]
       }
@@ -603,10 +623,11 @@ const DATA = {
       },
       {
         yearLabel: "2025 onwards (OBD2B / TFT)",
-        questions: ["Meter Type", "Front Brake Type"],
+        questions: ["Meter Type", "Colour"],
         variants: [
-          { name: "Drum",      specs: { "Meter Type": "Digital (segment LCD)", "Front Brake Type": "Drum", "Wheel Type": "Alloy", "Headlight": "LED" } },
-          { name: "DLX (TFT)", specs: { "Meter Type": "TFT (colour)",          "Front Brake Type": "Disc", "Wheel Type": "Alloy", "Headlight": "LED" } }
+          { name: "Drum",                specs: { "Meter Type": "Digital (segment LCD)", "Front Brake Type": "Drum", "Wheel Type": "Alloy", "Headlight": "LED" } },
+          { name: "DLX (TFT)",           specs: { "Meter Type": "TFT (colour)",          "Front Brake Type": "Disc", "Wheel Type": "Alloy", "Headlight": "LED", "Colour": "Standard" } },
+          { name: "Anniversary Edition", specs: { "Meter Type": "TFT (colour)",          "Front Brake Type": "Disc", "Wheel Type": "Alloy", "Headlight": "LED", "Colour": "Matte Blue Steel + gold wheels" } }
         ]
       }
     ]
@@ -652,30 +673,32 @@ const DATA = {
         yearLabel: "2021 – 2022 (launch)",
         questions: ["Meter Type", "Front Brake Type"],
         variants: [
-          { name: "Drum",             specs: { "Meter Type": "Reverse LCD",     "Front Brake Type": "Drum", "Wheel Type": "Alloy", "Headlight": "LED" } },
-          { name: "Disc",             specs: { "Meter Type": "Reverse LCD",     "Front Brake Type": "Disc", "Wheel Type": "Alloy", "Headlight": "LED" } },
-          { name: "SmartXonnect TFT", specs: { "Meter Type": "TFT SmartXonnect", "Front Brake Type": "Disc", "Wheel Type": "Alloy", "Headlight": "LED" } }
+          { name: "Drum",               specs: { "Meter Type": "Reverse LCD",     "Front Brake Type": "Drum", "Wheel Type": "Alloy", "Headlight": "LED" } },
+          { name: "Single Seat - Disc", specs: { "Meter Type": "Reverse LCD",     "Front Brake Type": "Disc", "Wheel Type": "Alloy", "Headlight": "LED" } },
+          { name: "SmartXonnect TFT",   specs: { "Meter Type": "TFT SmartXonnect", "Front Brake Type": "Disc", "Wheel Type": "Alloy", "Headlight": "LED" } }
         ]
       },
       {
         yearLabel: "2023 – 2024 (Super Squad / iGO)",
-        questions: ["Meter Type", "Front Brake Type", "Colour"],
+        questions: ["Meter Type", "Front Brake Type", "Colour", "Seat Type"],
         variants: [
-          { name: "Drum",             specs: { "Meter Type": "Reverse LCD",      "Front Brake Type": "Drum", "Colour": "Striking Red, Wicked Black" } },
-          { name: "Disc",             specs: { "Meter Type": "Reverse LCD",      "Front Brake Type": "Disc", "Colour": "Blazing Blue, Fiery Yellow" } },
-          { name: "iGO",              specs: { "Meter Type": "Reverse LCD",      "Front Brake Type": "Disc", "Colour": "Nardo Grey with red wheels" } },
-          { name: "Super Squad",      specs: { "Meter Type": "Reverse LCD",      "Front Brake Type": "Disc", "Colour": "Black Panther, Iron Man" } },
-          { name: "SmartXonnect TFT", specs: { "Meter Type": "TFT SmartXonnect", "Front Brake Type": "Disc" } }
+          { name: "Drum",               specs: { "Meter Type": "Reverse LCD",      "Front Brake Type": "Drum", "Colour": "Striking Red, Wicked Black" } },
+          { name: "Single Seat - Disc", specs: { "Meter Type": "Reverse LCD",      "Front Brake Type": "Disc", "Colour": "Blazing Blue, Fiery Yellow", "Seat Type": "Single" } },
+          { name: "Split Seat - Disc",  specs: { "Meter Type": "Reverse LCD",      "Front Brake Type": "Disc", "Colour": "Blazing Blue, Fiery Yellow", "Seat Type": "Split" } },
+          { name: "iGO",                specs: { "Meter Type": "Reverse LCD",      "Front Brake Type": "Disc", "Colour": "Nardo Grey with red wheels" } },
+          { name: "Super Squad",        specs: { "Meter Type": "Reverse LCD",      "Front Brake Type": "Disc", "Colour": "Black Panther, Iron Man" } },
+          { name: "SmartXonnect TFT",   specs: { "Meter Type": "TFT SmartXonnect", "Front Brake Type": "Disc" } }
         ]
       },
       {
         yearLabel: "2025 – 2026 (Dual Disc / TFT)",
-        questions: ["Meter Type", "Rear Brake Type", "Front Brake Type"],
+        questions: ["Meter Type", "Rear Brake Type", "Front Brake Type", "Seat Type"],
         variants: [
-          { name: "Drum",             specs: { "Meter Type": "Reverse LCD",      "Front Brake Type": "Drum", "Rear Brake Type": "Drum" } },
-          { name: "Disc",             specs: { "Meter Type": "Reverse LCD",      "Front Brake Type": "Disc", "Rear Brake Type": "Drum" } },
-          { name: "SmartXonnect TFT", specs: { "Meter Type": "TFT SmartXonnect", "Front Brake Type": "Disc", "Rear Brake Type": "Drum" } },
-          { name: "TFT Dual Disc",    specs: { "Meter Type": "TFT SmartXonnect", "Front Brake Type": "Disc", "Rear Brake Type": "Disc" } }
+          { name: "Drum",               specs: { "Meter Type": "Reverse LCD",      "Front Brake Type": "Drum", "Rear Brake Type": "Drum" } },
+          { name: "Single Seat - Disc", specs: { "Meter Type": "Reverse LCD",      "Front Brake Type": "Disc", "Rear Brake Type": "Drum", "Seat Type": "Single" } },
+          { name: "Split Seat - Disc",  specs: { "Meter Type": "Reverse LCD",      "Front Brake Type": "Disc", "Rear Brake Type": "Drum", "Seat Type": "Split" } },
+          { name: "SmartXonnect TFT",   specs: { "Meter Type": "TFT SmartXonnect", "Front Brake Type": "Disc", "Rear Brake Type": "Drum" } },
+          { name: "TFT Dual Disc",      specs: { "Meter Type": "TFT SmartXonnect", "Front Brake Type": "Disc", "Rear Brake Type": "Disc" } }
         ]
       }
     ]
@@ -719,7 +742,527 @@ const DATA = {
         ]
       }
     ]
+  },
+
+  /* ================= Expansion batch (16 models) — Gemini + Search grounding.
+     Non-visible splits (i3S, Bluetooth, IBS-vs-ABS, ride modes) collapse to the
+     pick-list rather than inventing a fake visual cue. ================= */
+
+  "TVS|Sport": {
+    make: "TVS", model: "Sport",
+    generations: [
+      {
+        yearLabel: "2015 – 2026 (all years)",
+        questions: ["Self Start", "Wheel Type"],
+        variants: [
+          { name: "Kick (Spoke)",   specs: { "Self Start": "No",  "Wheel Type": "Spoke", "Front Brake Type": "Drum", "Meter Type": "Analogue", "Headlight": "Halogen Bulb" } },
+          { name: "Kick (Alloy)",   specs: { "Self Start": "No",  "Wheel Type": "Alloy", "Front Brake Type": "Drum", "Meter Type": "Analogue", "Headlight": "Halogen Bulb" } },
+          { name: "Electric Start", specs: { "Self Start": "Yes", "Wheel Type": "Alloy", "Front Brake Type": "Drum", "Meter Type": "Analogue", "Headlight": "Halogen Bulb" } }
+        ]
+      }
+    ]
+  },
+
+  "Bajaj|Pulsar 125": {
+    make: "Bajaj", model: "Pulsar 125",
+    generations: [
+      {
+        yearLabel: "2019 – 2023 (Neon)",
+        questions: ["Front Brake Type"],
+        variants: [
+          { name: "Neon (Drum)", specs: { "Front Brake Type": "Drum", "Wheel Type": "Alloy", "Headlight": "Halogen Bulb", "Meter Type": "Semi-Digital", "Colour": "Neon highlights" } },
+          { name: "Neon (Disc)", specs: { "Front Brake Type": "Disc", "Wheel Type": "Alloy", "Headlight": "Halogen Bulb", "Meter Type": "Semi-Digital", "Colour": "Neon highlights" } }
+        ]
+      },
+      {
+        // Current lineup splits by seat (single vs split), front brake (drum vs disc), the Carbon
+        // edition, and Bluetooth connectivity. Disc: Single Seat = halogen, Split Seat = LED.
+        // Bluetooth is asked as its own question (the owner can confirm it / the console shows
+        // call-SMS alerts), so the BT carbon trims resolve uniquely rather than falling to a pick-list.
+        yearLabel: "2024 – 2026 (current lineup)",
+        questions: ["Front Brake Type", "Seat Type", "Headlight", "Colour", "Bluetooth"],
+        variants: [
+          { name: "Single Seat Drum",             specs: { "Headlight": "Halogen Bulb", "Front Brake Type": "Drum", "Seat Type": "Single", "Colour": "Standard",              "Bluetooth": "No",  "Wheel Type": "Alloy", "Meter Type": "Semi-Digital" } },
+          { name: "Single Seat Disc",             specs: { "Headlight": "Halogen Bulb", "Front Brake Type": "Disc", "Seat Type": "Single", "Colour": "Standard",              "Bluetooth": "No",  "Wheel Type": "Alloy", "Meter Type": "Semi-Digital" } },
+          { name: "Split Seat Drum",              specs: { "Headlight": "Halogen Bulb", "Front Brake Type": "Drum", "Seat Type": "Split",  "Colour": "Standard",              "Bluetooth": "No",  "Wheel Type": "Alloy", "Meter Type": "Semi-Digital" } },
+          { name: "Split Seat Disc",              specs: { "Headlight": "LED",          "Front Brake Type": "Disc", "Seat Type": "Split",  "Colour": "Standard",              "Bluetooth": "No",  "Wheel Type": "Alloy", "Meter Type": "Digital (LCD)" } },
+          { name: "Carbon Single Seat",           specs: { "Headlight": "LED",          "Front Brake Type": "Disc", "Seat Type": "Single", "Colour": "Carbon-fibre graphics", "Bluetooth": "No",  "Wheel Type": "Alloy", "Meter Type": "Digital (LCD)" } },
+          { name: "Carbon Split Seat",            specs: { "Headlight": "LED",          "Front Brake Type": "Disc", "Seat Type": "Split",  "Colour": "Carbon-fibre graphics", "Bluetooth": "No",  "Wheel Type": "Alloy", "Meter Type": "Digital (LCD)" } },
+          { name: "Carbon Single Seat Bluetooth", specs: { "Headlight": "LED",          "Front Brake Type": "Disc", "Seat Type": "Single", "Colour": "Carbon-fibre graphics", "Bluetooth": "Yes", "Wheel Type": "Alloy", "Meter Type": "Digital (LCD)" } },
+          { name: "Carbon Split Seat Bluetooth",  specs: { "Headlight": "LED",          "Front Brake Type": "Disc", "Seat Type": "Split",  "Colour": "Carbon-fibre graphics", "Bluetooth": "Yes", "Wheel Type": "Alloy", "Meter Type": "Digital (LCD)" } }
+        ]
+      }
+    ]
+  },
+
+  "Hero|Xtreme 125R": {
+    make: "Hero", model: "Xtreme 125R",
+    generations: [
+      {
+        // IBS (no ABS ring) vs single-channel ABS (front ring) ARE visually distinct;
+        // single- vs split-seat separates the two single-channel trims.
+        yearLabel: "2024 – 2026 (all years)",
+        questions: ["Abs", "Seat Type", "Rear Brake Type"],
+        variants: [
+          { name: "IBS",              specs: { "Abs": "IBS (CBS)",      "Rear Brake Type": "Drum", "Meter Type": "Digital (LCD)",        "Front Brake Type": "Disc", "Headlight": "LED", "Wheel Type": "Alloy", "Seat Type": "Split" } },
+          { name: "ABS",              specs: { "Abs": "Single Channel", "Rear Brake Type": "Drum", "Meter Type": "Digital (LCD)",        "Front Brake Type": "Disc", "Headlight": "LED", "Wheel Type": "Alloy", "Seat Type": "Split" } },
+          { name: "ABS Single Seat",  specs: { "Abs": "Single Channel", "Rear Brake Type": "Drum", "Meter Type": "Digital (LCD)",        "Front Brake Type": "Disc", "Headlight": "LED", "Wheel Type": "Alloy", "Seat Type": "Single" } },
+          { name: "Dual-Channel ABS", specs: { "Abs": "Dual Channel",   "Rear Brake Type": "Disc", "Meter Type": "Colour Digital (LCD)", "Front Brake Type": "Disc", "Headlight": "LED", "Wheel Type": "Alloy", "Seat Type": "Split" } }
+        ]
+      }
+    ]
+  },
+
+  "Honda|Activa 5G": {
+    make: "Honda", model: "Activa 5G",
+    generations: [
+      {
+        // Both trims have LED headlamp; the cluster (analogue vs semi-digital) is the marker.
+        yearLabel: "2018 – 2020 (all years)",
+        questions: ["Meter Type"],
+        variants: [
+          { name: "Standard", specs: { "Meter Type": "Analogue",     "Headlight": "LED", "Wheel Type": "Steel", "Front Brake Type": "Drum" } },
+          { name: "Deluxe",   specs: { "Meter Type": "Semi-Digital", "Headlight": "LED", "Wheel Type": "Steel", "Front Brake Type": "Drum" } }
+        ]
+      }
+    ]
+  },
+
+  "Hero|Splendor Plus Xtec": {
+    make: "Hero", model: "Splendor Plus Xtec",
+    generations: [
+      {
+        yearLabel: "2022 – 2024 (Xtec)",
+        questions: ["Front Brake Type"],
+        variants: [
+          { name: "Xtec Drum", specs: { "Front Brake Type": "Drum", "Headlight": "Halogen with LED DRL", "Meter Type": "Digital (LCD)", "Wheel Type": "Alloy", "Self Start": "Yes" } },
+          { name: "Xtec Disc", specs: { "Front Brake Type": "Disc", "Headlight": "Halogen with LED DRL", "Meter Type": "Digital (LCD)", "Wheel Type": "Alloy", "Self Start": "Yes" } }
+        ]
+      },
+      {
+        yearLabel: "2024 – 2026 (Xtec 2.0)",
+        questions: ["Colour"],
+        variants: [
+          { name: "Xtec 2.0",                     specs: { "Colour": "Standard",               "Headlight": "LED", "Meter Type": "Digital (LCD)", "Front Brake Type": "Drum", "Wheel Type": "Alloy", "Self Start": "Yes" } },
+          { name: "Xtec 2.0 125 Million Edition", specs: { "Colour": "Grey with gold accents", "Headlight": "LED", "Meter Type": "Digital (LCD)", "Front Brake Type": "Drum", "Wheel Type": "Alloy", "Self Start": "Yes" } }
+        ]
+      }
+    ]
+  },
+
+  "Bajaj|Pulsar 150": {
+    make: "Bajaj", model: "Pulsar 150",
+    generations: [
+      {
+        yearLabel: "2015 – 2018 (pre-ABS, halogen)",
+        questions: ["Rear Brake Type"],
+        variants: [
+          { name: "Single Disc", specs: { "Front Brake Type": "Disc", "Rear Brake Type": "Drum", "Headlight": "Halogen Bulb", "Meter Type": "Semi-Digital", "Wheel Type": "Alloy" } },
+          { name: "Twin Disc",   specs: { "Front Brake Type": "Disc", "Rear Brake Type": "Disc", "Headlight": "Halogen Bulb", "Meter Type": "Semi-Digital", "Wheel Type": "Alloy" } }
+        ]
+      },
+      {
+        yearLabel: "2019 – 2023 (ABS, halogen)",
+        questions: ["Rear Brake Type", "Colour"],
+        variants: [
+          { name: "Neon",            specs: { "Front Brake Type": "Disc", "Rear Brake Type": "Drum", "Abs": "Single Channel", "Headlight": "Halogen Bulb", "Meter Type": "Semi-Digital", "Wheel Type": "Alloy", "Colour": "Neon highlights" } },
+          { name: "Single Disc ABS", specs: { "Front Brake Type": "Disc", "Rear Brake Type": "Drum", "Abs": "Single Channel", "Headlight": "Halogen Bulb", "Meter Type": "Semi-Digital", "Wheel Type": "Alloy", "Colour": "Standard" } },
+          { name: "Twin Disc ABS",   specs: { "Front Brake Type": "Disc", "Rear Brake Type": "Disc", "Abs": "Single Channel", "Headlight": "Halogen Bulb", "Meter Type": "Semi-Digital", "Wheel Type": "Alloy" } }
+        ]
+      },
+      {
+        yearLabel: "2024 – 2026 (LED)",
+        questions: ["Rear Brake Type"],
+        variants: [
+          { name: "Single Disc", specs: { "Front Brake Type": "Disc", "Rear Brake Type": "Drum", "Abs": "Single Channel", "Headlight": "LED", "Meter Type": "Digital (LCD)", "Wheel Type": "Alloy" } },
+          { name: "Twin Disc",   specs: { "Front Brake Type": "Disc", "Rear Brake Type": "Disc", "Abs": "Single Channel", "Headlight": "LED", "Meter Type": "Digital (LCD)", "Wheel Type": "Alloy" } }
+        ]
+      }
+    ]
+  },
+
+  "Honda|Activa 3G / 4G": {
+    make: "Honda", model: "Activa 3G / 4G",
+    generations: [
+      {
+        yearLabel: "2015 – 2016 (Activa 3G)",
+        questions: [],
+        variants: [
+          { name: "Activa 3G", specs: { "Headlight": "Halogen Bulb", "Meter Type": "Analogue", "Wheel Type": "Steel", "Front Brake Type": "Drum", "Self Start": "Yes" } }
+        ]
+      },
+      {
+        yearLabel: "2017 – 2018 (Activa 4G)",
+        questions: [],
+        variants: [
+          { name: "Activa 4G", specs: { "Headlight": "Halogen Bulb", "Meter Type": "Analogue", "Wheel Type": "Steel", "Front Brake Type": "Drum", "Self Start": "Yes" } }
+        ]
+      }
+    ]
+  },
+
+  "Honda|Shine 100": {
+    make: "Honda", model: "Shine 100",
+    generations: [
+      {
+        yearLabel: "2023 – 2026 (all years)",
+        questions: ["Meter Type"],
+        variants: [
+          { name: "Standard", specs: { "Meter Type": "Analogue",      "Front Brake Type": "Drum", "Wheel Type": "Alloy", "Headlight": "Halogen Bulb", "Self Start": "Yes" } },
+          { name: "DX",       specs: { "Meter Type": "Digital (LCD)", "Front Brake Type": "Drum", "Wheel Type": "Alloy", "Headlight": "Halogen Bulb", "Self Start": "Yes" } }
+        ]
+      }
+    ]
+  },
+
+  "TVS|Apache RTR 200 4V": {
+    make: "TVS", model: "Apache RTR 200 4V",
+    generations: [
+      {
+        yearLabel: "2016 – 2019 (halogen)",
+        questions: ["Abs"],
+        variants: [
+          { name: "Non-ABS",  specs: { "Abs": "No ABS",       "Headlight": "Halogen Bulb", "Meter Type": "Digital LCD", "Front Brake Type": "Disc", "Rear Brake Type": "Disc" } },
+          { name: "Dual ABS", specs: { "Abs": "Dual Channel", "Headlight": "Halogen Bulb", "Meter Type": "Digital LCD", "Front Brake Type": "Disc", "Rear Brake Type": "Disc" } }
+        ]
+      },
+      {
+        yearLabel: "2020 – 2024 (BS6, LED + SmartXonnect)",
+        questions: ["Meter Type"],
+        variants: [
+          { name: "LCD",          specs: { "Meter Type": "Digital LCD",  "Headlight": "LED", "Abs": "Dual Channel", "Front Suspension": "Telescopic", "Front Brake Type": "Disc", "Rear Brake Type": "Disc" } },
+          { name: "SmartXonnect", specs: { "Meter Type": "SmartXonnect", "Headlight": "LED", "Abs": "Dual Channel", "Front Suspension": "Telescopic", "Front Brake Type": "Disc", "Rear Brake Type": "Disc" } }
+        ]
+      },
+      {
+        yearLabel: "2025 – 2026 (TFT / USD forks)",
+        questions: ["Meter Type"],
+        variants: [
+          { name: "SmartXonnect", specs: { "Meter Type": "SmartXonnect", "Front Suspension": "Telescopic",   "Headlight": "LED",           "Abs": "Dual Channel", "Front Brake Type": "Disc", "Rear Brake Type": "Disc" } },
+          { name: "TFT (USD)",    specs: { "Meter Type": "TFT (colour)",  "Front Suspension": "USD (golden)", "Headlight": "LED Projector", "Abs": "Dual Channel", "Front Brake Type": "Disc", "Rear Brake Type": "Disc" } }
+        ]
+      }
+    ]
+  },
+
+  "Bajaj|Platina 110": {
+    make: "Bajaj", model: "Platina 110",
+    generations: [
+      {
+        yearLabel: "2018 – 2022 (CBS only)",
+        questions: ["Front Brake Type"],
+        variants: [
+          { name: "Drum (CBS)", specs: { "Front Brake Type": "Drum", "Abs": "CBS", "Wheel Type": "Alloy", "Headlight": "Halogen with LED DRL", "Meter Type": "Semi-Digital" } },
+          { name: "Disc (CBS)", specs: { "Front Brake Type": "Disc", "Abs": "CBS", "Wheel Type": "Alloy", "Headlight": "Halogen with LED DRL", "Meter Type": "Semi-Digital" } }
+        ]
+      },
+      {
+        // Platina 110 ABS launched Dec 2022 as the new top variant; CBS Drum/Disc continued.
+        yearLabel: "2023 – 2026 (ABS added)",
+        questions: ["Front Brake Type", "Abs"],
+        variants: [
+          { name: "Drum (CBS)", specs: { "Front Brake Type": "Drum", "Abs": "CBS", "Wheel Type": "Alloy", "Headlight": "Halogen with LED DRL", "Meter Type": "Semi-Digital" } },
+          { name: "Disc (CBS)", specs: { "Front Brake Type": "Disc", "Abs": "CBS", "Wheel Type": "Alloy", "Headlight": "Halogen with LED DRL", "Meter Type": "Semi-Digital" } },
+          { name: "ABS",        specs: { "Front Brake Type": "Disc", "Abs": "Single Channel", "Wheel Type": "Alloy", "Headlight": "Halogen with LED DRL", "Meter Type": "Semi-Digital" } }
+        ]
+      }
+    ]
+  },
+
+  "Bajaj|Platina 100": {
+    make: "Bajaj", model: "Platina 100",
+    generations: [
+      {
+        yearLabel: "2015 – 2026 (all years)",
+        questions: ["Self Start", "Front Brake Type"],
+        variants: [
+          { name: "Kick Start (KS)",     specs: { "Self Start": "No",  "Front Brake Type": "Drum", "Wheel Type": "Alloy", "Headlight": "Halogen with LED DRL", "Meter Type": "Analogue" } },
+          { name: "Electric Start (ES)", specs: { "Self Start": "Yes", "Front Brake Type": "Drum", "Wheel Type": "Alloy", "Headlight": "Halogen with LED DRL", "Meter Type": "Analogue" } },
+          { name: "ES Disc",             specs: { "Self Start": "Yes", "Front Brake Type": "Disc", "Wheel Type": "Alloy", "Headlight": "Halogen with LED DRL", "Meter Type": "Analogue" } }
+        ]
+      }
+    ]
+  },
+
+  "Honda|Shine 125": {
+    make: "Honda", model: "Shine 125",
+    generations: [
+      {
+        yearLabel: "2015 – 2019 (carburettor)",
+        questions: ["Front Brake Type"],
+        variants: [
+          { name: "Drum", specs: { "Front Brake Type": "Drum", "Wheel Type": "Alloy", "Headlight": "Halogen Bulb", "Meter Type": "Analogue", "Self Start": "Yes" } },
+          { name: "Disc", specs: { "Front Brake Type": "Disc", "Wheel Type": "Alloy", "Headlight": "Halogen Bulb", "Meter Type": "Analogue", "Self Start": "Yes" } }
+        ]
+      },
+      {
+        yearLabel: "2020 – 2026 (BS6, fuel-injected)",
+        questions: ["Front Brake Type"],
+        variants: [
+          { name: "Drum", specs: { "Front Brake Type": "Drum", "Wheel Type": "Alloy", "Headlight": "Halogen Bulb", "Meter Type": "Analogue", "Self Start": "Yes" } },
+          { name: "Disc", specs: { "Front Brake Type": "Disc", "Wheel Type": "Alloy", "Headlight": "Halogen Bulb", "Meter Type": "Analogue", "Self Start": "Yes" } }
+        ]
+      }
+    ]
+  },
+
+  "Hero|Glamour Xtec": {
+    make: "Hero", model: "Glamour Xtec",
+    generations: [
+      {
+        yearLabel: "2021 – 2026 (all years)",
+        questions: ["Front Brake Type"],
+        variants: [
+          { name: "Drum (Alloy)", specs: { "Front Brake Type": "Drum", "Wheel Type": "Alloy", "Headlight": "LED", "Meter Type": "Digital (LCD)", "Self Start": "Yes" } },
+          { name: "Disc (Alloy)", specs: { "Front Brake Type": "Disc", "Wheel Type": "Alloy", "Headlight": "LED", "Meter Type": "Digital (LCD)", "Self Start": "Yes" } }
+        ]
+      }
+    ]
+  },
+
+  "Yamaha|FZ-X": {
+    make: "Yamaha", model: "FZ-X",
+    generations: [
+      {
+        // Standard vs Bluetooth: same LCD, but BT trim adds a visible USB port below it.
+        yearLabel: "2021 – 2026 (all years)",
+        questions: ["Meter Type", "Usb Charging Port"],
+        variants: [
+          { name: "Standard",        specs: { "Meter Type": "Digital (LCD)", "Usb Charging Port": "No",  "Front Brake Type": "Disc", "Rear Brake Type": "Disc", "Abs": "Single Channel", "Headlight": "LED", "Wheel Type": "Alloy" } },
+          { name: "Bluetooth",       specs: { "Meter Type": "Digital (LCD)", "Usb Charging Port": "Yes", "Front Brake Type": "Disc", "Rear Brake Type": "Disc", "Abs": "Single Channel", "Headlight": "LED", "Wheel Type": "Alloy" } }
+        ]
+      }
+    ]
+  },
+
+  "Hero|Destini Prime": {
+    make: "Hero", model: "Destini Prime",
+    generations: [
+      {
+        yearLabel: "2023 – 2026 (all years)",
+        questions: [],
+        variants: [
+          { name: "Destini Prime", specs: { "Front Brake Type": "Drum", "Rear Brake Type": "Drum", "Wheel Type": "Steel", "Headlight": "LED", "Meter Type": "Semi-Digital", "Self Start": "Yes" } }
+        ]
+      }
+    ]
+  },
+
+  "Yamaha|R15 V4": {
+    make: "Yamaha", model: "R15 V4",
+    generations: [
+      {
+        // R15 V4 (LCD) vs R15M (colour TFT) is the cluster marker; the named M
+        // editions (MotoGP / Carbon) then split by livery.
+        yearLabel: "2021 – 2026 (all years)",
+        questions: ["Meter Type", "Colour"],
+        variants: [
+          { name: "R15 V4",              specs: { "Meter Type": "Digital (LCD)", "Headlight": "LED Projector", "Front Suspension": "USD (golden)", "Abs": "Dual Channel", "Front Brake Type": "Disc", "Rear Brake Type": "Disc", "Wheel Type": "Alloy" } },
+          { name: "R15M",                specs: { "Meter Type": "TFT (colour)",  "Colour": "Metallic Grey (standard M)",         "Headlight": "LED Projector", "Front Suspension": "USD (golden)", "Abs": "Dual Channel", "Front Brake Type": "Disc", "Rear Brake Type": "Disc", "Wheel Type": "Alloy" } },
+          { name: "R15M MotoGP Edition", specs: { "Meter Type": "TFT (colour)",  "Colour": "Monster Energy MotoGP livery",       "Headlight": "LED Projector", "Front Suspension": "USD (golden)", "Abs": "Dual Channel", "Front Brake Type": "Disc", "Rear Brake Type": "Disc", "Wheel Type": "Alloy" } },
+          { name: "R15M Carbon",         specs: { "Meter Type": "TFT (colour)",  "Colour": "Carbon-fibre pattern + blue wheels", "Headlight": "LED Projector", "Front Suspension": "USD (golden)", "Abs": "Dual Channel", "Front Brake Type": "Disc", "Rear Brake Type": "Disc", "Wheel Type": "Alloy" } }
+        ]
+      }
+    ]
   }
+};
+
+/* Vutto variant mapping — our variant → name to pick in the Vutto Calculator.
+   Source of truth: 'Models for Testing - VS Code.csv' (regenerate when it changes). */
+const VUTTO_MAP = {
+  "Royal Enfield|Hunter 350|2022 – 2025 (1st gen)|Metro Dapper": "Metro Dapper",
+  "Royal Enfield|Hunter 350|2022 – 2025 (1st gen)|Retro Factory": "Retro Factory",
+  "Royal Enfield|Hunter 350|2022 – 2025 (1st gen)|Metro Rebel": "Metro Rebel",
+  "Royal Enfield|Hunter 350|2025 onwards (new gen)|Standard": "Retro Factory",
+  "Royal Enfield|Hunter 350|2025 onwards (new gen)|Base Premium": "Retro Factory",
+  "Royal Enfield|Hunter 350|2025 onwards (new gen)|Mid": "Metro Dapper",
+  "Royal Enfield|Hunter 350|2025 onwards (new gen)|Top": "Metro Rebel",
+  "Royal Enfield|Classic 350|2015 – 2017 (UCE, pre-ABS)|ES (Electric Start)": "ES (Electric Start)",
+  "Royal Enfield|Classic 350|2015 – 2017 (UCE, pre-ABS)|Chrome": "Chrome",
+  "Royal Enfield|Classic 350|2018 – 2020 (UCE, ABS)|ABS": "ABS",
+  "Royal Enfield|Classic 350|2018 – 2020 (UCE, ABS)|Signals Edition": "Classic Signals - Dual Channel ABS",
+  "Royal Enfield|Classic 350|2018 – 2020 (UCE, ABS)|Gunmetal Grey": "Classic Dark - Dual Channel ABS",
+  "Royal Enfield|Classic 350|2018 – 2020 (UCE, ABS)|Stealth Black": "Classic Dark - Dual Channel ABS",
+  "Royal Enfield|Classic 350|2018 – 2020 (UCE, ABS)|Chrome": "Chrome",
+  "Royal Enfield|Classic 350|2021 – 2023 (J-platform)|Redditch": "Redditch - Single Channel ABS",
+  "Royal Enfield|Classic 350|2021 – 2023 (J-platform)|Halcyon": "Halcyon - Dual Channel ABS",
+  "Royal Enfield|Classic 350|2021 – 2023 (J-platform)|Signals": "Classic Signals - Dual Channel ABS",
+  "Royal Enfield|Classic 350|2021 – 2023 (J-platform)|Dark": "Classic Dark - Dual Channel ABS",
+  "Royal Enfield|Classic 350|2021 – 2023 (J-platform)|Chrome": "Chrome",
+  "Royal Enfield|Classic 350|2024 – 2026 (current)|Heritage": "Heritage",
+  "Royal Enfield|Classic 350|2024 – 2026 (current)|Heritage Premium": "Heritage Premium",
+  "Royal Enfield|Classic 350|2024 – 2026 (current)|Signals": "Classic Signals - Dual Channel ABS",
+  "Royal Enfield|Classic 350|2024 – 2026 (current)|Dark": "Classic Dark - Dual Channel ABS",
+  "Royal Enfield|Classic 350|2024 – 2026 (current)|Chrome / Emerald": "Classic Chrome - Dual Channel ABS",
+  "Royal Enfield|Bullet 350|2015 – 2018 (UCE)|Bullet 350": "Electra Twinspark",
+  "Royal Enfield|Bullet 350|2015 – 2018 (UCE)|Bullet 350 ES (formerly Electra)": "ES",
+  "Royal Enfield|Bullet 350|2015 – 2018 (UCE)|Electra Twinspark (Double Disc)": "Electra Twinspark",
+  "Royal Enfield|Bullet 350|2019 – 2022 (UCE, ABS)|Bullet 350 ABS": "KS - ABS (New Colour Edition)",
+  "Royal Enfield|Bullet 350|2019 – 2022 (UCE, ABS)|Bullet 350 ES ABS": "ES - ABS (New Colour Edition)",
+  "Royal Enfield|Bullet 350|2023 – 2026 (new platform / J-series)|Military": "Base",
+  "Royal Enfield|Bullet 350|2023 – 2026 (new platform / J-series)|Battalion Black": "Battalion Black",
+  "Royal Enfield|Bullet 350|2023 – 2026 (new platform / J-series)|Standard": "Mid",
+  "Royal Enfield|Bullet 350|2023 – 2026 (new platform / J-series)|Black Gold": "Top",
+  "Royal Enfield|Meteor 350|2020 – 2026 (all years)|Fireball": "Fireball",
+  "Royal Enfield|Meteor 350|2020 – 2026 (all years)|Stellar": "Stellar",
+  "Royal Enfield|Meteor 350|2020 – 2026 (all years)|Aurora": "Aurora",
+  "Royal Enfield|Meteor 350|2020 – 2026 (all years)|Supernova": "Supernova",
+  "TVS|Apache RTR 160|2015 – 2026 (all years)|RM Drum (Single Disc)": "RM Drum",
+  "TVS|Apache RTR 160|2015 – 2026 (all years)|RM Disc (Twin Disc)": "RM Disc",
+  "TVS|Apache RTR 160|2015 – 2026 (all years)|RM Disc BT": "RM Disc Bluetooth",
+  "TVS|Apache RTR 160|2015 – 2026 (all years)|Racing Edition": "Racing Edition",
+  "TVS|Apache RTR 160|2015 – 2026 (all years)|Dual ABS": "Dual ABS",
+  "Bajaj|Pulsar NS125|2021 – 2026 (all years)|Standard (CBS)": "Standard",
+  "Bajaj|Pulsar NS125|2021 – 2026 (all years)|LED BT (CBS)": "Bluetooth",
+  "Bajaj|Pulsar NS125|2021 – 2026 (all years)|LED BT ABS": "Bluetooth",
+  "TVS|Ntorq 125|2018 – 2026 (all years)|Drum": "Drum",
+  "TVS|Ntorq 125|2018 – 2026 (all years)|Disc": "Disc",
+  "TVS|Ntorq 125|2018 – 2026 (all years)|Race Edition": "Race Edition",
+  "TVS|Ntorq 125|2018 – 2026 (all years)|Super Squad": "Super Squad Edition",
+  "TVS|Ntorq 125|2018 – 2026 (all years)|Race XP": "Race XP",
+  "TVS|Ntorq 125|2018 – 2026 (all years)|XT": "XT",
+  "TVS|Jupiter|2015 – 2020|Standard": "Standard",
+  "TVS|Jupiter|2015 – 2020|ZX": "ZX Drum - AOL",
+  "TVS|Jupiter|2015 – 2020|Classic": "Classic",
+  "TVS|Jupiter|2021 – 2022|Standard": "Standard",
+  "TVS|Jupiter|2021 – 2022|ZX": "ZX Drum - AOL",
+  "TVS|Jupiter|2021 – 2022|ZX Disc": "ZX Disc",
+  "TVS|Jupiter|2021 – 2022|Classic": "Classic",
+  "TVS|Jupiter|2023 – 2026 (current)|Drum": "Drum",
+  "TVS|Jupiter|2023 – 2026 (current)|Drum Alloy": "Drum Alloy",
+  "TVS|Jupiter|2023 – 2026 (current)|Drum SmartXonnect": "ZX Drum - SmartXonnect",
+  "TVS|Jupiter|2023 – 2026 (current)|Disc SmartXonnect": "ZX Disc - SmartXonnect",
+  "TVS|Jupiter 125|2021 – 2026 (all years)|Drum - Steel Wheel": "Drum - Steel Wheel",
+  "TVS|Jupiter 125|2021 – 2026 (all years)|Drum - Alloy Wheel": "Drum - Alloy Wheel",
+  "TVS|Jupiter 125|2021 – 2026 (all years)|Disc - Alloy Wheel": "Disc - Alloy Wheel",
+  "TVS|Jupiter 125|2021 – 2026 (all years)|SmartXonnect": "SmartXonnect",
+  "Honda|Activa 6G|2020 – 2026 (all years)|Standard": "Standard",
+  "Honda|Activa 6G|2020 – 2026 (all years)|Deluxe": "Deluxe",
+  "Honda|Activa 6G|2020 – 2026 (all years)|H-Smart": "H-Smart",
+  "Hero|Splendor Plus|2015 – 2026 (all years)|Self Alloy": "Self Alloy",
+  "Hero|Splendor Plus|2015 – 2026 (all years)|Self Alloy i3S": "Self Alloy i3S",
+  "Hero|Splendor Plus|2015 – 2026 (all years)|100 Million Edition": "Self Alloy i3S",
+  "Hero|Splendor Plus|2015 – 2026 (all years)|125 Million Edition": "Self Alloy i3S",
+  "Hero|HF Deluxe|2015 – 2026 (all years)|Kick Start": "Kick Alloy",
+  "Hero|HF Deluxe|2015 – 2026 (all years)|Self Start": "Self Alloy",
+  "Hero|HF Deluxe|2015 – 2026 (all years)|Self Start i3S": "Self Alloy i3S",
+  "Hero|HF Deluxe|2015 – 2026 (all years)|Canvas Black": "Drum Self Alloy Black",
+  "Hero|HF Deluxe|2015 – 2026 (all years)|HF Deluxe Pro": "Self Alloy i3S",
+  "TVS|Radeon|2018 – 2021 (analogue console)|Drum (Base)": "Drum",
+  "TVS|Radeon|2018 – 2021 (analogue console)|Disc (Special Edition)": "Digital - Disc",
+  "TVS|Radeon|2022 – 2026 (digital console)|Drum (Base, analogue)": "Drum",
+  "TVS|Radeon|2022 – 2026 (digital console)|Digi Drum": "Digital - Drum",
+  "TVS|Radeon|2022 – 2026 (digital console)|Dual Tone Edition": "Digital - Drum",
+  "TVS|Radeon|2022 – 2026 (digital console)|All Black Edition": "Digital - Drum",
+  "TVS|Radeon|2022 – 2026 (digital console)|Digi Disc": "Digital - Disc",
+  "Honda|Activa 125|2015 – 2022 (BS4 / BS6)|Standard": "Standard",
+  "Honda|Activa 125|2015 – 2022 (BS4 / BS6)|Alloy": "Drum Alloy",
+  "Honda|Activa 125|2015 – 2022 (BS4 / BS6)|Deluxe": "Deluxe",
+  "Honda|Activa 125|2023 – 2024 (OBD2 update)|Drum": "Drum",
+  "Honda|Activa 125|2023 – 2024 (OBD2 update)|Drum Alloy": "Drum Alloy",
+  "Honda|Activa 125|2023 – 2024 (OBD2 update)|Disc": "Disc",
+  "Honda|Activa 125|2023 – 2024 (OBD2 update)|H-Smart": "H-Smart",
+  "Honda|Activa 125|2025 onwards (TFT update)|DLX": "Disc",
+  "Honda|Activa 125|2025 onwards (TFT update)|H-Smart": "H-Smart",
+  "Honda|SP125|2019 – 2024 (BS6 / OBD2)|Drum": "Drum",
+  "Honda|SP125|2019 – 2024 (BS6 / OBD2)|Disc": "Disc",
+  "Honda|SP125|2025 onwards (OBD2B / TFT)|Drum": "Drum",
+  "Honda|SP125|2025 onwards (OBD2B / TFT)|DLX (TFT)": "sports Edition",
+  "Honda|SP125|2025 onwards (OBD2B / TFT)|Anniversary Edition": "sports Edition",
+  "Suzuki|Access 125|2015 – 2019 (BS4, halogen)|Standard": "Drum",
+  "Suzuki|Access 125|2015 – 2019 (BS4, halogen)|Special Edition": "Special Edition",
+  "Suzuki|Access 125|2020 – 2022 (BS6, LED headlamp)|Drum (Steel)": "Drum",
+  "Suzuki|Access 125|2020 – 2022 (BS6, LED headlamp)|Drum (Alloy)": "Drum",
+  "Suzuki|Access 125|2020 – 2022 (BS6, LED headlamp)|Disc (Alloy)": "Disc",
+  "Suzuki|Access 125|2023 – 2026 (OBD2 / Ride Connect)|Standard": "Drum",
+  "Suzuki|Access 125|2023 – 2026 (OBD2 / Ride Connect)|Special Edition": "Special Edition",
+  "Suzuki|Access 125|2023 – 2026 (OBD2 / Ride Connect)|Ride Connect": "Ride Connect Edition",
+  "Suzuki|Access 125|2023 – 2026 (OBD2 / Ride Connect)|Ride Connect TFT": "Ride Connect Edition",
+  "TVS|Raider 125|2021 – 2022 (launch)|Drum": "Drum",
+  "TVS|Raider 125|2021 – 2022 (launch)|Single Seat - Disc": "Single Seat - Disc",
+  "TVS|Raider 125|2021 – 2022 (launch)|SmartXonnect TFT": "SmartXonnect",
+  "TVS|Raider 125|2023 – 2024 (Super Squad / iGO)|Drum": "Drum",
+  "TVS|Raider 125|2023 – 2024 (Super Squad / iGO)|Single Seat - Disc": "Disc",
+  "TVS|Raider 125|2023 – 2024 (Super Squad / iGO)|Split Seat - Disc": "Disc",
+  "TVS|Raider 125|2023 – 2024 (Super Squad / iGO)|iGO": "iGO - Boost Mode",
+  "TVS|Raider 125|2023 – 2024 (Super Squad / iGO)|Super Squad": "Super Squad Edition",
+  "TVS|Raider 125|2023 – 2024 (Super Squad / iGO)|SmartXonnect TFT": "SmartXonnect",
+  "TVS|Raider 125|2025 – 2026 (Dual Disc / TFT)|Drum": "Drum",
+  "TVS|Raider 125|2025 – 2026 (Dual Disc / TFT)|Single Seat - Disc": "Disc",
+  "TVS|Raider 125|2025 – 2026 (Dual Disc / TFT)|Split Seat - Disc": "Disc",
+  "TVS|Raider 125|2025 – 2026 (Dual Disc / TFT)|SmartXonnect TFT": "SmartXonnect",
+  "TVS|Raider 125|2025 – 2026 (Dual Disc / TFT)|TFT Dual Disc": "TFT Dual Disc",
+  "TVS|Apache RTR 160 4V|2018 – 2019 (BS4, halogen)|Drum (Rear Drum)": "Single Disc ABS",
+  "TVS|Apache RTR 160 4V|2018 – 2019 (BS4, halogen)|Disc (Rear Disc)": "Dual Disc - ABS",
+  "TVS|Apache RTR 160 4V|2020 – 2022 (BS6, LED + SmartXonnect)|Drum": "Single Disc ABS",
+  "TVS|Apache RTR 160 4V|2020 – 2022 (BS6, LED + SmartXonnect)|Disc": "Dual Disc - ABS",
+  "TVS|Apache RTR 160 4V|2020 – 2022 (BS6, LED + SmartXonnect)|Disc SmartXonnect": "Dual Disc - ABS - Bluetooth",
+  "TVS|Apache RTR 160 4V|2023 – 2024 (USD forks / Dual Channel ABS)|Disc (Single ABS)": "Dual Disc - ABS",
+  "TVS|Apache RTR 160 4V|2023 – 2024 (USD forks / Dual Channel ABS)|Drum (Single ABS)": "Single Disc ABS - Black Edition",
+  "TVS|Apache RTR 160 4V|2023 – 2024 (USD forks / Dual Channel ABS)|USD Dual Channel ABS": "Dual Channel ABS - USD Forks",
+  "TVS|Apache RTR 160 4V|2025 – 2026 (TFT projector top variant)|SmartXonnect (USD, Dual ABS)": "Dual Disc - ABS - Bluetooth",
+  "TVS|Apache RTR 160 4V|2025 – 2026 (TFT projector top variant)|TFT (projector)": "Special Edition",
+  "TVS|Sport|2015 – 2026 (all years)|Kick (Spoke)": "Kick Start (KS) - Alloy Wheels",
+  "TVS|Sport|2015 – 2026 (all years)|Kick (Alloy)": "Kick Start (KS) - Alloy Wheels",
+  "TVS|Sport|2015 – 2026 (all years)|Electric Start": "Self Start (ES) - Alloy Wheels",
+  "Bajaj|Pulsar 125|2019 – 2023 (Neon)|Neon (Drum)": "Neon Drum",
+  "Bajaj|Pulsar 125|2019 – 2023 (Neon)|Neon (Disc)": "Neon Disc",
+  "Bajaj|Pulsar 125|2024 – 2026 (current lineup)|Single Seat Drum": "Drum",
+  "Bajaj|Pulsar 125|2024 – 2026 (current lineup)|Single Seat Disc": "Disc",
+  "Bajaj|Pulsar 125|2024 – 2026 (current lineup)|Split Seat Drum": "Drum",
+  "Bajaj|Pulsar 125|2024 – 2026 (current lineup)|Split Seat Disc": "Disc - Split Seat",
+  "Bajaj|Pulsar 125|2024 – 2026 (current lineup)|Carbon Single Seat": "Carbon Single Seat",
+  "Bajaj|Pulsar 125|2024 – 2026 (current lineup)|Carbon Split Seat": "Carbon Split Seat",
+  "Bajaj|Pulsar 125|2024 – 2026 (current lineup)|Carbon Single Seat Bluetooth": "Carbon Single Seat - Bluetooth",
+  "Bajaj|Pulsar 125|2024 – 2026 (current lineup)|Carbon Split Seat Bluetooth": "Carbon Split Seat - Bluetooth",
+  "Hero|Xtreme 125R|2024 – 2026 (all years)|IBS": "IBS",
+  "Hero|Xtreme 125R|2024 – 2026 (all years)|ABS": "Single Channel ABS",
+  "Hero|Xtreme 125R|2024 – 2026 (all years)|ABS Single Seat": "Single Channel ABS",
+  "Hero|Xtreme 125R|2024 – 2026 (all years)|Dual-Channel ABS": "Dual-Channel ABS",
+  "Honda|Activa 5G|2018 – 2020 (all years)|Standard": "Standard",
+  "Honda|Activa 5G|2018 – 2020 (all years)|Deluxe": "Deluxe",
+  "Hero|Splendor Plus Xtec|2022 – 2024 (Xtec)|Xtec Drum": "i3s Drum Self Alloy",
+  "Hero|Splendor Plus Xtec|2022 – 2024 (Xtec)|Xtec Disc": "Disc",
+  "Hero|Splendor Plus Xtec|2024 – 2026 (Xtec 2.0)|Xtec 2.0": "2",
+  "Hero|Splendor Plus Xtec|2024 – 2026 (Xtec 2.0)|Xtec 2.0 125 Million Edition": "2",
+  "Bajaj|Pulsar 150|2015 – 2018 (pre-ABS, halogen)|Single Disc": "Single Disc - Bluetooth",
+  "Bajaj|Pulsar 150|2015 – 2018 (pre-ABS, halogen)|Twin Disc": "Twin Disc - Bluetooth",
+  "Bajaj|Pulsar 150|2019 – 2023 (ABS, halogen)|Neon": "Single Disc - Bluetooth",
+  "Bajaj|Pulsar 150|2019 – 2023 (ABS, halogen)|Single Disc ABS": "Single Disc",
+  "Bajaj|Pulsar 150|2019 – 2023 (ABS, halogen)|Twin Disc ABS": "Twin Disc",
+  "Bajaj|Pulsar 150|2024 – 2026 (LED)|Single Disc": "Single Disc - Bluetooth",
+  "Bajaj|Pulsar 150|2024 – 2026 (LED)|Twin Disc": "Twin Disc - Bluetooth",
+  "Honda|Activa 3G / 4G|2015 – 2016 (Activa 3G)|Activa 3G": "Standard (BS III)",
+  "Honda|Activa 3G / 4G|2017 – 2018 (Activa 4G)|Activa 4G": "Standard (BS IV)",
+  "Honda|Shine 100|2023 – 2026 (all years)|Standard": "Standard",
+  "Honda|Shine 100|2023 – 2026 (all years)|DX": "DX",
+  "TVS|Apache RTR 200 4V|2016 – 2019 (halogen)|Non-ABS": "Non-ABS",
+  "TVS|Apache RTR 200 4V|2016 – 2019 (halogen)|Dual ABS": "Dual Channel ABS with Modes",
+  "TVS|Apache RTR 200 4V|2020 – 2024 (BS6, LED + SmartXonnect)|LCD": "LCD Cluster",
+  "TVS|Apache RTR 200 4V|2020 – 2024 (BS6, LED + SmartXonnect)|SmartXonnect": "SmartXonnect",
+  "TVS|Apache RTR 200 4V|2025 – 2026 (TFT / USD forks)|SmartXonnect": "SmartXonnect",
+  "TVS|Apache RTR 200 4V|2025 – 2026 (TFT / USD forks)|TFT (USD)": "TFT Cluster",
+  "Bajaj|Platina 110|2018 – 2022 (CBS only)|Drum (CBS)": "Drum",
+  "Bajaj|Platina 110|2018 – 2022 (CBS only)|Disc (CBS)": "Disc",
+  "Bajaj|Platina 110|2023 – 2026 (ABS added)|Drum (CBS)": "Drum",
+  "Bajaj|Platina 110|2023 – 2026 (ABS added)|Disc (CBS)": "Disc",
+  "Bajaj|Platina 110|2023 – 2026 (ABS added)|ABS": "ABS",
+  "Bajaj|Platina 100|2015 – 2026 (all years)|Kick Start (KS)": "KS Drum",
+  "Bajaj|Platina 100|2015 – 2026 (all years)|Electric Start (ES)": "ES Drum",
+  "Bajaj|Platina 100|2015 – 2026 (all years)|ES Disc": "ES Drum",
+  "Honda|Shine 125|2015 – 2019 (carburettor)|Drum": "Drum",
+  "Honda|Shine 125|2015 – 2019 (carburettor)|Disc": "Disc",
+  "Honda|Shine 125|2020 – 2026 (BS6, fuel-injected)|Drum": "Drum",
+  "Honda|Shine 125|2020 – 2026 (BS6, fuel-injected)|Disc": "Disc",
+  "Hero|Glamour Xtec|2021 – 2026 (all years)|Drum (Alloy)": "Drum Alloy",
+  "Hero|Glamour Xtec|2021 – 2026 (all years)|Disc (Alloy)": "Disc Alloy",
+  "Yamaha|FZ-X|2021 – 2026 (all years)|Standard": "Standard",
+  "Yamaha|FZ-X|2021 – 2026 (all years)|Bluetooth": "Chrome",
+  "Hero|Destini Prime|2023 – 2026 (all years)|Destini Prime": "Standard",
+  "Yamaha|R15 V4|2021 – 2026 (all years)|R15 V4": "Racing Blue - Intensity White - Vivid Magenta Metallic",
+  "Yamaha|R15 V4|2021 – 2026 (all years)|R15M": "M",
+  "Yamaha|R15 V4|2021 – 2026 (all years)|R15M MotoGP Edition": "M - MotoGP Edition",
+  "Yamaha|R15 V4|2021 – 2026 (all years)|R15M Carbon": "M - Carbon Fibre"
 };
 
 /* Friendly question copy + ordering of brands in the picker */
@@ -738,13 +1281,15 @@ const QMETA = {
   "Usb Charging Port": { label: "USB charging port?",              hint: "Is there a USB charger?" },
   "Ride Modes":        { label: "Ride modes?",                     hint: "Are selectable ride modes available?" },
   "Smart Key":         { label: "Smart key?",                      hint: "Keyless smart key system?" },
+  "Bluetooth":         { label: "Bluetooth connectivity?",         hint: "Ask the owner — or check the console for call/SMS alerts & phone-app pairing." },
   "Front Suspension":  { label: "Front suspension",                hint: "Conventional telescopic forks, or golden upside-down (USD) forks?" },
-  "Colour":            { label: "Colour / paint scheme",           hint: "Pick the closest colour or theme." }
+  "Seat Type":         { label: "Seat",                            hint: "One-piece (single) seat, or a split rider + pillion seat?" },
+  "Colour":            { label: "Colour / edition",                hint: "Pick the closest colour scheme or named edition." }
 };
-const BRAND_ORDER = ["Royal Enfield", "TVS", "Bajaj", "Honda", "Hero", "Suzuki"];
+const BRAND_ORDER = ["Royal Enfield", "TVS", "Bajaj", "Honda", "Hero", "Suzuki", "Yamaha"];
 
 /* ============================= ENGINE / STATE ============================ */
-const state = { modelKey: null, genIndex: null, answers: [], override: null };
+const state = { modelKey: null, genIndex: null, answers: [], override: null, modelQuery: "" };
 const app = document.getElementById("app");
 
 function splitVals(raw) {
@@ -857,25 +1402,88 @@ function optButton(label, sub, pillHtml, onClick) {
   return b;
 }
 
-function renderModelPicker(stage) {
-  renderCrumbs(stage);
-  stage.appendChild(el('<div class="step-label"><span class="num">Step 1</span> Bike model</div>'));
-  stage.appendChild(el('<div class="step-q">Which model are you identifying?</div>'));
-  stage.appendChild(el('<div class="step-hint">Choose the make &amp; model — we\'ll only ask what actually matters for it.</div>'));
+// fuzzy match a query against a label; higher = better, -1 = no match
+function fuzzyScore(query, text) {
+  const q = query.toLowerCase().replace(/[^a-z0-9]/g, "");
+  const t = text.toLowerCase().replace(/[^a-z0-9]/g, "");
+  if (!q) return 0;
+  const idx = t.indexOf(q);
+  if (idx !== -1) return 1000 - idx * 2 - (t.length - q.length);   // contiguous substring
+  let qi = 0, gaps = 0, last = -1;                                  // subsequence
+  for (let i = 0; i < t.length && qi < q.length; i++) {
+    if (t[i] === q[qi]) { if (last !== -1) gaps += i - last - 1; last = i; qi++; }
+  }
+  if (qi === q.length) return 400 - gaps;
+  return qi >= Math.ceil(q.length * 0.6) ? 100 + qi : -1;           // fuzzy partial
+}
 
+function renderBrandGroups(stage, all, selectModel) {
   BRAND_ORDER.forEach(brand => {
-    const models = Object.entries(DATA).filter(([, m]) => m.make === brand);
+    const models = all.filter(([, m]) => m.make === brand);
     if (!models.length) return;
     const group = el(`<div class="brand-group"><h3>${esc(brand)}</h3></div>`);
     const opts = el('<div class="opts cols-2"></div>');
     models.forEach(([key, m]) => {
       const n = m.generations.length;
       const sub = n > 1 ? n + " generations" : null;
-      opts.appendChild(optButton(m.model, sub, "", () => { reset(); state.modelKey = key; render(); }));
+      opts.appendChild(optButton(m.model, sub, "", () => selectModel(key)));
     });
     group.appendChild(opts);
     stage.appendChild(group);
   });
+}
+
+function renderModelPicker(stage) {
+  renderCrumbs(stage);
+  stage.appendChild(el('<div class="step-label"><span class="num">Step 1</span> Bike model</div>'));
+  stage.appendChild(el('<div class="step-q">Which model are you identifying?</div>'));
+  stage.appendChild(el('<div class="step-hint">Search a model, or pick the make &amp; model below.</div>'));
+
+  const all = Object.entries(DATA);
+  const selectModel = (key) => { reset(); state.modelKey = key; state.modelQuery = ""; render(); };
+
+  // ----- search box (the <input> element is kept stable so typing never loses focus) -----
+  const wrap = el('<div class="msearch-wrap"><svg viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="M21 21l-4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>');
+  const input = el('<input class="msearch" type="text" placeholder="Search a model — e.g. Activa, R15, Pulsar 150…" autocomplete="off" spellcheck="false">');
+  input.value = state.modelQuery || "";
+  wrap.appendChild(input);
+  stage.appendChild(wrap);
+
+  const host = el('<div></div>');           // only this region repaints as you type
+  stage.appendChild(host);
+
+  let topMatchKey = null;
+  function paint(query) {
+    host.innerHTML = "";
+    topMatchKey = null;
+    const q = (query || "").trim();
+    if (!q) { renderBrandGroups(host, all, selectModel); return; }
+    const matches = all.map(([key, m]) => ({ key, m, s: Math.max(fuzzyScore(q, m.model), fuzzyScore(q, m.make + " " + m.model)) }))
+                       .filter(x => x.s > -1)
+                       .sort((a, b) => b.s - a.s);
+    if (!matches.length) {
+      host.appendChild(el('<div class="msearch-hint">No match — try a shorter term, or pick from the list below.</div>'));
+      renderBrandGroups(host, all, selectModel);
+      return;
+    }
+    topMatchKey = matches[0].key;
+    host.appendChild(el(`<div class="msearch-hint">${matches.length} match${matches.length > 1 ? "es" : ""} · press <b>Enter</b> for the closest</div>`));
+    const opts = el('<div class="opts"></div>');
+    matches.forEach(({ key, m }) => {
+      const n = m.generations.length;
+      opts.appendChild(optButton(m.model, m.make + (n > 1 ? " · " + n + " generations" : ""), "", () => selectModel(key)));
+    });
+    host.appendChild(opts);
+  }
+
+  input.addEventListener("input", () => { state.modelQuery = input.value; paint(input.value); });
+  input.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") { if (topMatchKey) { e.preventDefault(); selectModel(topMatchKey); } }
+    else if (e.key === "Escape") { e.preventDefault(); input.value = ""; state.modelQuery = ""; paint(""); }
+  });
+
+  paint(input.value);
+  requestAnimationFrame(() => { input.focus(); const v = input.value; input.value = ""; input.value = v; });
 }
 
 function renderYearPicker(stage) {
@@ -923,6 +1531,22 @@ function renderQuestionOrResult(stage) {
   stage.appendChild(opts);
 }
 
+// Vutto Calculator variant name for a given match (null if no mapping)
+function vuttoVariant(m, gen, variant) {
+  return VUTTO_MAP[[m.make, m.model, gen.yearLabel, variant.name].join("|")] || null;
+}
+// Callout telling the inspector which variant to pick in the Vutto Calculator
+function vuttoCallout(name) {
+  if (!name) return null;
+  const box = el(`<div class="vutto-map"><span class="vm-label">Vutto Calculator</span><span class="vm-line">Choose variant <b>${esc(name)}</b></span><button class="vm-copy" type="button">Copy</button></div>`);
+  box.querySelector(".vm-copy").addEventListener("click", e => {
+    const b = e.currentTarget;
+    try { navigator.clipboard && navigator.clipboard.writeText(name); } catch (_) {}
+    b.textContent = "Copied"; setTimeout(() => { b.textContent = "Copy"; }, 1200);
+  });
+  return box;
+}
+
 function renderResult(stage, gen, candidates) {
   const m = DATA[state.modelKey];
   const chosen = state.override || (candidates.length === 1 ? candidates[0] : null);
@@ -934,6 +1558,8 @@ function renderResult(stage, gen, candidates) {
     stage.appendChild(head);
     stage.appendChild(el(`<div><span class="result-name">${esc(chosen.name)}</span></div>`));
     stage.appendChild(el(`<div class="result-sub">${esc(m.make)} ${esc(m.model)} &nbsp;·&nbsp; ${esc(gen.yearLabel)}</div>`));
+    const vc = vuttoCallout(vuttoVariant(m, gen, chosen));
+    if (vc) stage.appendChild(vc);
     stage.appendChild(renderSpecs(gen, chosen));
     stage.appendChild(el('<div class="trust"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z" stroke="#D23757" stroke-width="1.8" stroke-linejoin="round"/><path d="M9 12l2 2 4-4" stroke="#D23757" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg> Every Vutto bike is inspected, refurbished and backed by a 6-month free warranty.</div>'));
     fireConfetti();
@@ -946,7 +1572,10 @@ function renderResult(stage, gen, candidates) {
     stage.appendChild(el('<div class="result-sub">These share the same recorded specs. Pick the exact one:</div>'));
     const opts = el('<div class="candidates"></div>');
     candidates.forEach(v => {
-      opts.appendChild(optButton(v.name, v.specs["Colour"] || null, "", () => { state.override = v; render(); }));
+      const vn = vuttoVariant(m, gen, v);
+      const b = optButton(v.name, vn ? "Vutto: " + vn : (v.specs["Colour"] || null), "", () => { state.override = v; render(); });
+      if (vn) { const s = b.querySelector(".sub"); if (s) s.classList.add("vm"); }
+      opts.appendChild(b);
     });
     stage.appendChild(opts);
   }
@@ -1005,6 +1634,9 @@ function fireConfetti() {
 /* keyboard interactivity */
 document.addEventListener("keydown", (e) => {
   if (e.metaKey || e.ctrlKey || e.altKey) return;
+  // ignore shortcuts while typing in the search box (let it handle its own keys)
+  const ae = document.activeElement;
+  if (ae && (ae.tagName === "INPUT" || ae.tagName === "TEXTAREA")) return;
   if (/^[1-9]$/.test(e.key)) {
     const i = parseInt(e.key, 10) - 1;
     if (keyMap[i]) { e.preventDefault(); keyMap[i](); }

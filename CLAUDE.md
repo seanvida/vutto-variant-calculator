@@ -19,21 +19,20 @@ Hosted on GitHub Pages: https://seanvida.github.io/vutto-variant-calculator/
 
 | File | Role |
 |------|------|
-| **`index-revised.html`** | **CANONICAL / current build.** 34 models, enforced 3-step flow (Model → Year → cues), year groups from 2015, plus a fuzzy model **search box** at Step 1. Edit this one. |
-| `index-extended.html` | Prior 14-model build (year step auto-skipped for single-gen). Kept for history. |
-| `index.html` | **LIVE homepage (`/`).** Currently the 18-model build. When ready, promote `index-revised.html` over it (confirm first). Rollback = git history. |
-| `final34_models.csv` | **Master variant repository** — all 34 models / 172 variants with their visual-cue specs + diagnostic question order. Regenerated directly from `DATA` (see `/tmp/gencsv.mjs` pattern) so it always mirrors `index-revised.html`. |
+| **`index.html`** | **THE single canonical + LIVE file** (served at `/` by GitHub Pages). 34 models, enforced 3-step flow (Model → Year → cues), year groups from 2015, fuzzy model **search box** at Step 1, and the `VUTTO_MAP` Vutto-Calculator mapping. **Edit this one directly** — there is no separate "revised" file or promote step anymore. Rollback = git history. *(Prior `index-revised.html` / `index-extended.html` builds were consolidated into this file; recover from git if ever needed.)* |
+| `vutto-variant-mapping.csv` | **Go-to reckoner** — our variant → Vutto-Calculator variant name. First 4 cols (Make, Model, Year Group, Variant) match `final34_models.csv` exactly; last col `Vutto Variant` is what the result screen shows. Drives the embedded `VUTTO_MAP`. Regenerate `VUTTO_MAP` from this whenever it changes. |
+| `final34_models.csv` | **Master variant repository** — all 34 models / 193 variants with their visual-cue specs + diagnostic question order. Regenerated directly from `DATA` (see `/tmp/gencsv.mjs` pattern) so it always mirrors `index.html`. |
 | `variants-new-4-models.csv` | Visual-cue spec reference for the first 4 web-sourced models (Splendor Plus, HF Deluxe, Radeon, Activa 125). |
 | `variant-cues.csv` | Master taxonomy of all differentiating cues + how to spot each + visual-verifiability. |
 | `.env` | `GEMINI_API_KEY` (working). Gitignored — never commit. |
 
-> When promoting a build to be the live homepage, copy it over `index.html` (don't break the
-> root URL). Confirm with the user before overwriting `index.html`.
+> `index.html` is both the file you edit and the file that ships — there is no promote step.
+> Validate (Node sim, below) before committing so you never push a broken root URL.
 
 ## Development
 
 ```
-python3 -m http.server 8080      # then open http://localhost:8080/index-revised.html
+python3 -m http.server 8080      # then open http://localhost:8080/index.html
 ```
 No lint/test/build pipeline. Verification = the Node simulation below + a browser walk-through.
 
@@ -92,6 +91,13 @@ Step numbering is fixed: 1 = model, 2 = year, 3+ = questions.
   doesn't trigger the `1–9` option shortcuts.
 - Keyboard: `1–9` select options, `Backspace`/`Esc` go back one step (disabled while the search box
   is focused).
+- **Vutto-Calculator mapping callout.** `const VUTTO_MAP` (embedded, keyed
+  `Make|Model|Year Group|Variant` → Vutto variant name) is built from `vutto-variant-mapping.csv`.
+  On the result screen, `vuttoCallout()` shows a pink **"Choose variant `X`"** box (with a Copy
+  button) under the matched variant; the pick-list shows each option's Vutto name as a `Vutto: …`
+  sub-label. No mapping → callout hidden. To regenerate after the CSV changes: rebuild the
+  `VUTTO_MAP` block (parse CSV → `Make|Model|Year Group|Variant: "Vutto Variant"`), replace the
+  block before `const QMETA`, and verify 0 unmapped against `DATA` before committing.
 
 ---
 
@@ -100,7 +106,7 @@ Step numbering is fixed: 1 = model, 2 = year, 3+ = questions.
 Follow this order every time. Budget ~1 research call + a few data edits per model.
 
 ### Step 0 — Decide the file
-Edit `index-revised.html` (canonical). Add each model object to `DATA`; add the brand to
+Edit `index.html` (the single canonical file). Add each model object to `DATA`; add the brand to
 `BRAND_ORDER` if new; add any new cue key to `QMETA`.
 
 ### Variant definition (settled with the user)
@@ -172,11 +178,22 @@ human in a yard. Pick the cue an inspector can actually verify at a glance:
 - **Lead with the cue that defines the trim, not the cue that happens to differ.** Trims are
   usually defined by console / lighting / brakes; wheels often just track the trim and are
   hard to read.
+- **`Seat Type` (single vs split) is a real, easy, under-used cue.** Many 125/150 commuters
+  split a trim purely by one-piece vs split rider+pillion seat (Pulsar 125, Raider 125, Xtreme
+  125R). It's unmistakable in the yard — use it whenever it's the genuine differentiator.
+  *(Round-1 field feedback found Pulsar 125 & Raider 125 seat variants were missing entirely
+  because seat type wasn't being modelled as a cue.)*
+- **`Bluetooth` is now an askable cue, not always a pick-list twin.** The owner can confirm
+  connectivity (and the console shows call/SMS alerts), so a BT-only trim can be split with the
+  `Bluetooth` question (Yes/No) rather than collapsed. Only fall back to the pick-list when the
+  *other* distinction is also invisible (e.g. a Racing-livery badge twin that already has BT).
 
 ### Step 4 — Handle non-visual distinctions honestly
-If two variants differ only by something you can't see (i3S badge, Bluetooth pairing, engine
-internals), give them **identical visual specs** so they fall to the pick-list. Do NOT invent
-a fake visual difference. (Record the real difference in the CSV's "Visually Verifiable" column.)
+If two variants differ only by something you can't see **and can't be asked** (i3S badge,
+engine internals), give them **identical visual specs** so they fall to the pick-list. Do NOT
+invent a fake visual difference. (Record the real difference in the CSV's "Visually Verifiable"
+column.) **Exception — askable cues:** Bluetooth/connectivity is now captured by the `Bluetooth`
+question because the owner can confirm it; prefer asking over a pick-list when the cue is askable.
 
 ### Step 5 — Validate (must be 0 mismatches)
 Run the Node simulation (below) — it replays the real engine over every variant. Expect
@@ -201,6 +218,12 @@ guard that catches the "Pulsar 125 Neon was missing" class of bug — that slipp
 because this step had never been run (Gemini quota was exhausted; see quota note above).
 Mind the 20/day quota: audit the models you touched, not all 34, unless on a paid key.
 
+> **Do not ship un-audited when quota is exhausted.** If the 20/day cap blocks the audit,
+> either wait for the reset (~midnight Pacific) / use the paid key, or do a manual lineup
+> check against the brand's official site before shipping. The Round-1 misses below were all
+> "shipped without the completeness gate." A real **field test by the team is itself a valid
+> completeness audit** — treat that feedback as authoritative (it outranks Gemini grounding).
+
 ### Step 7 — Sync + ship
 Update the relevant CSV, then commit & push. Confirm `.env` is NOT staged
 (`git check-ignore .env`). Verify the live URL serves the change.
@@ -208,7 +231,7 @@ Update the relevant CSV, then commit & push. Confirm `.env` is NOT staged
 ### Verification snippet (Node — paste into a temp `.mjs`)
 ```js
 import { readFileSync } from "node:fs";
-const html = readFileSync("index-revised.html","utf8");
+const html = readFileSync("index.html","utf8");
 const s = html.indexOf("const DATA = {"), e = html.indexOf("\n};", s);
 const DATA = eval("("+html.slice(s+"const DATA = ".length, e+2)+")");
 const sp=r=>!r?[]:r.split(",").map(x=>x.trim()).filter(Boolean);
@@ -252,6 +275,34 @@ on it — set-3 in particular leans on recent web data (some 2025/26 trims). Not
   `Splendor Plus Xtec` is its own cluster, separate from the `Xtec` *variant* inside `Splendor Plus`.
 - Brands added over time and present in `BRAND_ORDER`: `Suzuki` (set 2), `Yamaha` (set 3).
 - `Front Suspension` cue (telescopic vs golden USD forks) is shared by the Apache 4V/200 4V and R15 V4.
+
+### Round-1 team field-test feedback (applied — 193 variants total)
+The team test-drove all 34 models in the yard and returned an add/remove list. Applied to
+`index.html` + `final34_models.csv`. **Added:** Platina 110 `ABS` (Dec-2022 launch →
+its own `2023 – 2026 (ABS added)` year group, CBS Drum/Disc continue); Bullet 350 `Electra
+Twinspark (Double Disc)` (UCE era); Raider 125 `Single Seat - Disc` & `Split Seat - Disc`
+(2023-24 & 2025-26 groups). **Removed:** Splendor Plus `Drum Spoke (Kick)`, `Self Spoke`,
+`Disc (2025+)`; FZ-X `Hybrid (2025+)`. New cue keys: `Seat Type` (already existed), `Bluetooth`
+(new — askable). **Pulsar 125 finalised at 10 variants** (team-defined): Neon ×2 (Drum, Disc) in
+the `2019 – 2023 (Neon)` group; in the `2024 – 2026 (current lineup)` group → Drum ×2 (Single/Split
+Seat), Disc ×2 (Single Seat = **halogen**, Split Seat = **LED**), Carbon Fibre ×4 (Single, Split,
+Single Bluetooth, Split Bluetooth). The old `Disc (Standard)` / `Carbon Fibre Edition` entries were
+dropped in favour of this seat/headlight/Bluetooth split.
+
+**Why these slipped (root cause → fix):**
+- *Missing seat-type variants (Pulsar 125, Raider 125):* seat type wasn't modelled as a cue
+  for commuters, so whole branches of the lineup were invisible. → `Seat Type` promoted to a
+  first-class cue in the Step-3 guardrails; use it wherever it's the real split.
+- *Missing trims (Platina 110 ABS, Bullet double-disc Electra):* the completeness audit
+  (Step 5b) was never actually run on these — same quota-exhaustion root cause as the original
+  Pulsar Neon miss. The sim only proves *listed* variants resolve; it can't see a gap. → audit
+  gate hardened (don't ship un-audited; team field test counts as an audit).
+- *Phantom trims removed (Splendor spoke/kick base trims, FZ-X Hybrid, Splendor Disc 2025+):*
+  over-enumeration from speculative recent (2025/26) web data and base trims not in the used
+  market — exactly the "flag web-sourced 2025/26 specs" risk noted above. → be conservative
+  with speculative recent trims; only add when confirmed, and prefer removing on field feedback.
+- ⚠️ The Round-1 ADD specs (brake/headlight/console per new variant) were **inferred** from the
+  variant names + existing data and still need **human confirmation** of exact visual cues.
 
 ## Secrets
 
