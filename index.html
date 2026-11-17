@@ -242,7 +242,7 @@
         <span class="tool">Variant Calculator</span>
       </div>
       <h1>Which variant is it, <span class="accent">exactly?</span></h1>
-      <p class="lede">Pick the model, the year it was made, then the features you can see. We'll pin down the precise variant. <strong style="color:var(--rose)">34 models · every variant from 2015.</strong></p>
+      <p class="lede">Pick the model, the year it was made, then the features you can see. We'll pin down the precise variant. <strong style="color:var(--rose)">48 models · every variant from 2015.</strong></p>
     </header>
 
     <div class="progress"><div class="track"><div class="fill" id="pbar"></div></div><div class="pmeta" id="pmeta">Step 1</div></div>
@@ -1061,6 +1061,301 @@ const DATA = {
           { name: "R15M",                specs: { "Meter Type": "TFT (colour)",  "Colour": "Metallic Grey (standard M)",         "Headlight": "LED Projector", "Front Suspension": "USD (golden)", "Abs": "Dual Channel", "Front Brake Type": "Disc", "Rear Brake Type": "Disc", "Wheel Type": "Alloy" } },
           { name: "R15M MotoGP Edition", specs: { "Meter Type": "TFT (colour)",  "Colour": "Monster Energy MotoGP livery",       "Headlight": "LED Projector", "Front Suspension": "USD (golden)", "Abs": "Dual Channel", "Front Brake Type": "Disc", "Rear Brake Type": "Disc", "Wheel Type": "Alloy" } },
           { name: "R15M Carbon",         specs: { "Meter Type": "TFT (colour)",  "Colour": "Carbon-fibre pattern + blue wheels", "Headlight": "LED Projector", "Front Suspension": "USD (golden)", "Abs": "Dual Channel", "Front Brake Type": "Disc", "Rear Brake Type": "Disc", "Wheel Type": "Alloy" } }
+        ]
+      }
+    ]
+  },
+
+  "Yamaha|MT-15": {
+    make: "Yamaha", model: "MT-15",
+    generations: [
+      {
+        yearLabel: "2019 – 2021 (V1)",
+        questions: [],
+        variants: [
+          { name: "Standard (V1)", specs: { "Abs": "Single Channel", "Meter Type": "Digital (LCD)", "Headlight": "LED Projector", "Front Suspension": "Telescopic" } }
+        ]
+      },
+      {
+        yearLabel: "2022 – 2026 (V2)",
+        questions: ["Abs", "Meter Type", "Colour"],
+        variants: [
+          { name: "Standard (Single ABS)", specs: { "Abs": "Single Channel", "Meter Type": "Digital (LCD)",  "Headlight": "LED Projector", "Front Suspension": "USD (golden)" } },
+          { name: "Standard",              specs: { "Abs": "Dual Channel",   "Meter Type": "Digital (LCD)",  "Headlight": "LED Projector", "Front Suspension": "USD (golden)" } },
+          { name: "DLX",                   specs: { "Abs": "Dual Channel",   "Meter Type": "TFT (colour)",   "Headlight": "LED Projector", "Front Suspension": "USD (golden)", "Colour": "Ice Storm DLX, Vivid Violet Metallic DLX, Metallic Black, Metallic Silver Cyan" } },
+          { name: "MotoGP Edition",        specs: { "Abs": "Dual Channel",   "Meter Type": "TFT (colour)",   "Headlight": "LED Projector", "Front Suspension": "USD (golden)", "Colour": "Monster Energy MotoGP livery" } }
+        ]
+      }
+    ]
+  },
+
+  "Yamaha|R15 V3": {
+    make: "Yamaha", model: "R15 V3",
+    generations: [
+      {
+        yearLabel: "2018 – 2018 (BS4, no ABS)",
+        questions: [],
+        variants: [
+          { name: "Standard", specs: { "Abs": "No ABS", "Headlight": "LED", "Meter Type": "Digital (LCD)", "Wheel Type": "Alloy", "Seat Type": "Split" } }
+        ]
+      },
+      {
+        yearLabel: "2019 – 2021 (dual ABS)",
+        questions: ["Colour"],
+        variants: [
+          { name: "Standard",          specs: { "Abs": "Dual Channel", "Headlight": "LED", "Meter Type": "Digital (LCD)", "Wheel Type": "Alloy", "Seat Type": "Split", "Colour": "Thunder Grey, Racing Blue" } },
+          { name: "Darknight Edition", specs: { "Abs": "Dual Channel", "Headlight": "LED", "Meter Type": "Digital (LCD)", "Wheel Type": "Alloy", "Seat Type": "Split", "Colour": "Darknight (blacked-out + gold accents)" } },
+          { name: "MotoGP Edition",    specs: { "Abs": "Dual Channel", "Headlight": "LED", "Meter Type": "Digital (LCD)", "Wheel Type": "Alloy", "Seat Type": "Split", "Colour": "Monster Energy MotoGP livery" } }
+        ]
+      }
+    ]
+  },
+
+  "Yamaha|FZ-S FI": {
+    make: "Yamaha", model: "FZ-S FI",
+    generations: [
+      {
+        yearLabel: "2019 – 2020 (V3.0 launch)",
+        questions: [],
+        variants: [
+          { name: "Standard", specs: { "Abs": "Single Channel", "Headlight": "LED", "Meter Type": "Digital (LCD)", "Bluetooth": "No", "Rear Brake Type": "Disc" } }
+        ]
+      },
+      {
+        yearLabel: "2021 – 2026 (Y-Connect)",
+        questions: [],
+        variants: [
+          { name: "Y-Connect", specs: { "Abs": "Single Channel", "Headlight": "LED", "Meter Type": "Digital (LCD)", "Bluetooth": "Yes", "Rear Brake Type": "Disc" } }
+        ]
+      }
+    ]
+  },
+
+  "Yamaha|Fascino 125": {
+    make: "Yamaha", model: "Fascino 125",
+    generations: [
+      {
+        yearLabel: "2020 – 2020 (BS6 FI)",
+        questions: ["Front Brake Type"],
+        variants: [
+          { name: "Drum", specs: { "Front Brake Type": "Drum", "Headlight": "Halogen Bulb", "Meter Type": "Analogue" } },
+          { name: "Disc", specs: { "Front Brake Type": "Disc", "Headlight": "Halogen Bulb", "Meter Type": "Analogue" } }
+        ]
+      },
+      {
+        yearLabel: "2021 – 2026 (Hybrid)",
+        questions: ["Front Brake Type", "Headlight"],
+        variants: [
+          { name: "Drum", specs: { "Front Brake Type": "Drum", "Headlight": "Halogen Bulb", "Meter Type": "Analogue",     "Bluetooth": "No" } },
+          { name: "Disc", specs: { "Front Brake Type": "Disc", "Headlight": "Halogen Bulb", "Meter Type": "Digital (LCD)", "Bluetooth": "Yes" } },
+          { name: "S",    specs: { "Front Brake Type": "Disc", "Headlight": "LED",           "Meter Type": "TFT (colour)",  "Bluetooth": "Yes" } }
+        ]
+      }
+    ]
+  },
+
+  "Bajaj|Pulsar N160": {
+    make: "Bajaj", model: "Pulsar N160",
+    generations: [
+      {
+        yearLabel: "2022 – 2024 (BS6 / OBD2)",
+        questions: ["Seat Type"],
+        variants: [
+          { name: "Single ABS", specs: { "Seat Type": "Single", "Abs": "Single Channel", "Headlight": "LED", "Rear Brake Type": "Disc", "Front Brake Type": "Disc" } },
+          { name: "Dual ABS",   specs: { "Seat Type": "Split",  "Abs": "Dual Channel",   "Headlight": "LED", "Rear Brake Type": "Disc", "Front Brake Type": "Disc" } }
+        ]
+      },
+      {
+        yearLabel: "2025 – 2026 (N160 S / SS)",
+        questions: ["Seat Type"],
+        variants: [
+          { name: "N160 S",  specs: { "Seat Type": "Single", "Abs": "Single Channel", "Front Suspension": "USD (golden)", "Meter Type": "Digital (LCD)", "Headlight": "LED" } },
+          { name: "N160 SS", specs: { "Seat Type": "Split",  "Abs": "Dual Channel",   "Front Suspension": "USD (golden)", "Meter Type": "TFT (colour)",  "Headlight": "LED" } }
+        ]
+      }
+    ]
+  },
+
+  "Bajaj|Avenger Cruise 220": {
+    make: "Bajaj", model: "Avenger Cruise 220",
+    generations: [
+      {
+        yearLabel: "2015 – 2017 (BS4, pre-ABS)",
+        questions: [],
+        variants: [
+          { name: "Standard", specs: { "Abs": "No ABS", "Headlight": "Halogen Bulb", "Wheel Type": "Spoke", "Front Brake Type": "Disc", "Rear Brake Type": "Drum" } }
+        ]
+      },
+      {
+        yearLabel: "2018 – 2026 (ABS)",
+        questions: [],
+        variants: [
+          { name: "Standard ABS", specs: { "Abs": "Single Channel", "Headlight": "Halogen Bulb", "Wheel Type": "Spoke", "Front Brake Type": "Disc", "Rear Brake Type": "Drum" } }
+        ]
+      }
+    ]
+  },
+
+  "Bajaj|Avenger Street 160": {
+    make: "Bajaj", model: "Avenger Street 160",
+    generations: [
+      {
+        yearLabel: "2019 – 2026 (all years)",
+        questions: [],
+        variants: [
+          { name: "Standard", specs: { "Abs": "Single Channel", "Headlight": "Halogen Bulb", "Wheel Type": "Alloy", "Front Brake Type": "Disc", "Rear Brake Type": "Drum", "Meter Type": "Semi-Digital" } }
+        ]
+      }
+    ]
+  },
+
+  "Suzuki|Burgman Street 125": {
+    make: "Suzuki", model: "Burgman Street 125",
+    generations: [
+      {
+        yearLabel: "2018 – 2019 (BS4)",
+        questions: [],
+        variants: [
+          { name: "Standard", specs: { "Headlight": "LED", "Meter Type": "Digital (LCD)", "Front Brake Type": "Disc", "Rear Brake Type": "Drum", "Bluetooth": "No" } }
+        ]
+      },
+      {
+        // EX had a larger 12-inch rear wheel vs 10-inch Standard — visual but hard to judge reliably;
+        // shown as pick-list twins so inspector can confirm.
+        yearLabel: "2020 – 2022 (BS6)",
+        questions: [],
+        variants: [
+          { name: "Standard", specs: { "Headlight": "LED", "Meter Type": "Digital (LCD)", "Front Brake Type": "Disc", "Rear Brake Type": "Drum", "Bluetooth": "No" } },
+          { name: "EX",       specs: { "Headlight": "LED", "Meter Type": "Digital (LCD)", "Front Brake Type": "Disc", "Rear Brake Type": "Drum", "Bluetooth": "No" } }
+        ]
+      },
+      {
+        yearLabel: "2023 – 2026 (OBD2 / Ride Connect)",
+        questions: ["Bluetooth", "Meter Type"],
+        variants: [
+          { name: "Standard",         specs: { "Headlight": "LED", "Meter Type": "Digital (LCD)", "Front Brake Type": "Disc", "Rear Brake Type": "Drum", "Bluetooth": "No",  "Smart Key": "No"  } },
+          { name: "Ride Connect",     specs: { "Headlight": "LED", "Meter Type": "Digital (LCD)", "Front Brake Type": "Disc", "Rear Brake Type": "Drum", "Bluetooth": "Yes", "Smart Key": "No"  } },
+          { name: "Ride Connect TFT", specs: { "Headlight": "LED", "Meter Type": "TFT (colour)",  "Front Brake Type": "Disc", "Rear Brake Type": "Drum", "Bluetooth": "Yes", "Smart Key": "Yes" } }
+        ]
+      }
+    ]
+  },
+
+  "Suzuki|Gixxer SF": {
+    make: "Suzuki", model: "Gixxer SF",
+    generations: [
+      {
+        yearLabel: "2015 – 2019 (BS4)",
+        questions: ["Abs", "Colour"],
+        variants: [
+          { name: "Non-ABS",        specs: { "Abs": "No ABS",        "Headlight": "Halogen Bulb", "Meter Type": "Digital (LCD)", "Front Brake Type": "Disc", "Rear Brake Type": "Disc" } },
+          { name: "Standard (ABS)", specs: { "Abs": "Single Channel", "Headlight": "Halogen Bulb", "Meter Type": "Digital (LCD)", "Front Brake Type": "Disc", "Rear Brake Type": "Disc", "Colour": "Metallic Blue, Metallic Black, Glass Sparkle White" } },
+          { name: "SF SP",          specs: { "Abs": "Single Channel", "Headlight": "Halogen Bulb", "Meter Type": "Digital (LCD)", "Front Brake Type": "Disc", "Rear Brake Type": "Disc", "Colour": "SF SP (maroon seat + distinctive dual-tone graphics)" } },
+          { name: "MotoGP Edition", specs: { "Abs": "Single Channel", "Headlight": "Halogen Bulb", "Meter Type": "Digital (LCD)", "Front Brake Type": "Disc", "Rear Brake Type": "Disc", "Colour": "Ecstar racing livery (blue + silver)" } }
+        ]
+      },
+      {
+        yearLabel: "2020 – 2026 (BS6 / OBD2)",
+        questions: ["Colour"],
+        variants: [
+          { name: "Standard",       specs: { "Abs": "Single Channel", "Headlight": "LED", "Meter Type": "Digital (LCD)", "Front Brake Type": "Disc", "Rear Brake Type": "Disc", "Bluetooth": "Yes", "Colour": "Metallic Oort Gray, Triton Blue, Glass Sparkle Black" } },
+          { name: "MotoGP Edition", specs: { "Abs": "Single Channel", "Headlight": "LED", "Meter Type": "Digital (LCD)", "Front Brake Type": "Disc", "Rear Brake Type": "Disc", "Bluetooth": "Yes", "Colour": "MotoGP Anniversary livery (blue + silver)" } }
+        ]
+      }
+    ]
+  },
+
+  "TVS|Ronin": {
+    make: "TVS", model: "Ronin",
+    generations: [
+      {
+        yearLabel: "2022 – 2026 (all years)",
+        questions: ["Abs", "Bluetooth", "Windscreen"],
+        variants: [
+          { name: "Base",                   specs: { "Abs": "Single Channel", "Bluetooth": "No",  "Windscreen": "No",          "Headlight": "LED", "Front Brake Type": "Disc", "Rear Brake Type": "Disc", "Wheel Type": "Alloy" } },
+          { name: "Connected (Single ABS)", specs: { "Abs": "Single Channel", "Bluetooth": "Yes", "Windscreen": "No",          "Headlight": "LED", "Front Brake Type": "Disc", "Rear Brake Type": "Disc", "Wheel Type": "Alloy" } },
+          { name: "Base+",                  specs: { "Abs": "Dual Channel",   "Bluetooth": "No",  "Windscreen": "No",          "Headlight": "LED", "Front Brake Type": "Disc", "Rear Brake Type": "Disc", "Wheel Type": "Alloy" } },
+          { name: "Mid",                    specs: { "Abs": "Dual Channel",   "Bluetooth": "Yes", "Windscreen": "No",          "Headlight": "LED", "Front Brake Type": "Disc", "Rear Brake Type": "Disc", "Wheel Type": "Alloy" } },
+          { name: "Top",                    specs: { "Abs": "Dual Channel",   "Bluetooth": "Yes", "Windscreen": "Small Visor", "Headlight": "LED", "Front Brake Type": "Disc", "Rear Brake Type": "Disc", "Wheel Type": "Alloy" } }
+        ]
+      }
+    ]
+  },
+
+  "TVS|Xoom": {
+    make: "TVS", model: "Xoom",
+    generations: [
+      {
+        yearLabel: "2023 – 2026 (all years)",
+        questions: ["Front Brake Type"],
+        variants: [
+          { name: "Drum", specs: { "Front Brake Type": "Drum", "Headlight": "LED" } },
+          { name: "Disc", specs: { "Front Brake Type": "Disc", "Headlight": "LED" } }
+        ]
+      }
+    ]
+  },
+
+  "Hero|Glamour": {
+    make: "Hero", model: "Glamour",
+    generations: [
+      {
+        yearLabel: "2015 – 2019 (BS4)",
+        questions: ["Self Start", "Front Brake Type"],
+        variants: [
+          { name: "Kick (Drum)",   specs: { "Self Start": "No",  "Front Brake Type": "Drum", "Headlight": "Halogen Bulb", "Meter Type": "Semi-Digital", "Wheel Type": "Alloy" } },
+          { name: "Self Drum",     specs: { "Self Start": "Yes", "Front Brake Type": "Drum", "Headlight": "Halogen Bulb", "Meter Type": "Semi-Digital", "Wheel Type": "Alloy" } },
+          { name: "Self Drum i3S", specs: { "Self Start": "Yes", "Front Brake Type": "Drum", "Headlight": "Halogen Bulb", "Meter Type": "Semi-Digital", "Wheel Type": "Alloy" } },
+          { name: "Self Disc",     specs: { "Self Start": "Yes", "Front Brake Type": "Disc", "Headlight": "Halogen Bulb", "Meter Type": "Semi-Digital", "Wheel Type": "Alloy" } },
+          { name: "Self Disc i3S", specs: { "Self Start": "Yes", "Front Brake Type": "Disc", "Headlight": "Halogen Bulb", "Meter Type": "Semi-Digital", "Wheel Type": "Alloy" } }
+        ]
+      },
+      {
+        yearLabel: "2020 – 2026 (BS6)",
+        questions: ["Front Brake Type"],
+        variants: [
+          { name: "Drum", specs: { "Self Start": "Yes", "Front Brake Type": "Drum", "Headlight": "Halogen Bulb", "Meter Type": "Semi-Digital", "Wheel Type": "Alloy" } },
+          { name: "Disc", specs: { "Self Start": "Yes", "Front Brake Type": "Disc", "Headlight": "Halogen Bulb", "Meter Type": "Semi-Digital", "Wheel Type": "Alloy" } }
+        ]
+      }
+    ]
+  },
+
+  "Hero|Destini 125": {
+    make: "Hero", model: "Destini 125",
+    generations: [
+      {
+        // LX and VX share identical visual specs (same drum/halogen/semi-digital).
+        // Minor trim differences (chrome brow, mobile charger) not reliably visible in yard;
+        // displayed as pick-list so inspector can confirm.
+        yearLabel: "2018 – 2023 (BS4 / BS6)",
+        questions: [],
+        variants: [
+          { name: "LX", specs: { "Front Brake Type": "Drum", "Headlight": "Halogen Bulb", "Meter Type": "Semi-Digital", "Wheel Type": "Alloy" } },
+          { name: "VX", specs: { "Front Brake Type": "Drum", "Headlight": "Halogen Bulb", "Meter Type": "Semi-Digital", "Wheel Type": "Alloy" } }
+        ]
+      },
+      {
+        yearLabel: "2024 – 2026 (updated)",
+        questions: ["Front Brake Type", "Backrest"],
+        variants: [
+          { name: "VX",  specs: { "Front Brake Type": "Drum", "Headlight": "LED", "Meter Type": "Semi-Digital",  "Backrest": "No",  "Bluetooth": "No"  } },
+          { name: "ZX",  specs: { "Front Brake Type": "Disc", "Headlight": "LED", "Meter Type": "Digital (LCD)", "Backrest": "No",  "Bluetooth": "No"  } },
+          { name: "ZX+", specs: { "Front Brake Type": "Disc", "Headlight": "LED", "Meter Type": "Digital (LCD)", "Backrest": "Yes", "Bluetooth": "Yes" } }
+        ]
+      }
+    ]
+  },
+
+  "Honda|CB Shine SP": {
+    make: "Honda", model: "CB Shine SP",
+    generations: [
+      {
+        yearLabel: "2015 – 2020 (BS4)",
+        questions: ["Front Brake Type"],
+        variants: [
+          { name: "Drum", specs: { "Self Start": "Yes", "Front Brake Type": "Drum", "Headlight": "Halogen Bulb", "Meter Type": "Semi-Digital", "Wheel Type": "Alloy" } },
+          { name: "Disc", specs: { "Self Start": "Yes", "Front Brake Type": "Disc", "Headlight": "Halogen Bulb", "Meter Type": "Semi-Digital", "Wheel Type": "Alloy" } }
         ]
       }
     ]
